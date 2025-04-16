@@ -8,9 +8,9 @@
   --color-site-footer: #666;
   --color-card: #fff;
   --color-text: #444;
-  --color-block: #181818;
+  --color-block: #f6f6f6;
   --color-inlinecode: #d56d28;
-  --color-codeblock: #343a3c;
+  --color-codeblock: #fff7ea;
   --color-h1: #444;
   --color-h2: #444;
   --color-h3: #444;
@@ -880,8 +880,8 @@ button {
   }
 }
 @font-face {
-  font-family: 'UbuntuMono';
-  src: url("https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf");
+  font-family: 'PingFang Medium.ttf';
+  src: url("https://github.com/paraself/PingFang-Fonts/raw/master/PingFang%20Medium.ttf");
   font-weight: 'normal';
   font-style: 'normal';
   font-display: swap;
