@@ -1825,9 +1825,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 		'}'+
 	'</style>'+
     '<div class="kill-ie">'+
-        `<span class="kill-t"><b>抱歉，您的浏览器无法访问本站</b></span><br/>`+
-        `<span class="kill-c">微软已经于2016年终止了对 Internet Explorer (IE) 10 及更早版本的支持，<br/>继续使用存在极大的安全隐患，请使用当代主流的浏览器进行访问。</span><br/>`+
-        `<a target="_blank" rel="noopener" href="https://blogs.windows.com/windowsexperience/2021/05/19/the-future-of-internet-explorer-on-windows-10-is-in-microsoft-edge/"><strong>了解详情 ></strong></a>`+
+        `<span class="kill-t"><b>Sorry, your browser cannot access this site</b></span><br/>`+
+        `<span class="kill-c">Microsoft has terminated support for Internet Explorer (IE) 10 and earlier versions in 2016. <br/>There are great security risks to continue using it. Please use contemporary mainstream browsers to access.</span><br/>`+
+        `<a target="_blank" rel="noopener" href="https://blogs.windows.com/windowsexperience/2021/05/19/the-future-of-internet-explorer-on-windows-10-is-in-microsoft-edge/"><strong>Learn more ></strong></a>`+
     '</div>');
 </script>
 
@@ -1855,9 +1855,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 		}
 	</style>
     <div class="kill-noscript">
-        <span class="kill-t"><b>抱歉，您的浏览器无法访问本站</b></span><br/>
-        <span class="kill-c">本页面需要浏览器支持（启用）JavaScript</span><br/>
-        <a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=启用JavaScript"><strong>了解详情 ></strong></a>
+        <span class="kill-t"><b>Sorry, your browser cannot access this site</b></span><br/>
+        <span class="kill-c">This page requires browser support (enable) JavaScript</span><br/>
+        <a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=启用JavaScript"><strong>Learn more ></strong></a>
     </div>
 </noscript>
 
@@ -1872,7 +1872,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: false,
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1750210760017),
+    lastupdate: new Date(1750496947730),
     sidebar: {
       for_page: ["blogger","category","tagcloud","donate"],
       for_post: ["toc","post","blogger"],
@@ -2633,6 +2633,76 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           <div class='post-wrapper'>
             <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
+  <link itemprop="mainEntityOfPage" href="https://bighu630.github.io/2024/11/28/solidity合约升级2/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="thisHu's log">
+  </span>
+  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
+    <meta itemprop="name" content="thisHu's log">
+    <meta itemprop="description" content="使卵石臻与完美的，非锤的打击，而是水的且歌且舞">
+  </span>
+  
+  
+  
+    <span hidden>
+      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+    </span>
+  
+  
+    
+    <h2 class="article-title"  itemprop="name headline">
+      <a href="/2024/11/28/solidity%E5%90%88%E7%BA%A6%E5%8D%87%E7%BA%A72/"  itemprop="url">
+        solidity合约升级2
+      </a>
+    </h2>
+  
+  <div class='md article-desc' itemprop="articleBody">
+    
+      
+        
+上回我们聊到了合约升级的原理（所依赖的solidity特性），一个是代理调用，他运行我们加载其他合约的逻辑来修改当前合约的数据，以及fallback函数，他可以出来未知的函数调用，让我们能够把请求转发到逻辑合约里面去，而逻辑合约的升级就是直接更换代理合约中的逻辑合约地址。这一回，将讲述常见的几种标准化的合约升级方案。
+
+合约升级方案通用合约升级通用合约升级实际上没有提出什么有建设性的技术，...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time itemprop="dateCreated datePublished" datetime="2024-11-28T11:43:38+08:00">2024-11-28</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链</a><span class="sep"></span><a class="category-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/">智能合约</a>
+          
+            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+              <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/" itemprop="url"><span itemprop="name">区块链</span></a>
+            </span>
+          
+            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+              <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" itemprop="url"><span itemprop="name">智能合约</span></a>
+            </span>
+          
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2024/11/28/solidity%E5%90%88%E7%BA%A6%E5%8D%87%E7%BA%A72/' itemprop="url">
+            Read More
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
   <link itemprop="mainEntityOfPage" href="https://bighu630.github.io/2024/11/23/solidity合约升级/">
   <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="thisHu's log">
@@ -2690,7 +2760,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div>
           <a class='readmore' href='/2024/11/23/solidity%E5%90%88%E7%BA%A6%E5%8D%87%E7%BA%A7/' itemprop="url">
-            阅读全文
+            Read More
           </a>
         </div>
       
@@ -2763,7 +2833,7 @@ RUN apt-get update &amp;&amp; apt-get install -y tzdata &amp;&amp; \
       
         <div>
           <a class='readmore' href='/2024/11/18/%E4%B8%BA%E5%AE%B9%E5%99%A8%E8%AE%BE%E7%BD%AE%E6%97%B6%E5%8C%BA/' itemprop="url">
-            阅读全文
+            Read More
           </a>
         </div>
       
@@ -2835,7 +2905,7 @@ RUN apt-get update &amp;&amp; apt-get install -y tzdata &amp;&amp; \
       
         <div>
           <a class='readmore' href='/2024/11/15/%E5%85%AC%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BF%85%E5%A4%87-ssh-deny/' itemprop="url">
-            阅读全文
+            Read More
           </a>
         </div>
       
@@ -2909,7 +2979,7 @@ yum install gpg
       
         <div>
           <a class='readmore' href='/2024/10/24/gpg%E5%B0%8F%E8%AE%B0/' itemprop="url">
-            阅读全文
+            Read More
           </a>
         </div>
       
@@ -2981,7 +3051,7 @@ qt6ct,kde setting,…..等一系列qt程序显示正常（使...
       
         <div>
           <a class='readmore' href='/2024/10/11/kde6%E5%88%B0hyprland%E4%B9%8B%E5%90%8E%E7%9A%84%E5%A5%87%E6%80%AAbug/' itemprop="url">
-            阅读全文
+            Read More
           </a>
         </div>
       
@@ -3037,7 +3107,7 @@ qt6ct,kde setting,…..等一系列qt程序显示正常（使...
       
         <div>
           <a class='readmore' href='/2024/09/29/linux%E7%AC%94%E8%AE%B0%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/' itemprop="url">
-            阅读全文
+            Read More
           </a>
         </div>
       
@@ -3111,7 +3181,7 @@ qt6ct,kde setting,…..等一系列qt程序显示正常（使...
       
         <div>
           <a class='readmore' href='/2024/09/29/hyprland%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/' itemprop="url">
-            阅读全文
+            Read More
           </a>
         </div>
       
@@ -3194,7 +3264,7 @@ dolphin使用kde的主题管理，可以通过kde的主题商店配合kvantum ma
       
         <div>
           <a class='readmore' href='/2024/09/23/%E6%9C%80%E5%A5%BD%E7%9A%84%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8-dolphin/' itemprop="url">
-            阅读全文
+            Read More
           </a>
         </div>
       
@@ -3264,79 +3334,7 @@ dolphin使用kde的主题管理，可以通过kde的主题商店配合kvantum ma
       
         <div>
           <a class='readmore' href='/2024/09/23/acme-cloudflare%E7%94%9F%E6%88%90%E5%85%8D%E8%B4%B9%E8%AF%81%E4%B9%A6%EF%BC%88%E8%87%AA%E5%8A%A8%E7%BB%AD%E6%9C%9F%EF%BC%89/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://bighu630.github.io/2024/09/22/献给一年有四季的人/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="thisHu's log">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="thisHu's log">
-    <meta itemprop="description" content="使卵石臻与完美的，非锤的打击，而是水的且歌且舞">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/09/22/%E7%8C%AE%E7%BB%99%E4%B8%80%E5%B9%B4%E6%9C%89%E5%9B%9B%E5%AD%A3%E7%9A%84%E4%BA%BA/"  itemprop="url">
-        献给一年有四季的人
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        再此写一篇文章献给拥有四季的人:
-你应该在春天的时候找到一下有意思的事情，注意他们。
-在夏天的时候去挖掘他们，一头扎进他们的世界中，可能是一个领域，可以是一本书，去找到他们的关键。
-秋天的时候回过头来看看，看看缺少了什么，写点笔记，捋一捋思路。
-冬天好好睡上一觉，等待来年。
-瓦尔登湖有说：如果理念告诉你不要这么做，那么你更应该就这么去做，或许你应该在春天的时候好好睡一觉，以便在夏天在睡一觉。...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-09-22T18:49:02+08:00">2024-09-22</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="sep"></span><a class="category-link" href="/categories/%E9%9A%8F%E7%AC%94/%E4%BA%BA%E7%94%9F/">人生</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E9%9A%8F%E7%AC%94/" itemprop="url"><span itemprop="name">随笔</span></a>
-            </span>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E9%9A%8F%E7%AC%94/%E4%BA%BA%E7%94%9F/" itemprop="url"><span itemprop="name">人生</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/09/22/%E7%8C%AE%E7%BB%99%E4%B8%80%E5%B9%B4%E6%9C%89%E5%9B%9B%E5%AD%A3%E7%9A%84%E4%BA%BA/' itemprop="url">
-            阅读全文
+            Read More
           </a>
         </div>
       
@@ -3357,17 +3355,17 @@ dolphin使用kde的主题管理，可以通过kde的主题商店配合kvantum ma
         
           <a class="prev" rel="prev" href="/">
             <section class="post prev white-box shadow floatable blur" >
-              <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页&nbsp;
+              <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous&nbsp;
             </section>
           </a>
         
         <p class="current">
-          2 / 5
+          2 / 6
         </p>
         
           <a class="next" rel="next" href="/page/3/">
             <section class="post next white-box shadow floatable blur">
-              &nbsp;下一页&nbsp;<i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+              &nbsp;Next&nbsp;<i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
             </section>
           </a>
         
@@ -3767,7 +3765,7 @@ dolphin使用kde的主题管理，可以通过kde的主题商店配合kvantum ma
       
     
       
-        <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+        <div><p>Blog content follows the <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
 </div>
       
     
@@ -3780,9 +3778,9 @@ dolphin使用kde的主题管理，可以通过kde的主题商店配合kvantum ma
       
     
       
-        本站使用
+        Use
         <a href="https://github.com/volantis-x/hexo-theme-volantis/#5.8.0" target="_blank" class="codename">Volantis</a>
-        作为主题
+        as theme
       
     
       
@@ -4628,7 +4626,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   <script>
-  let imgs = ["https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/005.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/016.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/056.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/003.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/035.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/038.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/054.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/004.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/051.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/034.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/006.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/012.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/042.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/039.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/025.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/019.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/002.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/052.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/033.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/046.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/001.webp"];
+  let imgs = ["https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/052.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/054.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/033.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/056.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/006.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/034.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/016.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/019.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/001.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/046.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/051.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/002.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/005.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/025.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/012.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/035.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/004.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/038.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/042.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/003.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/039.webp"];
   let index = 0;
   let IntervalParallax = null;
 
