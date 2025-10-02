@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>thisHu&#39;s log</title>
+  
+  <subtitle>暴躁的程序员</subtitle>
+  <link href="https://bighu630.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://bighu630.github.io/"/>
+  <updated>2025-10-02T08:02:56.042Z</updated>
+  <id>https://bighu630.github.io/</id>
+  
+  <author>
+    <name>[object Object]</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>bg一面面经</title>
+    <link href="https://bighu630.github.io/2025/06/30/bg%E4%B8%80%E9%9D%A2%E9%9D%A2%E7%BB%8F/"/>
+    <id>https://bighu630.github.io/2025/06/30/bg%E4%B8%80%E9%9D%A2%E9%9D%A2%E7%BB%8F/</id>
+    <published>2025-06-30T09:29:18.000Z</published>
+    <updated>2025-10-02T08:02:56.042Z</updated>
+    
+    <content type="html"><![CDATA[<p>某交易所一面面经</p><ol><li>自我介绍</li><li>交易所项目介绍（详细问）</li></ol><p>Q：你们的解析项目解析了那些数据？</p><p>A：token token_balance nft Account</p><p>Q：你们的解析全流程是怎么样的？</p><p>A：我们上游有一个xx服务，用来从节点那block数据，解析block数据后，将transition数据发到kafka,我们从kafka拿到数据，之后解析</p><p>Q：为什么有一个xx服务，你们不直接从节点拿数据？</p><p>A：我们还有其他服务需要数据，都从kafka那可以减少对节点的调用次数</p><p>Q：先说说solana这一块怎么解析的</p><p>A：首先是token, 拿到transition后，解析tx里面的指令，遇到sql token系列合约里面的mintinit系列的指令就判断为token的发行，记录token的数据，token_balance 在tx里面有（postTokenBalance字段），可以直接拿到交易后的账户余额，solana的nft和token的实现是一样的，所以没有单独处理nft.</p><p>Q：这个过程有没有遇到什么问题？</p><p>A：token_balance遇到过postTokenBalance里面缺失数据，后面调研找到缺失的原因是当一个token account关闭时postTokenBalance里面不会记录这条数据，导致余额不一致，解决方案是对比postTokenBalance和preTokenBalance</p><p>Q：你们有没有解过交易的数据（我回答有解transfer，他反问dex相关的交易）？</p><p>A：我没有参与dex这一块的解析，但是有了解过。</p><p>Q：怎么解的？</p><p>A：一种是解析dex交易，dex交易实际上是dex的指令，根据指令和指令参数就可以知道交易里面包含怎样的swap情况，另外一种是解析dex里面的数据，比如说solana链上有一些通过订单铺实现的dex，链上数据中包含订单铺信息，这时候需要解析dex合约里面的数据账户里面的数据。</p><p>Q：那说说evm里面的数据怎么解析？</p><p>A：evm我们是从kafka里面订阅的recept（一开始说的是tx,tx里面没有log信息😢），在recept里面查看log信息，判断有没有transfer事件，如果有就通过rpc获取账户相关token的余额。</p><p>Q：为什么不像solana那样从数据中解析token余额，要用rpc获取？</p><p>A：我们这是一个分布式，多线程的处理方案，处理的数据不是有序的，所以没办法做加减，我们后续有做过一个优化，在一分钟内做加减，但是为了保证数据准确，每分钟会call一下rpc拿到精准的余额信息。</p><p>W：这里省略一部分关于业务方使用数据的问题…</p><p>Q：evm你们除了解token,还有没有解别的（721,1155之类的）？</p><p>A：有解析721,和1155 ，具体的解析方式也是根据transfer事件拿到基础信息，再那其他数据。</p><p>Q：nft这一块有没有遇到什么问题？</p><p>A：我们有一个NFT的项目，他们在链上做了一个非标准的操作，更新了nft的metadata,但是更新操作不是标准721里面的操作，导致我们没有解析到更新之后的nft数据，当时的解决方案是解析捕捉这个非标准操作，并且解析。但是后面调查到有部分项目的玩法就是更新metadata，后面指定的方案是用一个白名单定时刷新这些集合里面的nft。</p><ol start="3"><li>跨链相关的两个项目</li></ol><p>Q：聊一下下面的跨链项目：你们的跨链整体流程是什么样的。</p><p>A：大致回答了一下跨链流程（这里不做纤细介绍）</p><p>Q：这里说到的预编译合约是什么？</p><p>A：这个涉及到evm系的合约执行流程，在eth里面，geth收到交易后会丢给evm,evm首先判断call的合约是不是预编译合约，是的话会把参数抛给预编译的go对象，预编译合约可以接受用户的call参数，也能直接修改evm的存储结构（可以直接修改leveldb），预编译的go代码比evm里面的sol代码执行速度快很多，zkevm里面的zk相关合约就是通过预编译合约写的。</p><p>Q：假如我要把uniswap v2放到我们自己的evm里面有什么好的解决方案，需要把数据也搞过来？</p><p>A：我想他的意思是用预编译的方式放到evm里面（实际上预编译的方式实现会更麻烦），我理解是把uniswap的合约部署过来，然后需要把存储的东西给弄过来，所以回答是 –》 这个涉及到合约的底层结构，每个合约的数据都单独存储在自己的mpt数里面，我们只需要拿到eth上面uniswap的树根，然后便利树根，拿到所有数据之后，把数导入到我们自己的evm里面，但是很难保证我们自己的uniswap可以读取到这个树根，总之这个有可能实现，实现难度一定很大。</p><ol start="4"><li>反问</li></ol><p>Q：我了解到这边是做xxx,我想知道这边有多少个人？</p><p>A：n个，这是一个新开的项目</p><p>Q：为什么要做xxx, 有很多可以直接用的链上xxx</p><p>A：1.战略储备，2.链上已有的限制多。</p><ol start="5"><li>拜拜</li></ol><blockquote><p>一面好像是过了，但是对xx协议解析存在问题，这两天得突击一下。听内推的伙伴说，如果二面的时候问道了xx协议，回答不上可能会挂掉。</p></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;某交易所一面面经&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;自我介绍&lt;/li&gt;
+&lt;li&gt;交易所项目介绍（详细问）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Q：你们的解析项目解析了那些数据？&lt;/p&gt;
+&lt;p&gt;A：token token_balance nft Account&lt;/p&gt;
+&lt;p&gt;Q：你们的解析全</summary>
+      
+    
+    
+    
+    <category term="区块链" scheme="https://bighu630.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+    <category term="面试" scheme="https://bighu630.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/%E9%9D%A2%E8%AF%95/"/>
+    
+    
+    <category term="交易所" scheme="https://bighu630.github.io/tags/%E4%BA%A4%E6%98%93%E6%89%80/"/>
+    
+    <category term="面经" scheme="https://bighu630.github.io/tags/%E9%9D%A2%E7%BB%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mongodb索引</title>
+    <link href="https://bighu630.github.io/2025/06/21/mongodb%E7%B4%A2%E5%BC%95/"/>
+    <id>https://bighu630.github.io/2025/06/21/mongodb%E7%B4%A2%E5%BC%95/</id>
+    <published>2025-06-21T09:06:51.000Z</published>
+    <updated>2025-10-02T08:02:56.042Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="mongodb索引"><a href="#mongodb索引" class="headerlink" title="mongodb索引"></a>mongodb索引</h2><h3 id="索引的作用"><a href="#索引的作用" class="headerlink" title="索引的作用"></a>索引的作用</h3><p>索引支持在MongoDB中有效地执行查询。如果没有索引，MongoDB必须执行集合扫描，即扫描集合中的每个文档，以选择那些与查询语句匹配的文档。如果一个查询存在适当的索引，MongoDB可以使用该索引来限制它必须检查的文档数量。</p><p>索引是特殊的数据结构，它以一种易于遍历的形式存储集合数据集的一小部分。索引存储一个或一组特定字段的值，按字段的值排序。索引项的排序支持有效的相等匹配和基于范围的查询操作。此外，MongoDB可以通过使用索引中的排序返回排序后的结果。</p><h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><h4 id="默认id索引"><a href="#默认id索引" class="headerlink" title="默认id索引"></a>默认id索引</h4><p>mongo默认创建的_id索引，_id字段一般用mongo自动生成的id,而不需要插入时手动创造</p><p>在分片群集中，如果您不使用<strong>_id字段作为分片键，那么您的应用程序 必须确保_id</strong>字段中值的唯一性以防止错误。这通常是通过使用标准的自动生成的ObjectId来完成的。</p><h4 id="索引创建"><a href="#索引创建" class="headerlink" title="索引创建"></a>索引创建</h4><p>在mongo shell中使用 <code>db.集合.createIndex()</code> 创建索引</p><p>以下示例在name字段上创建单个键降序索引：</p><p>db.collection.createIndex( { name: -1 } )</p><h5 id="索引名称"><a href="#索引名称" class="headerlink" title="索引名称"></a>索引名称</h5><p>索引的默认名称是索引键和索引中每个键的方向(即1或-1)的连接，使用下划线作为分隔符。例如，在 <strong>{ item : 1, quantity: -1 }上创建的索引名称为item<em>1_quantity</em>-1</strong> 。</p><p>可以在创建索引时指定索引名：</p><pre><code class="shell">db.products.createIndex(  &#123; item: 1, quantity: -1 &#125; ,  &#123; name: &quot;query for inventory&quot; &#125;)</code></pre><blockquote><p>[!important]</p><p>索引一旦创建，无法修改，包括索引名</p></blockquote><h5 id="索引类型"><a href="#索引类型" class="headerlink" title="索引类型"></a>索引类型</h5><p>MongoDB提供了许多不同的索引类型来支持特定类型的数据和查询。</p><ul><li>单字索引</li></ul><p>指在文档中的单个字段上创建索引</p><blockquote><p>对于单字段索引和排序操作，索引键的排序顺序(升序或降序)并不重要，因为MongoDB可以从任何方向遍历索引。</p></blockquote><ul><li>复合索引</li></ul><p>指使用多个用户定义字段创建的索引（类似mysql的联合索引），与mysql联合索引类似，必须有序的使用索引。</p><blockquote><p>删除冗余索引</p><p>如果集合同时具有复合索引和前缀索引（例如 { a: 1, b: 1 } 和 { a: 1 }），并且两个索引都没有稀疏或唯一约束，则可以删除前缀索引 ({ a: 1 })。MongoDB 在所有需要使用前缀索引的情况下都使用复合索引。</p></blockquote><p>复合索引的排序必须按照索引的顺序和方向，如{ a: 1, b: -1 } 则只能支持一下索引查询</p><ol><li>查询a的升序（不查询b）</li><li>查询a的升序，b的降序（与索引方法一致）：a的降序，b的升序，需要考虑能否支持</li><li>指定a,查询b的降序（注意这里不支持查询b的升序）</li></ol><ul><li>多键索引</li></ul><p>多键索引是mongo用来索引在数据中的内容的索引。如果索引包含数组值的字段，MongoDB为数组的每个元素创建单独的索引项。这些多键索引允许查询通过匹配数组的一个或多个元素来选择包含数组的文档。MongoDB自动决定是否创建一个多键索引，如果索引字段包含数组值;您不需要显式地指定多键类型。</p><p><img src="https://s2.loli.net/2025/06/21/Na2Xb4egOsW6opf.png" class="lazyload" data-srcset="https://s2.loli.net/2025/06/21/Na2Xb4egOsW6opf.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20250621144904799"></p><ul><li>地址空间索引</li></ul><p>Mongo支持的一种特殊索引，支持对使用平面几何的2d索引和使用球面几何返回结果的2dsphere索引。</p><ul><li>文本索引</li></ul><p><a href="https://chatgpt.com/s/t_685656f2a2608191ab47d328a77e736f">https://chatgpt.com/s/t_685656f2a2608191ab47d328a77e736f</a></p><ul><li>hashed索引</li></ul><p>指对key的内容hash之后做索引，hash索引只支持等值匹配，不支持范围查询，常用于作为分片键。</p><h5 id="索引属性"><a href="#索引属性" class="headerlink" title="索引属性"></a>索引属性</h5><ul><li>唯一索引</li></ul><p>唯一索引用于规划这个key对应的值在集合（table）中只能出现一次，一个集合里面可以有多个唯一索引，唯一索引对应的key如果不存在则不进行索引，只保证存在的文档中对应key不重复。</p><ul><li>部分索引</li></ul><p><a href="https://docs.mongodb.com/manual/core/index-partial/">部分索引</a>仅索引集合中符合指定过滤器表达式的文档。通过对集合中的部分文档建立索引，部分索引可以降低存储需求，并降低创建和维护索引的性能成本。</p><p>部分索引提供了稀疏索引功能的超集，因此应优先于稀疏索引。</p><p><a href="https://chatgpt.com/s/t_6856588847ac819183546a5583026345">https://chatgpt.com/s/t_6856588847ac819183546a5583026345</a></p><ul><li>稀疏索引</li></ul><p>索引的稀疏属性可确保索引仅包含具有索引字段的文档的条目。索引会跳过没有索引字段的文档。</p><ul><li>TTL索引</li></ul><p>自动过期索引</p><h4 id="索引查询"><a href="#索引查询" class="headerlink" title="索引查询"></a>索引查询</h4><ul><li>覆盖查询</li></ul><p>类似mysql的覆盖索引，如果索引字段包含查询字段，则可以直接返回索引的数据，而不用回表查询。</p><p><a href="https://chatgpt.com/s/t_68565a662a208191a66a97fac05ed587">https://chatgpt.com/s/t_68565a662a208191a66a97fac05ed587</a></p><ul><li>索引交集</li></ul><p>MongoDB可以使用索引的交集来完成查询。对于指定复合查询条件的查询，如果一个索引可以满足查询条件的一部分，而另一个索引可以满足查询条件的另一部分，则MongoDB可以使用两个索引的交集来满足查询。使用复合索引还是使用索引交集是否更有效取决于特定查询和系统。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;mongodb索引&quot;&gt;&lt;a href=&quot;#mongodb索引&quot; class=&quot;headerlink&quot; title=&quot;mongodb索引&quot;&gt;&lt;/a&gt;mongodb索引&lt;/h2&gt;&lt;h3 id=&quot;索引的作用&quot;&gt;&lt;a href=&quot;#索引的作用&quot; class=&quot;header</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>solana杂谈（1）</title>
+    <link href="https://bighu630.github.io/2025/06/17/solana%E6%9D%82%E8%B0%88%EF%BC%881%EF%BC%89/"/>
+    <id>https://bighu630.github.io/2025/06/17/solana%E6%9D%82%E8%B0%88%EF%BC%881%EF%BC%89/</id>
+    <published>2025-06-17T08:19:51.000Z</published>
+    <updated>2025-10-02T08:02:56.042Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="solana杂谈（1）"><a href="#solana杂谈（1）" class="headerlink" title="solana杂谈（1）"></a>solana杂谈（1）</h2><blockquote><p>本文适用于“只需大致了解 Solana”的读者，部分说法可能不够准确或不够深入。如需详细了解，建议阅读 Solana 的官方文档：<a href="https://solana.com/zh/docs">https://solana.com/zh/docs</a></p></blockquote><h3 id="solana账户模型"><a href="#solana账户模型" class="headerlink" title="solana账户模型"></a>solana账户模型</h3><p>solana 上所有数据都是储存在账户中，也就是说你可以通过账户信息拿到链上的任意状态（将区块链理解为一个大型状态机）.<br>solana 账户结构如下：<br><img src="https://solana.com/_next/image?url=/assets/docs/core/accounts/accounts.png&w=1200&q=75" class="lazyload" data-srcset="https://solana.com/_next/image?url=/assets/docs/core/accounts/accounts.png&w=1200&q=75" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="solana account"></p><ul><li><strong>钱包账户（Wallet Account）</strong>：<code>data</code> 字段为空。这类账户由椭圆曲线生成的公私钥对管理，拥有私钥的用户可以通过签署并发送交易来修改链上状态。</li><li><strong>程序账户（Program Account）</strong>：<code>data</code> 字段包含 Solana 程序的指令集及其 WASM 二进制代码。</li><li><strong>数据账户（Data Account）</strong>：<code>data</code> 字段包含所有编码后的数据。</li></ul><p>在 Solana 中，程序账户和数据账户的地址通常是通过特殊方式生成的，并非由椭圆曲线公私钥对直接控制，因此无法直接通过私钥生成签名。它们的状态修改通常通过<strong>程序派生地址（Program Derived Address, PDA）</strong>代理签名，在状态机内部进行。</p><h4 id="账户租金"><a href="#账户租金" class="headerlink" title="账户租金"></a>账户租金</h4><p>账户租金是solana避免数据臃余的处理方案（evm是通过释放空间，返回eth的方式），对于solana上所有的用户都需要支付租金（或者余额大于一定值免租）.</p><ul><li><strong>钱包账户</strong>：租金由账户所有者自己支付。</li><li><strong>程序账户</strong>：租金通常由程序的创建者一次性支付，以确保程序的可持续运行。</li></ul><p><strong>租金豁免</strong>：如果账户中存储的 SOL 数量足以支付该账户两年期的租金，则该账户可以获得租金豁免，无需再支付租金。这意味着账户将永久存在，除非被关闭。</p><ul><li><strong>数据账户（Data Account）</strong>：通常是程序用于保存数据的账户，其租金由创建该数据账户的交易发起者支付。</li></ul><blockquote><p><strong>数据账户管理</strong>：对于核心项目数据，通常在程序部署时进行统一初始化，以防止意外删除。对于用户自行管理的数据账户（如链上的 Token 账户），则由用户自己创建并管理租金。</p></blockquote><blockquote><p>rent_epoch：这是一个遗留字段，源于 Solana 曾经有一个机制会定期从账户中扣除 lamports。虽然此字段仍然存在于账户类型中，但自从租金收取被弃用后，它已不再使用。😅 租金已经被弃用了</p></blockquote><h3 id="solana的token标准"><a href="#solana的token标准" class="headerlink" title="solana的token标准"></a>solana的token标准</h3><p>solana上的token不像evm有多种token执行标准（erc20&#x2F;erc721&#x2F;erc1155）,也不会每个token都上去部署一个合约。</p><p>solana上的token由token program统一管理（token progeam有两个版本，这里不做展开），接下来我们从token的生命周期来看一下solana的脱可能标准</p><ol><li><p>项目方创建token<br>项目方创建token实际上是向token program发送一个mintinit指令，在token program中<code>登记</code>一个token 以及记录怎么发行token<br>不同于evm，不是一个合约，由合约管理token</p></li><li><p>mint token<br>在token初始化时制定了mint权限，拥有mint权限的账户合约mint token，注意每一个token有他独立的mint account.mint account的权限</p></li><li><p>创建token account<br>钱包用户通过token program，创建对应token 的token account(实际上也是一个数据账户)，用于保存钱包用户的token的状态</p></li><li><p>token transfer<br>token transfer指令由钱包用户发起，由token program执行，修改发送方&#x2F;接收方的token account 里面的余额状态，实现token的转账</p></li></ol><blockquote><p>另外还有销毁和授权，这里不做展开</p></blockquote><p>在solana上发行token不需要额外的部署代码</p><p>对于nft类的token,solana并不严格区分token类型，nft和ft共享相同的指令集（指令里面也没有区分这两者）</p><h4 id="solana上的nft"><a href="#solana上的nft" class="headerlink" title="solana上的nft"></a>solana上的nft</h4><p>solana nft转账之类的操作在token program上实现，生命周期通常由类似 Metaplex这类token标准管理（这些token是社区推动的标准，不同于token program预编译在solana主链上）</p><p>Metaplex这类标准通过控制token program mint不同的token来实现nft,也就是对于每一个nft的生成，实际上是在token program上执行 mintinit操作（！！！ 不是mint操作），每一个nft的mint相当于是发行一个token，Metaplex程序控制发行量，从而实现nft</p><h3 id="solana合约标准"><a href="#solana合约标准" class="headerlink" title="solana合约标准"></a>solana合约标准</h3><p>solana使用的BPF vm执行合约</p><p>合约生命周期有BPF loader系列系统合约管理.通常情况下需要将合约编码成wasm的二进制码然后部署在solana链上</p><p>对于合约开发，合约需要与solana链交互，所以并不是所有语言都可以开发solana合约，需要对应语言实现solana program sdk 并且可以编译成wasm的二进制码<br>目前来看只有（rust&#x2F;c&#x2F;c++）其他语言有一些社区实现的sdk,可能存在问题</p><h3 id="solana的共识"><a href="#solana的共识" class="headerlink" title="solana的共识"></a>solana的共识</h3><p>Solana 采用的是一种混合共识机制，结合了以下几个关键技术：</p><ul><li>Proof of History (PoH) — 历史证明</li></ul><p>这是 Solana 最核心的创新点。</p><p>PoH 通过一个加密哈希函数（SHA-256）以连续的方式产生可验证的时间顺序证明，相当于给所有交易和事件打上了时间戳。</p><p>这个机制让网络无需等待区块时间戳验证，极大地提高了交易处理速度和吞吐量。</p><ul><li>Tower BFT — 基于 PoH 的拜占庭容错共识</li></ul><p>Tower BFT 是 Solana 的一种优化的 Practical Byzantine Fault Tolerance (PBFT) 机制。</p><p>利用 PoH 生成的全局时间顺序，节点可以在这个时间线上锁定状态，从而更高效地达成共识。</p><p>节点通过投票和锁定投票权重防止双重花费和恶意行为。</p><ul><li>Turbine — 高效的数据传播协议</li></ul><p>用于快速分发数据包，减少网络拥堵，提高广播效率。</p><ul><li>Gulf Stream — 交易转发协议</li></ul><p>允许交易在网络中提前转发给验证者，减少确认时间。</p><ul><li>Sealevel — 并行智能合约运行时</li></ul><p>允许同时处理多个交易，提高吞吐量。</p><h4 id="Solana-共识流程简要"><a href="#Solana-共识流程简要" class="headerlink" title="Solana 共识流程简要"></a>Solana 共识流程简要</h4><ol><li><p>交易发起后，节点利用 PoH 来验证交易的时间顺序。</p></li><li><p>验证者节点基于 Tower BFT 达成共识，投票决定哪个区块被接受。</p></li><li><p>通过这种方式，Solana 可以实现每秒数千至数万笔交易的处理速度。</p></li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;solana杂谈（1）&quot;&gt;&lt;a href=&quot;#solana杂谈（1）&quot; class=&quot;headerlink&quot; title=&quot;solana杂谈（1）&quot;&gt;&lt;/a&gt;solana杂谈（1）&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;本文适用于“只需大致了解 Solana”的</summary>
+      
+    
+    
+    
+    <category term="区块链" scheme="https://bighu630.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+    <category term="solana" scheme="https://bighu630.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/solana/"/>
+    
+    
+    <category term="solana" scheme="https://bighu630.github.io/tags/solana/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>禅与摩托车维修艺术-1</title>
+    <link href="https://bighu630.github.io/2025/04/15/%E7%A6%85%E4%B8%8E%E6%91%A9%E6%89%98%E8%BD%A6%E7%BB%B4%E4%BF%AE%E8%89%BA%E6%9C%AF%EF%BC%881%EF%BC%89/"/>
+    <id>https://bighu630.github.io/2025/04/15/%E7%A6%85%E4%B8%8E%E6%91%A9%E6%89%98%E8%BD%A6%E7%BB%B4%E4%BF%AE%E8%89%BA%E6%9C%AF%EF%BC%881%EF%BC%89/</id>
+    <published>2025-04-15T01:04:46.000Z</published>
+    <updated>2025-10-02T08:02:56.044Z</updated>
+    
+    <content type="html"><![CDATA[<p>这算得上我第四次看这本书，看这么多次主要是一直没怎么看懂。在细说这本书之前，先简单聊一下这个作者的背景故事（在我的视角下）。<br>本书作者原本是一个严重的精神分裂患者，后来在精神病院中，作者的另外一个人格在高压电下意识死亡，从而回归一个人格的视角，故事写于作者在精神病院出来后和自己的儿子以及两个朋友的绕美摩托车旅行（这两是夫妻）。在旅行期间通过 陶野扩 的方式和旅人讲述长久以来的心物二元论，同时引出“良质”来解决心物二元论的冲突（当然大部分是作者独自思考，毕竟和他一起旅游主要是想旅游，而不是像思考）<br>1、两种人<br>技术理性派，与非技术理想派（非原文观点）。这源于一个很有意思的问题–“一个人应当多大程度上独立维修自己的摩托车？” 作者属于是技术理性派，他会大量的维修手段，当然关键是他可以通过听发动机的声音判断发动机的状态。与之相对的是他的两个朋友，几乎不会自己动手去修理摩托车（摩托车送的维修配件包甚至是新的），他们选择购买昂贵的摩托车的方式规避开到半路上摩托车出问题的风险（这显然行不通），所以在没有作者的摩托车旅途中，他们只能选择附近有维修站的线路。<br>就背景而言，随着工业的发展，越来越多的技术部件进入人的生活（比如那对夫妻家中的水龙头，他们通过无视来规避漏水的滴滴答答），对于一些人而言，那些器具上面铭刻着醒目的“禁止触碰，仅开关可碰”。另一方面，这种隔阂像是一篇工业废墟，破烂的铁丝网上挂着禁止入内的蓝色牌子，在有的人看来就像是“欢迎光临”.<br>2、心物二元论<br>关于鬼真的存在吗的讨论，这也是本书很经典的片段。起因是作者的儿子（克里斯）想要听鬼故事，他的一个印地安同学说鬼真的存在，而且那个同学还见过。克里斯还属于那种相信“鬼只存在人的脑海中”的理论（即使现在大部分人也会如此），作者并不否认鬼在脑海中，但是他澄清了一个误区,也就是鬼在脑海中，所以鬼不存在。<br>而后开启一段“诡异”的陶冶扩–万有引力被发现之前，存在万有引力吗？似乎答案是显然存在的。但是他如何存在，他的存在是苹果掉到地面上，而不是掉到天上去了。但是他在什么地方，万有引力使苹果掉到大地上，但事实上是苹果和大地使苹果掉在大地上，而万有引力则是牛顿创造出来的鬼魂，他把苹果“掉”到地上。</p><p>小结：看上去还差点火候，似乎没法把作者想要表达的关键写出来，特别是鬼故事那一段。先到这儿了，后面我也没看多少（这一次又要不定期脱更了😭）</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;这算得上我第四次看这本书，看这么多次主要是一直没怎么看懂。在细说这本书之前，先简单聊一下这个作者的背景故事（在我的视角下）。&lt;br&gt;本书作者原本是一个严重的精神分裂患者，后来在精神病院中，作者的另外一个人格在高压电下意识死亡，从而回归一个人格的视角，故事写于作者在精神病院出</summary>
+      
+    
+    
+    
+    <category term="图书" scheme="https://bighu630.github.io/categories/%E5%9B%BE%E4%B9%A6/"/>
+    
+    <category term="禅与摩托维修艺术" scheme="https://bighu630.github.io/categories/%E5%9B%BE%E4%B9%A6/%E7%A6%85%E4%B8%8E%E6%91%A9%E6%89%98%E7%BB%B4%E4%BF%AE%E8%89%BA%E6%9C%AF/"/>
+    
+    
+    <category term="二元论" scheme="https://bighu630.github.io/tags/%E4%BA%8C%E5%85%83%E8%AE%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>恐惧与颤栗-1</title>
+    <link href="https://bighu630.github.io/2025/03/12/%E6%81%90%E6%83%A7%E4%B8%8E%E9%A2%A4%E6%A0%97%EF%BC%881%EF%BC%89/"/>
+    <id>https://bighu630.github.io/2025/03/12/%E6%81%90%E6%83%A7%E4%B8%8E%E9%A2%A4%E6%A0%97%EF%BC%881%EF%BC%89/</id>
+    <published>2025-03-12T12:29:15.000Z</published>
+    <updated>2025-10-02T08:02:56.044Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="心境"><a href="#心境" class="headerlink" title="心境"></a>心境</h2><blockquote><p>克尔恺郭尔 - 恐惧与颤栗一书第一章 – 心境</p></blockquote><p>“神要试验亚伯拉罕，就对他说，带着以撒，你独生的儿子，你所爱的，往摩利亚地去，在我所要指示你的山上，把他献为燔祭。”</p><p>这是梦开始的地方，乍一听这是一个疯狂且愚蠢的故事，怎么会有人愚蠢到相信脑子的（幻听），献祭自己的儿子。</p><p>但是亚伯拉罕不是一个疯子，在那个时代，他是被敬仰的人。</p><blockquote><p>可能有人会认为那是那个时代的问题，我不否定这种想法，但是我不认为存在一个没有问题的时代，那个时代的人之所以会有那样的观念，恰恰是因为他们在那个时代，就像你在这个时代一样。我不会举例子去解释这段话，因为这恰是 “我在哪儿？”这个问题的一部分的答案，我处在我正在这里的时代，同时我不再其他我不再的时代，那么关于亚伯拉罕所在时代，敬仰他是应该的，如同现在的鄙夷也是应该的。</p></blockquote><p>心境这一章是克尔恺郭尔信仰之旅的起点，也是从亚伯拉罕这里把握信仰的关键。</p><p>上帝让亚伯拉罕去献祭自己的儿子，那么亚伯拉罕会怎么想。</p><blockquote><p>这个人不是一个思想家，他没有想要出离信仰的愿望；在他看来，“像信仰之父一样地被记住” 必定就是最为荣耀的事情，“拥有信仰”是一种令人羡慕的命运，哪怕没有人知道他拥有这信仰。</p><p>这个人不是博学的圣经注释家，他不会希伯来语；如果他会希伯来语的话，那么，他也许就很容易地理解了这故事和亚伯拉罕。</p></blockquote><h2 id="四个小故事"><a href="#四个小故事" class="headerlink" title="四个小故事"></a>四个小故事</h2><h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><blockquote><p>那是一个清晨，亚伯拉罕清早起来，给毛驴戴上鞍座，离开自己的帐篷，以撒跟着他 ，但是撒拉从窗户里望出去目送他们向下走过谷地 ，直到她无法再看得见他们。他们沉默地骑着驴旅行了三天，在第四天的早晨，亚伯拉罕一声不吭，但抬眼看着远方的摩利亚山。他让那些男孩子们留在下面而独自拉着以撒的手走上山。但是亚伯拉罕对自己说：“我倒是不会对以撒隐瞒这段路将会把他带往何方。”他沉默地站着，他把自己的手放在以撒的头上作为祝福，以撒躬身接受这祝福。亚伯拉罕的脸是父慈之容，他的目光是温柔的，他的话语是谆谆的训诫。但是以撒无法明白他，他的灵魂无法进入崇高；他抱着亚伯拉罕的膝盖 ，他在他的脚前祈求，他为自己年轻的生命而祈求，为自己美丽的生命蓝图而祈求，他回想起亚伯拉罕家中的喜悦，他回想起悲伤和孤独。这时，亚伯拉罕拉起这孩子，并和他并排走着，他的话语中满是安慰和训诫。但是以撒无法明白他。他登上摩利亚山，但是以撒不明白他。这时，他把自己的目光从他身上移开一小瞬间，但是在以撒再次看到亚伯拉罕的脸时，所看见的就变掉了，他的目光是狂野的，他的形象是恐怖。他抓住以撒的胸，把他扔在地上，并且说：“愚蠢的孩子，你以为我是你父亲？我是一个偶像崇拜者。你以为这是上帝的命令吗？不，这是我自己想要做的事情。”于是以撒颤抖着，在自己的恐惧中喊着：“天上的主啊，请给我慈悲，亚伯拉罕的神啊，请给我慈悲，既然我在大地上没有父亲，那么你就是我的父亲！”但是亚伯拉罕低声自语：“天上的主啊，我感谢你；他以为我是一个非人，但这还是好过他丧失对你的信仰。”</p><p>******</p><p>在小孩子要断奶的时候，母亲弄黑自己的乳房，当然，如果在孩子无法得到奶的时候，这乳房仍然看上去可口，这无疑也是遗憾的事情。这样一来，小孩子就会以为，乳房变了，但母亲，她仍是同一个人，她的目光就像往常一样地温柔亲切。那无须以更可怕的方式来为孩子断奶的人真是幸运啊！</p></blockquote><p>他的目光是狂野的，他的形象是恐怖。他抓住以撒的胸，把他扔在地上，并且说：“愚蠢的孩子，你以为我是你父亲？我是一个偶像崇拜者。你以为这是上帝的命令吗？不，这是我自己想要做的事情。</p><p>通过这里我们可以看到，这样的亚伯拉罕，他眼中的信仰是<code>我是一个偶像崇拜者</code> 这样的信仰，这样的信仰是一种子民式的信仰，之所以会用子民式这个词是因为我要应用一个很中二的台词：</p><blockquote><p>王来承认，王来允许，王来背负整个世界</p></blockquote><p>此时的亚伯来看就是被信仰所承认，被信仰所允许，最后的<code>不，这是我自己想要做的事情</code> 看是是在强调自我之存在，实际上是对最后残余的自我的否定，类比于，被卖了还帮忙数钱。其真实含义为，我甘愿臣服与我的信仰。</p><h3 id="2"><a href="#2" class="headerlink" title="2"></a>2</h3><blockquote><p>那是一个清晨，亚伯拉罕清早起来，他拥抱撒拉，他的老年的新娘，撒拉亲吻以撒，他消除掉了她的羞辱 <a href="javascript:void(0)">[11]</a> ，他是她的骄傲、她在所有族类中的希望。然后他们沉默地骑着驴上路了，亚伯拉罕的目光被钉在地上，直到第四天，这时，他抬眼远远地看向摩利亚山，然而，他的目光又转向地上。他沉默地把木柴放整齐，把以撒绑起。他沉默地拔出刀；这时他看见上帝所选的公羊。他献祭这公羊然后回家。……从这天起，亚伯拉罕变老了，他忘记不了，上帝向他要求了这个。以撒一如既往地蓬勃成长；但是亚伯拉罕的眼目昏浊了，他不再看见喜悦。</p><p>******</p><p>在小孩长大了要断奶的时候，这时，母亲处女般地隐藏起自己的胸脯，这样，孩子就不再有母亲。那没有以别的方式失去母亲的孩子真是幸运啊！</p></blockquote><p>亚伯拉罕的目光被钉在地上，直到第四天，这时，他抬眼远远地看向摩利亚山，然而，他的目光又转向地上。他沉默地把木柴放整齐，把以撒绑起。他沉默地拔出刀；这时他看见上帝所选的公羊。他献祭这公羊然后回家。……从这天起，亚伯拉罕变老了，他忘记不了，上帝向他要求了这个。以撒一如既往地蓬勃成长；但是亚伯拉罕的眼目昏浊了，他不再看见喜悦。</p><p>在这个故事里面，亚伯拉罕沉默了，他不再是之前那个狂热的信徒，他开始怀疑了，虽然他还是去献祭以撒去了，但是他并不认为献祭以撒是他自己的想法，甚至在最后，他在沉默中放弃了信仰。<code>他忘记不了，上帝向他要求了这个</code> 他并不依附于上帝，他知道上帝要求的他。</p><h3 id="3"><a href="#3" class="headerlink" title="3"></a>3</h3><blockquote><p>这是一个宁静的夜晚，这时亚伯拉罕一个人骑驴出去，他到了摩利亚山；他面孔朝地匍匐下来，他祈求上帝原谅他的罪，这罪就是：他曾想要牺牲以撒为祭品，父亲忘却了对儿子的义务。他更加频繁地一个人骑驴出行，但他得不到安宁。他无法领会这是一种罪，“他曾想要把他所拥有的最好的东西献祭给上帝”是一种罪，他所拥有的最好的东西，为了这东西他可以许多次以自己的生命去交换；如果这是罪的话，如果他不是如此地爱以撒的话，那么，他就无法明白，这罪是可以被原谅的；因为，又有什么罪会比这更可怕的？</p><p>******</p><p>在小孩子要断奶的时候，这时，母亲也不是没有悲哀的，她和孩子在越来越大的程度上相互分离开；这孩子，先曾是躺在她的心脏之下，然后又休憩在她的乳旁，将不再如此紧贴地靠近自己。于是他们一同在悲哀中度过这短暂的悲哀。那如此亲近地拥有过自己的孩子而无须悲哀更久的人真是幸运啊！</p></blockquote><p>这是很难理解的一章故事，他同样也是上一心境的延续，这一次他反抗了上帝，但他依然信仰着。我们首先需要把握住文中的“罪” – ”他曾想要牺牲以撒为祭品，父亲忘却了对儿子的义务“。</p><blockquote><p>注意在信仰这个层面，不一定要做过，想也是do something（也是一个动词），需要区别于想过即是做过</p></blockquote><p>这里的关键是<code>父亲对儿子的义务</code> ,在信仰层面，这一罪是 想要否认这一义务，抽象一点是 “这罪是试图通过信仰否认义务&#x2F;伦理，这里的义务并不局限于父亲对儿子的义务”</p><p>另外一个难点是 – “这罪是可以被原谅的；因为，又有什么罪会比这更可怕的？” 我们已经知道这罪是借用信仰来否定义务&#x2F;伦理，那么这最为什么可以被原谅呢？或者说为什么他会说“因为，又有什么罪会比这更可怕的？”，难道这就值得被原谅吗？ 此处留白，我也不懂</p><h3 id="4"><a href="#4" class="headerlink" title="4"></a>4</h3><blockquote><p>那是一个清晨，在亚伯拉罕家里，旅行准备就绪。他与撒拉告别，忠实的仆人以利以谢 <a href="javascript:void(0)">[13]</a> 陪送他上路，直到他重返。他们和谐默契地一起骑着驴旅行，亚伯拉罕和以撒，直到他们到达摩利亚山。但是亚伯拉罕为献祭准备好了一切，平静而温和，但是在他转过身去拔出刀的时候，这时，以撒看见了亚伯拉罕的左手绝望地紧紧握住，一阵颤动闪遍他的整个身体，——但是亚伯拉罕拔出了刀。</p><p>在他们重新回到家的时候，撒拉急忙地奔向他们，但是，以撒失去了信仰。世上不曾有任何对此的讨论，以撒从不曾对任何人说过他所见到的东西，而亚伯拉罕也丝毫想不到有人看见了这个。</p><p>******</p><p>在小孩子要断奶的时候，这时，母亲手头有着更强劲的食物，这样，这孩子就不会死去。那手头有着更强劲的食物的人真是幸运啊！</p><p>于是，以这样的方式，以及以许多类似的方式，我们所谈论的这个人想着这一事件。每一次在他漫步去摩利亚山之后回家的时候，这时，他因疲劳而瘫坐下来，他握合起自己的手并且说：“亚伯拉罕伟大无与伦比，又有谁能够理解他呢？”</p></blockquote><p>由于上一章看的不是很明白，这一章实际上依然没法完全看懂。</p><p>关于亚伯拉罕只有一个地方需要注意–  <code>以撒看见了亚伯拉罕的左手绝望地紧紧握住，一阵颤动闪遍他的整个身体，——但是亚伯拉罕拔出了刀。</code> </p><p>这里的“<code>一阵颤动闪遍他的整个身体</code>“ 我们接着上一章分析，不难看出这里是从伦理到信仰的转换，如果上一章亚伯拉罕重视的是伦理，那这里就是转换为信仰。</p><p>我们可以通过下面关于小孩断奶的描述来窥探一二，这里的奶是指代义务&#x2F;伦理，而更强劲的食物则是指代信仰。</p><p>另外还有一点要提的是<code>以撒看见了亚伯拉罕的左手绝望地紧紧握住</code> 这里的绝望值得是在义务与信仰之间的临界，由于信仰在义务中绝望，突破这一绝望也就是全然的拥抱信仰，也就是克尔恺郭尔后面会提到的信仰之跃。</p><blockquote><p>我之所以会做 义务到信仰之转换 这一猜测，是因为，这一章里面的亚伯拉罕已经全然的信赖了，他在献祭的过程中完成了信仰之跃，这一信仰之跃并不等同于第一章里面的子民式的信仰，是一种，“我想做的即是上帝想让我做的”，而不是“上帝让我想这么做”</p></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;心境&quot;&gt;&lt;a href=&quot;#心境&quot; class=&quot;headerlink&quot; title=&quot;心境&quot;&gt;&lt;/a&gt;心境&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;克尔恺郭尔 - 恐惧与颤栗一书第一章 – 心境&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;“神要试验亚伯拉罕，就对</summary>
+      
+    
+    
+    
+    <category term="图书" scheme="https://bighu630.github.io/categories/%E5%9B%BE%E4%B9%A6/"/>
+    
+    <category term="恐惧与颤栗" scheme="https://bighu630.github.io/categories/%E5%9B%BE%E4%B9%A6/%E6%81%90%E6%83%A7%E4%B8%8E%E9%A2%A4%E6%A0%97/"/>
+    
+    
+    <category term="克尔恺郭尔" scheme="https://bighu630.github.io/tags/%E5%85%8B%E5%B0%94%E6%81%BA%E9%83%AD%E5%B0%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>语言是什么</title>
+    <link href="https://bighu630.github.io/2024/12/25/%E8%AF%AD%E8%A8%80%E6%98%AF%E4%BB%80%E4%B9%88/"/>
+    <id>https://bighu630.github.io/2024/12/25/%E8%AF%AD%E8%A8%80%E6%98%AF%E4%BB%80%E4%B9%88/</id>
+    <published>2024-12-25T11:25:42.000Z</published>
+    <updated>2025-10-02T08:02:56.045Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h2><p>语言的基本组成：</p><ul><li><p>名词</p></li><li><p>动词</p></li><li><p>形容词</p></li></ul><p>语言的填充：</p><ul><li><p>冠词</p></li><li><p>介词</p></li></ul><p>…</p><p>基本语言有名词，动词，形容词组成。普遍ai可以识别出这三者，从而完成简单交流</p><p>在语言的填充上，介词等，可能会对语义产生较大的影响。</p><h2 id="语言的根基"><a href="#语言的根基" class="headerlink" title="语言的根基"></a>语言的根基</h2><p>语言的基本元素是无意义的，例如，“悲伤”，我们无法从“悲伤”这个词中拿到任何有用的信息。</p><p>语言必须是在语境中的。</p><p>关于语言在语境中，这里有一点需要谈到。语言在语境中导致了这样一个现象 - 语境的过度复杂 - ，以至于在层层叠加的语境中，我们找不到语言的原有含义。由此，演化出了当代的结构主义 – 找到语言的原始语境。将语境解构为他原始的模样。早期解构主义我是比较认可的，他破除了语境的复杂性。而随之结构主义的逐步推进，语言的无意义信暴露出来。语言无法自语境之外产生意义。语境像是一团迷雾透过迷雾去看我们才会去 understand 一些事情，而当迷雾散去，我们却好像失明了。而当迷雾太厚，我们则被动失明。</p><h2 id="语境"><a href="#语境" class="headerlink" title="语境"></a>语境</h2><p>语境是语言运行的环境，就像程序运行的环境一样，Linux 上的软件可以在 Linux 上运行，它可以有一个图形化界面，我可以像现在这样在里面写文章，或者做别的什么。而当我们把这个程序拿到别的环境，或者是直接打印出来，那他就什么也做不了，语言必须运行在特定的环境中。</p><p><strong>语境的划分</strong></p><ul><li><p>强语境</p></li><li><p>弱语境</p></li></ul><p>强语境指的是在语境下存在大量公知的信息，比如家庭环境，在家庭环境中父母亲对孩子的性格，以及语言中的省略信息都有较多的了解，在强语境环境中，只进行少量的信息传递，并且新信息一般不会影响语境信息。强语境中一般误解会出现的比较少（当然，前提是对语境足够了解，如果对语境理解错误，那么对语义的理解将会错的更远），更多的矛盾冲突，强语境会迅速确认一个信息，而没有更多的周旋的余地。在强语境环境下，人会受语境的影响，首先，人需要学习语境，而在这个过程中，改变的一般是人，而不是语境。</p><p>弱语境则刚好与强语境相反，弱语境下一般公共知识较少，例如社会环境。在社会环境中，人与人之间的相互理解较少。对于一个叙事描述，除非叙事者从头到尾把事情讲一遍，否者接受者很难理解都叙事者的叙事。在弱语境中，由于语言的开放性，语义会被接受者重新构建，而导致信息的失真。弱语境中强调个体性，忽视集体中存在的潜在语义。弱语境倾向于将叙事回归到个人。弱语境因为相互之间的不理解而避免了很多冲突。而在弱语境下，相互之间是不需要理解的，他们不强调构建强语境，所以也没必要理解。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;语言&quot;&gt;&lt;a href=&quot;#语言&quot; class=&quot;headerlink&quot; title=&quot;语言&quot;&gt;&lt;/a&gt;语言&lt;/h2&gt;&lt;p&gt;语言的基本组成：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;名词&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;动词&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;形容词&lt;/</summary>
+      
+    
+    
+    
+    <category term="知识" scheme="https://bighu630.github.io/categories/%E7%9F%A5%E8%AF%86/"/>
+    
+    <category term="传播学" scheme="https://bighu630.github.io/categories/%E7%9F%A5%E8%AF%86/%E4%BC%A0%E6%92%AD%E5%AD%A6/"/>
+    
+    
+    <category term="语言" scheme="https://bighu630.github.io/tags/%E8%AF%AD%E8%A8%80/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>go 八股文复习-2</title>
+    <link href="https://bighu630.github.io/2024/12/16/go-%E5%85%AB%E8%82%A1%E6%96%87%E5%A4%8D%E4%B9%A0-2/"/>
+    <id>https://bighu630.github.io/2024/12/16/go-%E5%85%AB%E8%82%A1%E6%96%87%E5%A4%8D%E4%B9%A0-2/</id>
+    <published>2024-12-16T09:16:37.000Z</published>
+    <updated>2025-10-02T08:02:56.042Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="常见数据结构-实现原理-–-slice"><a href="#常见数据结构-实现原理-–-slice" class="headerlink" title="常见数据结构&amp;实现原理 – slice"></a>常见数据结构&amp;实现原理 – slice</h2><p>slice（切片）是go语言中的一中类似与数据的数据结构，和数组一样，它使用下标访问，但是slice的长度是可变的（可增长的），而数组的长度是不可变，在初始时定义好的。所以slice是分配在堆上面，而数组通常是分配在栈上面。</p><h3 id="Slice的数据结构"><a href="#Slice的数据结构" class="headerlink" title="Slice的数据结构"></a>Slice的数据结构</h3><pre><code class="go">type slice struct &#123;    array unsafe.Pointer  // 底层数组    len   int // 长度,是指已经使用的长度    cap   int // 底层数组的长度&#125;</code></pre><p>其中 <code>len</code> 表示这个slice的长度， <code>cap</code> 表示这个slice最多容纳的大学，当数据量超过这个值之后，需要重新分配一个更大的slice</p><p>通过<code>slice := make([]int, 5, 10)</code> 我们可以创建长为5,容量为10的slice</p><p>默认初始值为类型对应的初始值，也就是 0-4会被赋值为0</p><p>注意，虽然slice的总容量是10 ，但是当我们访问下表为5的数据是，会panic 访问越界</p><p>我们可以在一个数组的基础上创建一个slice</p><p>eg：</p><pre><code class="go">array := [10]intslice := array[1:4]</code></pre><p>slice的array指针会直接指向原array的下标1<br>len 设置为3(那么我们访问下标3时会报错，即使底层数组的这个位置是有元素的)<br>cap 是底层数组的长度,由于slice是从底层数组的下标1开始的，所以这里的cap是 10-1</p><h3 id="slice扩容"><a href="#slice扩容" class="headerlink" title="slice扩容"></a>slice扩容</h3><p>那我们上面生成的cap为10的slice为例，当我们使用append添加第11个元素时，因为超过slice的cap限制，go会重新分配一段更大内存给这个slice,然后把原先slice的值复制过去</p><p>所以如果我们用</p><pre><code class="go">append(slice,3)</code></pre><p>直接添加值时，如果slice没有发生扩容，我们不需要接受slice,因为和原先的一样,但如果发生扩容，我们将拿不到扩容之后的数组</p><p>所以进行append操作时我们要接受返回值</p><pre><code class="go">slice = append(slice,3)</code></pre><p>这样即使发生扩容，我们的slice也是扩容之后的</p><h4 id="扩容规则"><a href="#扩容规则" class="headerlink" title="扩容规则"></a>扩容规则</h4><p>目前常见的规则说法是：</p><ul><li>如果原Slice容量小于1024，则新Slice容量将扩大为原来的2倍；</li><li>如果原Slice容量大于等于1024，则新Slice容量将扩大为原来的1.25倍；</li></ul><h3 id="slice注意事项"><a href="#slice注意事项" class="headerlink" title="slice注意事项"></a>slice注意事项</h3><p>slice是共享内存的,也就是把一个slice赋值给其他多个slice,他们在底层都是共用一个数组的，在编码时需要注意读写冲突，以及避免数据污染</p><p>eg:</p><p>slice &#x3D; make([]int, 5, 10)<br>sa &#x3D; slice[1:3]<br>sb &#x3D; slice[2:]</p><p>当sa中的sa[1]变动时，sb[0]也会跟着变</p><blockquote><p>sa[1] 和 sb[0] 在底层数组上是同一个位置</p></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;常见数据结构-实现原理-–-slice&quot;&gt;&lt;a href=&quot;#常见数据结构-实现原理-–-slice&quot; class=&quot;headerlink&quot; title=&quot;常见数据结构&amp;amp;实现原理 – slice&quot;&gt;&lt;/a&gt;常见数据结构&amp;amp;实现原理 – slice&lt;/</summary>
+      
+    
+    
+    
+    <category term="计算机" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+    <category term="笔记" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="go" scheme="https://bighu630.github.io/tags/go/"/>
+    
+    <category term="八股文" scheme="https://bighu630.github.io/tags/%E5%85%AB%E8%82%A1%E6%96%87/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>arbitrum 资产桥合约</title>
+    <link href="https://bighu630.github.io/2024/12/15/arbitrum-%E8%B5%84%E4%BA%A7%E6%A1%A5%E5%90%88%E7%BA%A6/"/>
+    <id>https://bighu630.github.io/2024/12/15/arbitrum-%E8%B5%84%E4%BA%A7%E6%A1%A5%E5%90%88%E7%BA%A6/</id>
+    <published>2024-12-15T02:51:52.000Z</published>
+    <updated>2025-10-02T08:02:56.042Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="资产桥的作用"><a href="#资产桥的作用" class="headerlink" title="资产桥的作用"></a>资产桥的作用</h2><p>Rollup 的主要流程中，实际上不包含资产桥，也就是说即使没有资产桥，L2依然能正常运行但是此时L1与L2在数据上是完全独立的两条链，L1不理解L2上的数据（L1只保存L2压缩后的数据，不理解数据）,L2上也不知道L1上发生了什么（只能拿到区块高度等一些基本信息）。完全可以把L2做是另外一条链。</p><p>在这种情况下如果需要做资产转移，就和普通的一层链之间的资产转移没什么区别.</p><p>而有了自己实现的资产桥就不一样，因为实际上L2的数据都是通过L1上的inbox(sequencer inbox)合约保存的，所以当我们在inbox合约中解析数据，L1上就可以看到L2上的部分数据<br>虽然这会增加L1上的手续费，但是这样可以降低跨链带来的安全性问题（跨链过程本质上是在L1上的inbox合约中，其他逻辑则完全嵌套在L2的主用逻辑中，也就是跨链的安全性&#x3D;整个L2的安全性&#x3D;aribtrum的any-trust模型）</p><h2 id="arbitrum-的快箱-慢箱"><a href="#arbitrum-的快箱-慢箱" class="headerlink" title="arbitrum 的快箱&amp;慢箱"></a>arbitrum 的快箱&amp;慢箱</h2><p>在介绍资产桥之前，我们先来区分一下arbitrum的快箱和慢箱。</p><h3 id="快箱-Sequencer-Inbox"><a href="#快箱-Sequencer-Inbox" class="headerlink" title="快箱 (Sequencer Inbox)"></a>快箱 (Sequencer Inbox)</h3><p>快箱是L2交易的入口（写入sequencer的交易最终会在L2上被处理，sequencer的处理实际上还没进入L2）<br>在Sequencer inbox中交易会迅速被validator打包(validator的打包逻辑就是在在inbox中拿数据,来打包)</p><h3 id="慢箱（inbox"><a href="#慢箱（inbox" class="headerlink" title="慢箱（inbox)"></a>慢箱（inbox)</h3><p>慢箱中的交易是L1往L2上发送的交易,通过慢箱，我们可以在L1上改变L2的世界状态.</p><p>慢箱的实际价值有两个</p><ul><li><p>L1向L2发送数据是，L2不需要验证L1的数据，L1的数据只能通过inbox进入L2,对数据的校验都发生在L1的inbox合约中</p></li><li><p>抗审查，因为L2的所有交易都是由sequencer打包的，而sequencer是一个中心化的节点，sequencer可以对L2上的交易进行恶意的审查从而拒绝部分交易（sequencer 不能修改交易内容，因为他没有指定账户的私钥）.此时可以通过L1上的inbox合约强行把交易写入L2（实际上最终也是写入sequencer inbox）,L2的区块是validator在Rbolck中确定的（sequencer不同意也无所谓）,当交易通过慢箱写入L2后，sequencer只能接受这个交易（否则会因为与L2的状态不一致导致失去部分功能）</p></li></ul><h2 id="资产桥的运作"><a href="#资产桥的运作" class="headerlink" title="资产桥的运作"></a>资产桥的运作</h2><p>知道慢箱的处理逻辑之后，我们可以来看看资产桥是怎么运作的.</p><p>资产桥分为两种处理逻辑，L1到L2（充值），L2到L1（提现），当然arbitrum的资产桥不只是能做资产转移的操作，实际上也可以完成calldata的跨链操作（把calldata传递到L2指定的合约）</p><h3 id="充值过程"><a href="#充值过程" class="headerlink" title="充值过程"></a>充值过程</h3><p>在讨论充值问题之前，我们需要考虑下面几个</p><ul><li>ETH怎么铸造？</li><li>ERC20怎么处理？</li><li>L2上没有对应的ERC20合约怎么办？自动部署，还是交易直接失败?</li><li>怎么控制L2铸造的权限，L2上的代币最终是可以提现在L1上的，如果随便铸造，跟L1对不上账怎么办？</li><li>铸造的时候L2手续费暴涨，铸造失败怎么办？</li></ul><blockquote><p>arbitrum 的资产桥是典型的<code>锁定-铸造 销毁-解锁</code>模型,L1上锁定的代币，L2上怎么铸造.</p></blockquote><h4 id="gateway"><a href="#gateway" class="headerlink" title="gateway"></a>gateway</h4><p>要回答这些问题，我们先来看一下arbitrum的资产桥模型 <code>gateway</code></p><p><img src="https://image.blockbeats.cn/upload/2023-12-28/1484787048ec792aa54b61833ac9044d0467ce57.png?x-oss-process=image/quality,q_50/format,webp" class="lazyload" data-srcset="https://image.blockbeats.cn/upload/2023-12-28/1484787048ec792aa54b61833ac9044d0467ce57.png?x-oss-process=image/quality,q_50/format,webp" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="arbitrum gateway"></p><p>gateway实现了L1 &lt;–&gt; L2资产合约的映射（ETH也使用合约的方式来映射）</p><p>arbitrum提供来了一些标准的ERC20 template,正常情况下，如果L1上的资产合约也是标准的ERC20,那么arbitrum会自动在L2上部署一个相同的ERC20合约（可能详细功能不同，但是能实现ERC20的逻辑）,而这个映射出来的ERC20 通过gateway做权限验证，也就是只有gateway合约能在这个合约中铸造和销毁，这样保证了L1和L2上的账能对的上.</p><blockquote><p>插一个小知识，arbitrum链上的交易手续费是使用ETH来支付的，但arbitrum本身不产生ETH(这点我不是很确定),所以在使用arbitrum之前，需要从以太坊上冲一些ETH到arbitrum上，这个充值交易的手续费在L1上支付,注意这里不是代付，是在交易到达L2后直接在L1中的msg.value中扣除。涉及到L1 &lt;–&gt; L2交易一个非常麻烦的问题 – 手续费处理。这里就不详细展开</p></blockquote><h4 id="retryable-可重试票据"><a href="#retryable-可重试票据" class="headerlink" title="retryable 可重试票据"></a>retryable 可重试票据</h4><p>可重试票据主要是用来解决L2上铸造失败的情况,L1上充值交易发送到L2上之后，可能因为L2上手续费超过 用户愿意支付的手续费阈值（在L1上发送充值交易时指定的）时可能导致交易的失败。这时候交易已经记录到L2上只是执行失败（calldata还在）,用户可以在L2上手动重试,手动重试不能改变calldata,但是手续费是在重试交易中一起支付的。L1 -&gt; L2的可重试票证只会保存7天，7天之后，资产将会永久的锁定在L1上（可以续费延期）.</p><blockquote><p>正常情况L1上的充值操作不需要用户去L2上触发铸造，L2会自动完成铸造.L2 -&gt; L1就不行，必须去L1上手动提现，当然相对而言L2 -&gt; L1的票据是永久有效的,用户不需要急着提现</p></blockquote><p>ok,我们已经知道了资产桥的架构,现在来看一下充值的详细过程</p><p>充值过程，用户调用L1 inbox合约中的<code>createRetryableTicket</code>方法创建可重试票据,指定L2上的接受者地址，token地址，手续费等，</p><p>inbox会将L1的资产锁定的L1上对应资产的gateway合约中，并将L2上的铸造请求的ticket写入sequencer inbox合约中</p><p>L2 订阅到sequencer inbox 中的铸造请求后会找到对应的gateway合约（这部分工作是gateway router做的）,铸造代币</p><p>如果L2自动铸造失败,这是用户可以在L2 上手动重试，或者在L1上完成手动重试（避免排序器审查）</p><h3 id="提现流程"><a href="#提现流程" class="headerlink" title="提现流程"></a>提现流程</h3><p>在理解充值流程后，提现就很容易理解了</p><p>提现的过程实质上是操纵gateway合约完成代币销毁，并生成票据，将票据写回到L1上</p><p>这里简单解释一下写回操作:</p><p>写回操作是通过arbitrum的outbox实现的，由validator来调用L1上的outbox合约将数据写回到L1,但是写回操作并不直接执行这些数据，只是记录数据，最后的执行需要用户手动去触发，这也是为什么提现操作不会自动在L1上进行(目前猜测是因为L2-&gt;L1不好控制手续费，所以没有在这里做自动执行，并且，自动执行相当于是L2自动修改L1的状态，实际上是比较不可控的)</p><p>当充值操作写回到L1的outbox之后，用户就可以在L1上解锁资产</p><blockquote><p>Q: 我冲了10WETH 可以提现20WETH吗？<br>这是可以的，如果你在L2上赚钱了(多赚了10WETH)，只要L2提供的票据说你销毁了20WETH, 那么在L1上就会给你解锁20WETH, 桥只要保证总资产的帐对的上就可以.</p></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;资产桥的作用&quot;&gt;&lt;a href=&quot;#资产桥的作用&quot; class=&quot;headerlink&quot; title=&quot;资产桥的作用&quot;&gt;&lt;/a&gt;资产桥的作用&lt;/h2&gt;&lt;p&gt;Rollup 的主要流程中，实际上不包含资产桥，也就是说即使没有资产桥，L2依然能正常运行但是此时L1与L2</summary>
+      
+    
+    
+    
+    <category term="区块链" scheme="https://bighu630.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+    <category term="二层" scheme="https://bighu630.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BA%8C%E5%B1%82/"/>
+    
+    
+    <category term="arbitrum" scheme="https://bighu630.github.io/tags/arbitrum/"/>
+    
+    <category term="资产桥" scheme="https://bighu630.github.io/tags/%E8%B5%84%E4%BA%A7%E6%A1%A5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>go 八股文复习-1</title>
+    <link href="https://bighu630.github.io/2024/12/14/go-%E5%85%AB%E8%82%A1%E6%96%87%E5%A4%8D%E4%B9%A0-1/"/>
+    <id>https://bighu630.github.io/2024/12/14/go-%E5%85%AB%E8%82%A1%E6%96%87%E5%A4%8D%E4%B9%A0-1/</id>
+    <published>2024-12-14T08:31:00.000Z</published>
+    <updated>2025-10-02T08:02:56.042Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="常见数据结构-实现原理-–-chan"><a href="#常见数据结构-实现原理-–-chan" class="headerlink" title="常见数据结构&amp;实现原理 – chan"></a>常见数据结构&amp;实现原理 – chan</h2><blockquote><p><code>chan</code>是用来提供go协程间通信通道的工具，也是go高并发优势的重要组成部分，通过chan我们可以非常简单的实现协程之间的通信（只需要用 <code>&lt;-</code> 写入 用<code>-&gt;</code> 读取）</p></blockquote><ul><li><code>chan</code> 的数据结构</li></ul><pre><code class="go">type hchan struct &#123;    qcount   uint           // 当前队列中剩余元素个数    dataqsiz uint           // 环形队列长度，即可以存放的元素个数, 初始化时指定    buf      unsafe.Pointer // 环形队列指针    elemsize uint16         // 每个元素的大小,元素根据大小线性排布，后面根据offset取值    // 关闭状态的chan是可读的，如果chan关闭 读取时没有内容，    // 那么会直接返回nil,false（代表读取失败，&lt;- 读到的是一个空指针），而不会阻塞，    // 如果没有关闭，没有数据可以读取时会阻塞    closed   uint32         // 标识关闭状态    elemtype *_type         // 元素类型    sendx    uint           // 队列下标，指示元素写入时存放到队列中的位置    recvx    uint           // 队列下标，指示元素从队列的该位置读出    // 如果一个协程在读chan,chan中没有数据，那么协程就会挂在这里, 等到有数据读时再唤醒    // FIFO队列，先进先出    recvq    waitq          // 等待读消息的goroutine队列    sendq    waitq          // 等待写消息的goroutine队列    lock mutex              // 互斥锁，chan不允许并发读写,所以chan是并发安全的&#125;</code></pre><p><code>chan</code> 中使用环形队列实现缓冲区(实际上就是在遍历最后一个后将索引指向第一个,实际上还是线性的)</p><ul><li><code>chan</code>的读写</li></ul><p><strong>向<code>chan</code>写入数据</strong></p><p><img src="https://s2.loli.net/2024/12/14/NfwVLRTOK9Bkcan.png" class="lazyload" data-srcset="https://s2.loli.net/2024/12/14/NfwVLRTOK9Bkcan.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="write to chan"></p><ol><li>如果<code>recvq</code>中有<code>goroutine(G)</code>等待，则将数据写入G并且唤醒G</li><li>如果<code>recvq</code>中没有等待的G,则尝试写入缓冲区，如果缓冲区也没有，则阻塞并挂在<code>sendq</code>上</li></ol><p><strong>在<code>chan</code>中读取数据</strong></p><p><img src="https://s2.loli.net/2024/12/14/BmZKLizylQjbD7r.png" class="lazyload" data-srcset="https://s2.loli.net/2024/12/14/BmZKLizylQjbD7r.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="read date from chan"></p><p>查看<code>sendq</code>不为空（说明有G阻塞在写入）</p><ol><li>此时如果有缓冲区，那么应该先读缓冲区的，并且在<code>sendq</code>中取出一个G来写入数据（因为我们拿走了一个，所以现在缓冲区未满</li><li>此时如果没有缓冲区，那么我们直接在<code>sendq</code>中取一个G,并读取他的数据</li></ol><p>如果<code>sendq</code>为空</p><ol><li>尝试去缓冲区读数据</li><li>阻塞，并挂在<code>recvq</code>上</li></ol><ul><li><code>单向chan</code></li></ul><p>实际上不存在单向<code>chan</code>,是在函数内做的约束,可以直接把一个<code>chan</code>当作只读&#x2F;只写的<code>chan</code>传递</p><ul><li>关闭<code>chan</code></li></ul><p>关闭<code>chan</code>时</p><ol><li>唤醒所有的<code>recvq</code>,向所有的<code>recvq</code>中写入nil</li><li>唤醒所有的<code>sendq</code>,使他们panic</li></ol><blockquote><p><code>recvq</code>和<code>sendq</code>一般不会同时有G</p></blockquote><p>除此之外，panic出现的常见场景还有：</p><p>关闭值为nil的channel<br>关闭已经被关闭的channel<br>向已经关闭的channel写数据</p><h3 id="select"><a href="#select" class="headerlink" title="select"></a>select</h3><p>select 可以同时监控多个<code>chan</code>,并不会阻塞，select支持向<code>chan</code>中写或者读取<code>chan</code>中的数据，如果碰巧写不进去(缓冲区满了)，读不到(没有数据),select不会阻塞，而是直接跳过<br>（后续select章节将会详细描述如何选择）</p><p>select 对case条目的处理是随即的，所以并不是在前面的case就会先触发。</p><h3 id="range"><a href="#range" class="headerlink" title="range"></a>range</h3><p>使用range可以持续的读取<code>chan</code>中的数据，如果<code>chan</code>中没有数据，则阻塞</p><p>注意：如果向此channel写数据的G退出时，系统检测到这种情况后会panic，否则range将会永久阻塞。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;常见数据结构-实现原理-–-chan&quot;&gt;&lt;a href=&quot;#常见数据结构-实现原理-–-chan&quot; class=&quot;headerlink&quot; title=&quot;常见数据结构&amp;amp;实现原理 – chan&quot;&gt;&lt;/a&gt;常见数据结构&amp;amp;实现原理 – chan&lt;/h2&gt;&lt;</summary>
+      
+    
+    
+    
+    <category term="计算机" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+    <category term="笔记" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="go" scheme="https://bighu630.github.io/tags/go/"/>
+    
+    <category term="八股文" scheme="https://bighu630.github.io/tags/%E5%85%AB%E8%82%A1%E6%96%87/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>克尔凯郭尔_那审美的</title>
+    <link href="https://bighu630.github.io/2024/12/09/%E5%85%8B%E5%B0%94%E5%87%AF%E9%83%AD%E5%B0%94-%E9%82%A3%E5%AE%A1%E7%BE%8E%E7%9A%84/"/>
+    <id>https://bighu630.github.io/2024/12/09/%E5%85%8B%E5%B0%94%E5%87%AF%E9%83%AD%E5%B0%94-%E9%82%A3%E5%AE%A1%E7%BE%8E%E7%9A%84/</id>
+    <published>2024-12-09T01:59:33.000Z</published>
+    <updated>2025-10-02T08:02:56.043Z</updated>
+    
+    <content type="html"><![CDATA[<p>碰巧失眠，所以又来看了一下克尔凯郭尔。</p><p>今天主要提到的是末明子的一小段关于人生三阶段的 审美阶段的的解释（他的解释其实在其他地方已经听过）。那审美的是指 那 在自身之中的，不连续的 无方向且无忧虑的享乐主义视角。以及我碰巧点进他的直播间，应该是在聊他的 主义主义 之类的，然后马上被封。</p><p>其实就我的感觉而言，末明子的组织也是处在 那审美的 阶段中。</p><p>我可能需要稍微花点时间来解释什么是那审美的（这也是这篇小计的主要内容）。</p><p>首先我们需要借用一个词– 独立。通过把玩（扭曲）这个词的解释来窥探那个在自身之中的自己。</p><p>那么在自身之中的自我是独立的吗？答案显然不是。在自身之中的自我是被架起来的自我。是一种无意识的自我，指的是我被（那个我）所架起来的我，我无法指挥那个我做什么，而只是在（那个我）之中体验着（那个我）给我带来的感官刺激。</p><p>这里我们需要仔细剖析（那个我）究竟是什么。这也是为什么，那审美的我是不独立的我。同时也解释什么是那审美的。（那个我）是并不以我而成为的我，（那个我）是环境对我的映射，即环境构造出（那个我），（注：环境在这里可以理解为无意义切连续的），环境的连续性使得我在审美上处于一种浅层次的连续中，即我会认为我是一个感官动物，这也是处在审美状态中的人的体验。而我们的不连续性体现在，当我们试图在那个无意义状态的自我中寻找意义的时候，我们就会发现自身的不连续性，因为在自我之中的人是被环境裹挟的人，自我寻求意义，而那个我只能给予感官刺激。这时候，意义成为一种巧合，当感官刺激符合意义时，意义显现出来，当感官刺激异于意义时，意义消失。当然，这里的寻求意义，实际上就是在窥视那个在自我之中而不是自我的动作。而这种在自我之中的我则恰恰是不独立的。（抱歉，突然发现上面说的是在自我之中的切不愿是自我的状态）。</p><p>全然在自我之中的状态是一种在自我之中且没有意识到在自我之中的状态。这是这样一种状态–寻求环境认可的状态。因为自我在环境构建的那个自我之中，自我并不认为有自我，而成为环境的附属，服从与环境：典型代表为纯粹的享乐主义，即放弃自我而全然拥抱环境的感官刺激，努力让自己变成享受的姿态。</p><p>那么独立的意义就是，那在自我之中且是自我的状态。</p><blockquote><p>补充，可能那审美的阶段还缺乏叔本华的钟摆理论（我不是很像讨论欲望相关的东西，因为欲望在那审美的阶段中是无方向，且无意义的），在审美阶段中的人的其中之一的表现是他不理解自己的欲望，欲望得到满足时他无聊，欲望的不到满足时他痛苦，他的幸福只在那一瞬间</p></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;碰巧失眠，所以又来看了一下克尔凯郭尔。&lt;/p&gt;
+&lt;p&gt;今天主要提到的是末明子的一小段关于人生三阶段的 审美阶段的的解释（他的解释其实在其他地方已经听过）。那审美的是指 那 在自身之中的，不连续的 无方向且无忧虑的享乐主义视角。以及我碰巧点进他的直播间，应该是在聊他的 主义主</summary>
+      
+    
+    
+    
+    <category term="哲学" scheme="https://bighu630.github.io/categories/%E5%93%B2%E5%AD%A6/"/>
+    
+    <category term="克尔凯郭尔" scheme="https://bighu630.github.io/categories/%E5%93%B2%E5%AD%A6/%E5%85%8B%E5%B0%94%E5%87%AF%E9%83%AD%E5%B0%94/"/>
+    
+    
+    <category term="沉思录" scheme="https://bighu630.github.io/tags/%E6%B2%89%E6%80%9D%E5%BD%95/"/>
+    
+    <category term="审美" scheme="https://bighu630.github.io/tags/%E5%AE%A1%E7%BE%8E/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git删除大文件</title>
+    <link href="https://bighu630.github.io/2024/12/04/git%E5%88%A0%E9%99%A4%E5%A4%A7%E6%96%87%E4%BB%B6/"/>
+    <id>https://bighu630.github.io/2024/12/04/git%E5%88%A0%E9%99%A4%E5%A4%A7%E6%96%87%E4%BB%B6/</id>
+    <published>2024-12-04T03:31:21.000Z</published>
+    <updated>2025-10-02T08:02:56.042Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>为什么git提交中会有大文件？</p><p>一般而言我们只会把代码放到git仓库，比较大 的可执行文件用其他方式保存，但是有时候因为疏忽把编译好的文件也给commit了，这时候这些文件就会像狗皮膏药一样粘在git上，pull&#x2F;clone的时候反作用给你。</p><h2 id="使用-git-filter-repo-删除历史中的大文件"><a href="#使用-git-filter-repo-删除历史中的大文件" class="headerlink" title="使用 git filter-repo 删除历史中的大文件"></a>使用 git filter-repo 删除历史中的大文件</h2><h3 id="删除指定的大文件"><a href="#删除指定的大文件" class="headerlink" title="删除指定的大文件"></a>删除指定的大文件</h3><p>假设你知道要删除的文件路径，例如 largefile.zip，可以运行以下命令：</p><pre><code class="bash">git filter-repo --path largefile.zip --invert-paths</code></pre><p>这将从所有历史记录中删除 largefile.zip 文件。</p><h3 id="删除超过特定大小的文件"><a href="#删除超过特定大小的文件" class="headerlink" title="删除超过特定大小的文件"></a>删除超过特定大小的文件</h3><p>如果你不确定具体文件，但知道文件过大，可以删除超过一定大小的所有文件。例如，删除所有超过 10MB 的文件：</p><pre><code class="bash">git filter-repo --strip-blobs-bigger-than 10M</code></pre><h3 id="强制推送到远程仓库"><a href="#强制推送到远程仓库" class="headerlink" title="强制推送到远程仓库"></a>强制推送到远程仓库</h3><p>修改历史后，你需要强制推送到远程仓库以覆盖旧的记录：</p><pre><code class="bash">git push origin --force --allgit push origin --force --tags</code></pre><h2 id="使用-git-filter-branch（较旧的方法）"><a href="#使用-git-filter-branch（较旧的方法）" class="headerlink" title="使用 git filter-branch（较旧的方法）"></a>使用 git filter-branch（较旧的方法）</h2><h3 id="删除指定文件的历史"><a href="#删除指定文件的历史" class="headerlink" title="删除指定文件的历史"></a>删除指定文件的历史</h3><p>假设你想删除文件 largefile.zip：</p><pre><code class="bash">git filter-branch --tree-filter &#39;rm -f largefile.zip&#39; --prune-empty -- --all</code></pre><h3 id="删除大于特定大小的文件"><a href="#删除大于特定大小的文件" class="headerlink" title="删除大于特定大小的文件"></a>删除大于特定大小的文件</h3><p>如果你想删除大于某个大小的所有文件（例如 10MB），可以结合 find 命令：</p><pre><code class="bash">git filter-branch --tree-filter &#39;find . -type f -size +10M -exec rm -f &#123;&#125; \;&#39; --prune-empty -- --all</code></pre><blockquote><p>同样，需要推送到远端</p></blockquote><p>瘦身远程仓库：在修改完历史后，你可能需要在远程仓库上运行垃圾回收命令：</p><pre><code class="bash">git gc --prune=now --aggressive</code></pre><p>通过这些步骤，你可以安全地删除 Git 历史中的大文件，同时保持代码库的可用性。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;为什么git提交中会有大文件？&lt;/p&gt;
+&lt;p&gt;一般而言我们只会把代码放到git仓库，比较大 的可执行文件用其他方式保存，但是有时候因为疏忽把</summary>
+      
+    
+    
+    
+    <category term="计算机" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+    
+    <category term="git" scheme="https://bighu630.github.io/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>solidity合约升级2</title>
+    <link href="https://bighu630.github.io/2024/11/28/solidity%E5%90%88%E7%BA%A6%E5%8D%87%E7%BA%A72/"/>
+    <id>https://bighu630.github.io/2024/11/28/solidity%E5%90%88%E7%BA%A6%E5%8D%87%E7%BA%A72/</id>
+    <published>2024-11-28T03:43:38.000Z</published>
+    <updated>2025-10-02T08:02:56.043Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>上回我们聊到了合约升级的原理（所依赖的solidity特性），一个是代理调用，他运行我们加载其他合约的逻辑来修改当前合约的数据，以及fallback函数，他可以出来未知的函数调用，让我们能够把请求转发到逻辑合约里面去，而逻辑合约的升级就是直接更换代理合约中的逻辑合约地址。<br>这一回，将讲述常见的几种标准化的合约升级方案。</p></blockquote><h2 id="合约升级方案"><a href="#合约升级方案" class="headerlink" title="合约升级方案"></a>合约升级方案</h2><h3 id="通用合约升级"><a href="#通用合约升级" class="headerlink" title="通用合约升级"></a>通用合约升级</h3><p>通用合约升级实际上没有提出什么有建设性的技术，只是单纯的使用上面的特性完成合约升级，并且将合约升级所面临的问题揭露出来</p><blockquote><p>目前基本上没有项目继续使用这种合约升级方案。</p></blockquote><p>他的流程就是简单的通过代理合约调用逻辑合约，每次函数调用，实际上执行的是逻辑合约的代码，修改的是代理合约的存储空间。<br>当需要升级时，需要新部署逻辑合约，然后将代理合约中的（逻辑合约地址）修改为新的逻辑合约，在升级后的调用中代理合约会加载新的逻辑合约代码（代理合约只是根据合约地址加载合约的代码，他所以并不会引起不一致）</p><p>这样的合约升级会带来两个问题（主要是这两个）</p><ul><li>存储冲突<br>虽然数据是存储在代理合约中的，但是由于逻辑合约中定义了对数据的操作，所以逻辑合约中也需要有对应的数据。比如有这样一种情况</li></ul><p>代理合约中的数据是</p><pre><code class="sol">contract Proxy &#123;    uint a;    uint b;    uint c;&#125;</code></pre><p>逻辑合约中的定义是</p><pre><code class="sol">contract Logic &#123;    uint b; // 逻辑合约只操作了数据B,所以没定义a,c    function add() &#123;       b = b+1;    &#125;&#125;</code></pre><p>这时，如果代理调用在逻辑合约中对b 进行了+1操作。<br>实际上发生的是，用户call Proxy合约，Proxy合约加载 Logic合约中的add代码<br>add代码实际上的操作是拿出第一个位置的数据，+1 ，写回去.</p><blockquote><p>注意，这里是拿出第一个位置的数据，因为solidity编译后是没有变量名的，而是使用变量的位置来记录变量的。</p></blockquote><p>所以当这段代码在Proxy中执行的时候，实际上是修改a位置的值。</p><p>这个问题怎么解决呢？</p><p>最简单的是，要求逻辑合约的变量顺序和代理合约一致，无论是否使用数据.但这么做似乎是不太美观的，我们似乎要在合约里定义一堆意义不明的变量.工业上使用的方法是通过继承，我们把所有的变量都卸载一个（或者多个）sol文件中，在逻辑合约和代理合约中以相同的顺序继承这些变量，这样就可以万无一失的保证不会出现数据冲突。</p><ul><li>函数选择器冲突</li></ul><p>之前我们提到过函数选择器冲突：代理合约不全是使用代理请求，他至少有一个update方法来更新逻辑合约的地址，而EVM中判断call指定的方法是使用一个8byte的函数选择器（函数名是函数签名的hash 的前八位），而8位的函数选择器导致我们很难保证两个不同的函数不会产生相同的函数签名。</p><p>如果在一个合约中，solc编译器会告诉我们函数签名冲突，无法编译，但是代理合约本质是是两个毫不相关的合约，他们的关系是EVM在执行时通过地址加载的，在编译期是看不出来函数冲突的。</p><p>通用合约升级方法并没有解决这个问题，而在下面的几种方案中，这个问题会得到妥善的处理。</p><h3 id="透明代理模式"><a href="#透明代理模式" class="headerlink" title="透明代理模式"></a>透明代理模式</h3><p>透明代理模式将用户区分为两种，一种是普通用户，一种是ADMIN用户.</p><p>对于普通用户而言，无论是否存在函数选择器冲突，所有请求均转发的逻辑合约。</p><p>对于管理员而言，如果存在函数选择器冲突，EVM会优先命中Proxy合约(无论那种都会优先命中Proxy,如果不是admin,最后还是被转发的fallback)</p><pre><code class="sol">contract Proxy&#123;    function update(address _logic) public &#123;        if (msg.sender != admin)&#123;            fallback(...)        &#125;else&#123;            ...        &#125;    &#125;    fallback&#123;    &#125;&#125;</code></pre><p>这是一种基于业务的方式来判断的，我们显然的知道，如果是普通用户，那么不可能会去升级合约，所以一定是转发到fallback,而对于管理员，他更关心的是升级功能，所以优先命中Proxy里面的方法.</p><h3 id="UUPS-通用可升级代理标准"><a href="#UUPS-通用可升级代理标准" class="headerlink" title="UUPS(通用可升级代理标准)"></a>UUPS(通用可升级代理标准)</h3><p>相较与透明代理，UUPS直接将代理合约的升级函数放在逻辑合约中，这样代理合约中实际上不会有任何的逻辑函数，所有的请求都是转发的逻辑合约中处理。</p><p>为了规范化合约升级，UUPS提供了固定的代理合约，以及固定的升级函数，需要在逻辑合约中继承Proxiable合约，从而继承其中的升级代码。由于solidity在编译一个合约时可以发现函数选择器的冲突，代理合约完全不需要考虑冲突问题。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;上回我们聊到了合约升级的原理（所依赖的solidity特性），一个是代理调用，他运行我们加载其他合约的逻辑来修改当前合约的数据，以及fallback函数，他可以出来未知的函数调用，让我们能够把请求转发到逻辑合约里面去，而逻辑合约的升级就是直接更换代</summary>
+      
+    
+    
+    
+    <category term="区块链" scheme="https://bighu630.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+    <category term="智能合约" scheme="https://bighu630.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/"/>
+    
+    
+    <category term="solidity" scheme="https://bighu630.github.io/tags/solidity/"/>
+    
+    <category term="合约升级" scheme="https://bighu630.github.io/tags/%E5%90%88%E7%BA%A6%E5%8D%87%E7%BA%A7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>solidity合约升级</title>
+    <link href="https://bighu630.github.io/2024/11/23/solidity%E5%90%88%E7%BA%A6%E5%8D%87%E7%BA%A7/"/>
+    <id>https://bighu630.github.io/2024/11/23/solidity%E5%90%88%E7%BA%A6%E5%8D%87%E7%BA%A7/</id>
+    <published>2024-11-23T03:43:38.000Z</published>
+    <updated>2025-10-02T08:02:56.042Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="为什么要做合约升级"><a href="#为什么要做合约升级" class="headerlink" title="为什么要做合约升级"></a>为什么要做合约升级</h2><p>就以太坊理想图景而言，合约升级是违背最初的“代码即法律”的构思的.</p><p>但是在生产环境中，我们不可不免的需要对已有的代码进行细微的改动（甚至有时候会有较大的改改动）,<br>就连以太坊自身也需要不断的迭代和升级,所以合约升级的问题实际上是《合约升级管理办法》 的问题</p><p><strong>合约升级的需求</strong><br>一般有两种需求</p><ul><li><p>合约bug修复</p><p>对于一个稍微复杂的dapp系统而言，在合约代码中，几乎不可避免的会存在一些bug,多数bag在测试阶段会被测试人员找到，<br>但是测试也不能保证能找到所有的bug,现实中的扫雷不像是“扫雷”游戏那样，所有的雷都是按照逻辑规则来分布，也没有明确的雷区边界。</p></li></ul><p>越是复杂的合约，越是难以保证不会存在bug（以太坊上的合约漏洞历历在目），如果能通过合约升级来避免漏洞被黑客利用，反倒能更好的保证用户的财产安全.</p><ul><li><p>新增需求</p><p>随着dapp的发展，用户规模逐渐加大，最开始设计的产品可能已经无法满足客户的需求，这个时候如果能合理的理由合约升级，可以避免重新再写一套系统的损失。</p></li></ul><p><strong>合约升级的好处</strong></p><ul><li>解决合约中潜藏的bug,对bug做必要的修复</li><li>允许在原有的dapp系统中新增需求</li><li>重新重视dapp合约的生命周期管理（在没有合约升级之前，dapp合约的生命周期是固定的，但是现在可以更灵活的控制dapp的生命周期）</li></ul><p><strong>合约升级的弊端</strong></p><ul><li>破坏了“代码及法律”</li><li>合约升级引来了新的合约漏洞（以太坊上已经有项目被黑）</li><li>降低dapp的去中心性<br>(现在大部分的可升级合约都是依赖一个合约管理员来管理合约的升级)</li></ul><h2 id="合约升级的关键"><a href="#合约升级的关键" class="headerlink" title="合约升级的关键"></a>合约升级的关键</h2><h3 id="代理调用（delegatecall）"><a href="#代理调用（delegatecall）" class="headerlink" title="代理调用（delegatecall）"></a>代理调用（delegatecall）</h3><p><code>delegatecall</code>是solidity提供的一种低级调用方式，它允许solidity合约在自己的上下问和存储空间中调用其他合约的代码。</p><p>简单而言，代理调用就是将其他合约（一般称为逻辑合约）的二进制代码copy过来，然后带当前的环境下执行，在逻辑合约中对EVM内存&#x2F;调用堆&#x2F;存储空间的操作，底下的操作对象是原合约（一般称为）的EVM</p><p>由此，我们很容易联想到一种显而易见的合约升级方式,即通过代理的方式，每次升级都是修改逻辑合约的代码（重新部署一个逻辑合约上去）,然后在代理合约中修改逻辑合约的地址，这样以后的每次调用对会指向新的逻辑合约的地址，实现合约中逻辑的升级。</p><p>也有一个显而易见的问题：我们没办法升级合约的数据结构，因为在代理调用的过程中使用的是代理合约的内存和存储空间，代理合约本身是不可升级</p><p>以及另外一个问题，代理合约和逻辑合约如何保证数据结构的一致？这个问题在后面<code>合约升级方案</code>中会提到。</p><h3 id="fallback函数"><a href="#fallback函数" class="headerlink" title="fallback函数"></a>fallback函数</h3><p>想象这样一种情况，逻辑合约中有30个函数需要被代理，那么代理合约岂不是要写30是个代理函数，用来转发请求？<br>而且如果逻辑合约的升级中需要新增一个函数，代理合约没法升级，新增的函数岂不是代理不到。</p><p>关于这些问题，solidity提供了一种特殊的函数,<code>fallback</code>方法，fallback的作用是，在处理一个调用时，如果没有找到对应的方法，合约会重看是否存在fallback方法，如果存在，则交由fallback方法来处理。</p><pre><code class="sol">fallback() external payable &#123;  // fallback方法不需要在前面加function&#125;</code></pre><p>通过fallback方法，我们可以不用关心逻辑合约中实现了什么方法，最终所有的请求都交由fallback转发,这样也就解决了上面提到的两个问题.</p><p>但是他引入了一个新的问题：代理合约中至少存在一个升级函数（用来升级逻辑合约地址的）,而sol的函数选择器（选择由那个函数来处理请求，fallback是在函数选择器没有找到时的默认调用）是由8byte数据,与升级函数冲突的概率是很大的。<br>而且这个冲突是在编译阶段发现不了的，因为逻辑合约和代理合约不是一起编译的。</p><p>在后面我会介绍一些业界成熟对函数选择器冲突的解决方案.</p><blockquote><p>鉴于篇幅，这一篇暂时到这儿.<a href="">后续…</a></p></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;为什么要做合约升级&quot;&gt;&lt;a href=&quot;#为什么要做合约升级&quot; class=&quot;headerlink&quot; title=&quot;为什么要做合约升级&quot;&gt;&lt;/a&gt;为什么要做合约升级&lt;/h2&gt;&lt;p&gt;就以太坊理想图景而言，合约升级是违背最初的“代码即法律”的构思的.&lt;/p&gt;
+&lt;p&gt;但</summary>
+      
+    
+    
+    
+    <category term="区块链" scheme="https://bighu630.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+    <category term="智能合约" scheme="https://bighu630.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/"/>
+    
+    
+    <category term="solidity" scheme="https://bighu630.github.io/tags/solidity/"/>
+    
+    <category term="合约升级" scheme="https://bighu630.github.io/tags/%E5%90%88%E7%BA%A6%E5%8D%87%E7%BA%A7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>为容器设置时区</title>
+    <link href="https://bighu630.github.io/2024/11/18/%E4%B8%BA%E5%AE%B9%E5%99%A8%E8%AE%BE%E7%BD%AE%E6%97%B6%E5%8C%BA/"/>
+    <id>https://bighu630.github.io/2024/11/18/%E4%B8%BA%E5%AE%B9%E5%99%A8%E8%AE%BE%E7%BD%AE%E6%97%B6%E5%8C%BA/</id>
+    <published>2024-11-18T07:26:30.000Z</published>
+    <updated>2025-10-02T08:02:56.043Z</updated>
+    
+    <content type="html"><![CDATA[<p>在构建 Docker 镜像时，你可以通过以下方式设置容器的时区为上海时区：</p><h2 id="方法-1：通过-Dockerfile-设置"><a href="#方法-1：通过-Dockerfile-设置" class="headerlink" title="方法 1：通过 Dockerfile 设置"></a>方法 1：通过 Dockerfile 设置</h2><p>在 Dockerfile 中设置时区，以下是一个示例：</p><pre><code class="dockerfile">FROM your_base_image# 安装时区工具并设置时区RUN apt-get update &amp;&amp; apt-get install -y tzdata &amp;&amp; \    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &amp;&amp; \    echo &quot;Asia/Shanghai&quot; &gt; /etc/timezone &amp;&amp; \    dpkg-reconfigure -f noninteractive tzdata</code></pre><h2 id="方法-2：通过环境变量设置"><a href="#方法-2：通过环境变量设置" class="headerlink" title="方法 2：通过环境变量设置"></a>方法 2：通过环境变量设置</h2><p>如果你的应用程序支持通过环境变量读取时区设置，可以在 Dockerfile 中添加以下内容：</p><pre><code class="dockerfile">ENV TZ=Asia/Shanghai</code></pre><p>并确保镜像中安装了 tzdata 包。</p><h2 id="方法-3：运行容器时设置时区"><a href="#方法-3：运行容器时设置时区" class="headerlink" title="方法 3：运行容器时设置时区"></a>方法 3：运行容器时设置时区</h2><p>在运行容器时，可以通过挂载宿主机的时区配置文件来设置容器的时区：</p><pre><code class="bash">docker run -v /etc/localtime:/etc/localtime:ro -v /etc/timezone:/etc/timezone:ro your_image</code></pre><h2 id="方法-4：多阶段构建（优化大小）"><a href="#方法-4：多阶段构建（优化大小）" class="headerlink" title="方法 4：多阶段构建（优化大小）"></a>方法 4：多阶段构建（优化大小）</h2><p>如果需要优化镜像大小，可以使用多阶段构建的方式，只在构建阶段安装时区工具：</p><pre><code class="dockerfile">FROM your_base_image AS builderRUN apt-get update &amp;&amp; apt-get install -y tzdata &amp;&amp; \ ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &amp;&amp; \ echo &quot;Asia/Shanghai&quot; &gt; /etc/timezoneFROM your_base_imageCOPY --from=builder /etc/localtime /etc/localtimeCOPY --from=builder /etc/timezone /etc/timezone</code></pre><p>验证时区<br>在容器内验证时区是否正确设置：</p><pre><code class="bash">docker exec -it your_container date</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;在构建 Docker 镜像时，你可以通过以下方式设置容器的时区为上海时区：&lt;/p&gt;
+&lt;h2 id=&quot;方法-1：通过-Dockerfile-设置&quot;&gt;&lt;a href=&quot;#方法-1：通过-Dockerfile-设置&quot; class=&quot;headerlink&quot; title=&quot;方法 1：</summary>
+      
+    
+    
+    
+    <category term="计算机" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+    <category term="容器" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E5%AE%B9%E5%99%A8/"/>
+    
+    
+    <category term="容器时区" scheme="https://bighu630.github.io/tags/%E5%AE%B9%E5%99%A8%E6%97%B6%E5%8C%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>公网服务器必备-ssh deny</title>
+    <link href="https://bighu630.github.io/2024/11/15/%E5%85%AC%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BF%85%E5%A4%87-ssh-deny/"/>
+    <id>https://bighu630.github.io/2024/11/15/%E5%85%AC%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BF%85%E5%A4%87-ssh-deny/</id>
+    <published>2024-11-15T08:34:57.000Z</published>
+    <updated>2025-10-02T08:02:56.043Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="问题？"><a href="#问题？" class="headerlink" title="问题？"></a>问题？</h2><p>公网上的服务器被一群无聊的人做密码爆破（我曾经也是其中的一员😀）.</p><p>虽然大概率是不会被突破的，但是还是小心为上，所以这一期来看看怎么自动化封ip</p><p><strong>不啰嗦直接跳到 <code>ssh 自动封禁</code></strong></p><h2 id="找日志"><a href="#找日志" class="headerlink" title="找日志"></a>找日志</h2><p>首先我们需要找具体是什么服务正在被爆破，目前最多的是ssh服务，因为一般服务器都会开启ssh来让你远程登陆，当然如果有远程桌面需求的话xrdc&#x2F;vnc服务可能也会开起来</p><p>我们以ssh为例：</p><p>ssh的守护进程是sshd,由systemd管理（大部分服务都是systemd管理的，xrdc&#x2F;vnc也是）</p><p>一般而言可以通过<code>journalctl</code>来查看日志</p><pre><code class="sh">journalctl -u sshd</code></pre><p>或者你连接来普罗米修斯之类的监控软件可以用他们来监控日志</p><p>可以看到日志的特征如下</p><p><img src="https://s2.loli.net/2024/11/15/EXRiTYBGhcILgA8.png" class="lazyload" data-srcset="https://s2.loli.net/2024/11/15/EXRiTYBGhcILgA8.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image.png"></p><p>可以看到我截图的这里就有人在尝试密码 （Failed开头的）</p><p>然后我们需要找到对应服务的日志文件，以便分析日志文件来过来ip地址</p><p>剧透一下 ubuntu22 的sshd的日志记录在 <code>/var/log/auth.log</code></p><p>找到包含Failed的行，过滤出ip地址，以及ip错误的次数</p><pre><code class="sh">cat /var/log/auth.log|awk &#39;/Failed/&#123;print $(NF-3)&#125;&#39;|sort|uniq -c|awk &#39;&#123;print $2&quot;=&quot;$1;&#125;&#39;</code></pre><h2 id="封ip"><a href="#封ip" class="headerlink" title="封ip"></a>封ip</h2><p>linux上面有一个<code>/etc/hosts.deny</code>文件，可以用来封ip</p><p>我们只需要找到上面日志中的ip,然后校验ip是否已经被封，如果没有，则将ip写入这个文件</p><blockquote><p><strong>为什么要判断ip是否已经被封禁</strong><br>我们会每隔一段时间读取一下日志文件，封禁有问题的ip,所以以前封禁过的ip还是会捕捉到</p></blockquote><h2 id="ssh-自动封禁"><a href="#ssh-自动封禁" class="headerlink" title="ssh 自动封禁"></a>ssh 自动封禁</h2><p>这里就直接给出脚本</p><pre><code class="bash">cat /var/log/auth|awk &#39;/Failed/&#123;print $(NF-3)&#125;&#39;|sort|uniq -c|awk &#39;&#123;print $2&quot;=&quot;$1;&#125;&#39; &gt; /black.listfor i in `cat /black.list`do    IP=`echo $i |awk -F= &#39;&#123;print $1&#125;&#39;`    NUM=`echo $i|awk -F= &#39;&#123;print $2&#125;&#39;`    echo $IP=$NUM    if [ $NUM -gt 10 ]; then        grep $IP /etc/hosts.deny &gt; /dev/null        if [ $? -gt 0 ];then            echo &quot;sshd:$IP:deny&quot; &gt;&gt; /etc/hosts.deny        fi    fidone</code></pre><p>其中<code>black.list</code>是一个临时文件，随便放哪儿都可以</p><p><strong>自动执行脚本</strong></p><p>使用<code>crontab -e</code> 打开cron 的编辑器,在最后添加如下</p><pre><code>0 */1 * * * sh /脚本绝对路径.sh</code></pre><p>这表示1小时执行一次</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;问题？&quot;&gt;&lt;a href=&quot;#问题？&quot; class=&quot;headerlink&quot; title=&quot;问题？&quot;&gt;&lt;/a&gt;问题？&lt;/h2&gt;&lt;p&gt;公网上的服务器被一群无聊的人做密码爆破（我曾经也是其中的一员😀）.&lt;/p&gt;
+&lt;p&gt;虽然大概率是不会被突破的，但是还是小心为上，所以</summary>
+      
+    
+    
+    
+    <category term="计算机" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+    <category term="运维" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BF%90%E7%BB%B4/"/>
+    
+    
+    <category term="ssh" scheme="https://bighu630.github.io/tags/ssh/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>gpg小记</title>
+    <link href="https://bighu630.github.io/2024/10/24/gpg%E5%B0%8F%E8%AE%B0/"/>
+    <id>https://bighu630.github.io/2024/10/24/gpg%E5%B0%8F%E8%AE%B0/</id>
+    <published>2024-10-24T09:22:21.000Z</published>
+    <updated>2025-10-02T08:02:56.042Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="什么是GPG-openpgp"><a href="#什么是GPG-openpgp" class="headerlink" title="什么是GPG&#x2F;openpgp"></a>什么是GPG&#x2F;openpgp</h2><p><strong>PGP</strong>（英语：Pretty Good Privacy，直译：<strong>优良保密协议</strong>）是一套用于<a href="https://zh.wikipedia.org/wiki/%E8%AE%AF%E6%81%AF">讯息</a>加密、验证的应用程式。</p><p>GPG：GUN组织的openpgp实现，GnuPG</p><h2 id="密钥生成"><a href="#密钥生成" class="headerlink" title="密钥生成"></a>密钥生成</h2><h3 id="gpg安装"><a href="#gpg安装" class="headerlink" title="gpg安装"></a>gpg安装</h3><pre><code class="shell"># debian系apt install gpg# redhat系yum install gpg</code></pre><h3 id="生成主密钥"><a href="#生成主密钥" class="headerlink" title="生成主密钥"></a>生成主密钥</h3><p>GPG提供了简易的密钥生成方法（–generate-key），这里使用复杂的方法看生成私钥是可以配置那些选项</p><pre><code class="bash">gpg --full-gen-key --expert</code></pre><p>结果是这样的：</p><pre><code>gpg (GnuPG) 2.4.5; Copyright (C) 2024 g10 Code GmbHThis is free software: you are free to change and redistribute it.There is NO WARRANTY, to the extent permitted by law.请选择您要使用的密钥类型：   (1) RSA 和 RSA   (2) DSA 和 Elgamal   (3) DSA（仅用于签名）   (4) RSA（仅用于签名）   (7) DSA（自定义用途）   (8) RSA（自定义用途）   (9) ECC（签名和加密） *默认*  (10) ECC（仅用于签名）  (11) ECC（自定义用途）  (13) 现有密钥 （14）卡中现有密钥您的选择是？</code></pre><p>这里可以选择密钥类型，密钥类型只是处于安全考虑，不会影响gpg的使用（也就是不管你用什么类型的签名方案，不影响签名&#x2F;验签时的参数），这里选择RSA， 自定义用途（也就是这里的8,自定义用途是因为我们想要限制这个密钥的功能）</p><pre><code>RSA 密钥的可实现的功能： 签名（Sign） 认证（Certify） 加密（Encrypt） 身份验证（Authenticate）目前启用的功能： 签名（Sign） 认证（Certify） 加密（Encrypt）   (S) 签名功能开关   (E) 加密功能开关   (A) 身份验证功能开关   (Q) 已完成您的选择是？</code></pre><p>到这里我们可以选择主密钥的功能。</p><p>主密钥不需要签名与加密的功能，保留认证功能来生成子密钥就可以，所以分别输入S 回车 E 回车 Q 回车</p><pre><code class="shell">RSA 密钥的长度应在 1024 位与 4096 位之间。您想要使用的密钥长度？(3072)</code></pre><p>这里密钥长度可以用默认，但是建议用4096，主密钥一般不用，所以长一点更安全。</p><pre><code class="shell">请设定这个密钥的有效期限。         0 = 密钥永不过期      &lt;n&gt;  = 密钥在 n 天后过期      &lt;n&gt;w = 密钥在 n 周后过期      &lt;n&gt;m = 密钥在 n 月后过期      &lt;n&gt;y = 密钥在 n 年后过期密钥的有效期限是？(0)</code></pre><p>有效期，主密钥可以设置为0，方便管理</p><p>输入完成后会提醒你输入主密钥的密码</p><pre><code class="shell">更改姓名（N）、注释（C）、电子邮件地址（E）或确定（O）/退出（Q）？ o我们需要生成大量的随机字节。在质数生成期间做些其他操作（敲打键盘、移动鼠标、读写硬盘之类的）将会是一个不错的主意；这会让随机数发生器有更好的机会获得足够的熵。gpg: 吊销证书已被存储为‘/home/home/.gnupg/openpgp-revocs.d/006F375FE8D4C1F404A63B2F44B8540AB57DFB0C.rev’公钥和私钥已经生成并被签名。pub   rsa4096 2024-10-24 [C]      006F375FE8D4C1F404A63B2F44B8540AB57DFB0Cuid                      uid</code></pre><blockquote><p>注意主密钥的密码可以为空，为空的话后续操作主密钥就不需要密码，只需要提供私钥就可以</p></blockquote><h3 id="生成子密钥"><a href="#生成子密钥" class="headerlink" title="生成子密钥"></a>生成子密钥</h3><p>进入密钥管理</p><pre><code class="shell">gpg --edit-key --expert 006F375FE8D4C1F404A63B2F44B8540AB57DFB0C</code></pre><p>注意后面这一段是上面生成的密钥id</p><p>在命令行输入<code>addkey</code> 添加密钥</p><pre><code>gpg&gt; addkey请选择您要使用的密钥类型：   (3) DSA（仅用于签名）   (4) RSA（仅用于签名）   (5) ElGamal（仅用于加密）   (6) RSA（仅用于加密）   (7) DSA（自定义用途）   (8) RSA（自定义用途）  (10) ECC（仅用于签名）  (11) ECC（自定义用途）  (12) ECC（仅用于加密）  (13) 现有密钥 （14）卡中现有密钥您的选择是？</code></pre><p>这里选择10,然后选择曲线（这里选什么都不影响操作，只是不同算法的安全属性不一样）</p><p>后面的设置与主密钥相同这里略过。</p><p>最后的结果：</p><pre><code class="shell">sec  rsa4096/44B8540AB57DFB0C     创建于：2024-10-24  有效至：永不       可用于：C     信任度：绝对        有效性：绝对ssb  ed25519/5D132C295B0C40F4     创建于：2024-10-24  有效至：永不       可用于：S</code></pre><p>ssb表示我们的子密钥，密钥ID是5D132C295B0C40F4</p><h3 id="子密钥导出"><a href="#子密钥导出" class="headerlink" title="子密钥导出"></a>子密钥导出</h3><h4 id="导出公钥"><a href="#导出公钥" class="headerlink" title="导出公钥"></a>导出公钥</h4><pre><code class="shell">gpg -a -o public-file.key --export keyId</code></pre><blockquote><p>-a 为 –armor 的简写，表示密钥以 ASCII 的形式输出，默认以二进制的形式输出；</p></blockquote><blockquote><p>-o 为 –output 的简写，指定写入的文件；</p></blockquote><blockquote><p>keyId 可以是key绑定的邮箱</p></blockquote><h4 id="导出私钥"><a href="#导出私钥" class="headerlink" title="导出私钥"></a>导出私钥</h4><pre><code class="shell">gpg -a -o private-file.key --export-secret-keys keyId</code></pre><h4 id="导入密钥"><a href="#导入密钥" class="headerlink" title="导入密钥"></a>导入密钥</h4><pre><code class="shell">gpg --import xxxx.key</code></pre><blockquote><p>私钥和公钥导入的方法相同，导入私钥相当于私钥&#x2F;公钥一起导入</p></blockquote><h3 id="公钥分发"><a href="#公钥分发" class="headerlink" title="公钥分发"></a>公钥分发</h3><pre><code class="shell">gpg --send-keys keyId --keyserver hkps://hkps.pool.sks-keyservers.net</code></pre><h3 id="使用硬件保存私钥"><a href="#使用硬件保存私钥" class="headerlink" title="使用硬件保存私钥"></a>使用硬件保存私钥</h3><p>推荐阅读：<a href="https://linux.cn/article-10415-1.html">https://linux.cn/article-10415-1.html</a></p><h3 id="密钥删除"><a href="#密钥删除" class="headerlink" title="密钥删除"></a>密钥删除</h3><p>一般建议子密钥只保存一份，所以推荐删除主密钥服务器上的子密钥，只保留硬件卡里面的就可以</p><pre><code class="shell">gpg --delete-secret-keys keyId</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;什么是GPG-openpgp&quot;&gt;&lt;a href=&quot;#什么是GPG-openpgp&quot; class=&quot;headerlink&quot; title=&quot;什么是GPG&amp;#x2F;openpgp&quot;&gt;&lt;/a&gt;什么是GPG&amp;#x2F;openpgp&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;PGP&lt;</summary>
+      
+    
+    
+    
+    <category term="计算机" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+    <category term="linux" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/linux/"/>
+    
+    
+    <category term="gpg" scheme="https://bighu630.github.io/tags/gpg/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>kde6到hyprland之后的奇怪bug</title>
+    <link href="https://bighu630.github.io/2024/10/11/kde6%E5%88%B0hyprland%E4%B9%8B%E5%90%8E%E7%9A%84%E5%A5%87%E6%80%AAbug/"/>
+    <id>https://bighu630.github.io/2024/10/11/kde6%E5%88%B0hyprland%E4%B9%8B%E5%90%8E%E7%9A%84%E5%A5%87%E6%80%AAbug/</id>
+    <published>2024-10-11T08:36:32.000Z</published>
+    <updated>2025-10-02T08:02:56.042Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="临床症状"><a href="#临床症状" class="headerlink" title="临床症状"></a>临床症状</h2><p>kde的部分应用不按照套路显示主题</p><p>我使用qt6ct来设置hyprland下qt程序的主题（主要是kde setting好像一到hyprland下面就手短，很多qt程序的主题都控制不了）</p><p>正常情况下我用kvantumanager来控制显示样式，然后在qt6ct中指定样式为kvantum.就想下面这样</p><p><img src="https://s2.loli.net/2024/10/11/qpKktojuDN4Ah6V.png" class="lazyload" data-srcset="https://s2.loli.net/2024/10/11/qpKktojuDN4Ah6V.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20241011164331942"></p><p>设置好之后</p><p>qt6ct,kde setting,…..等一系列qt程序显示正常（使用的是kvantum的风格），但是kde家族的 konsole dolphin okular,kate这些程序头铁，表示没有配置显示风格，使用默认的breeze.</p><p>当然breeze用起来也还不错，就是按钮有点大。</p><h2 id="线索"><a href="#线索" class="headerlink" title="线索"></a>线索</h2><p>然后非常奇怪的是，kate支持强制指定显示样式</p><p>在 <code>设置</code> -&gt; <code>应用程序样式</code> 里面可以找到kvantum的样式</p><p>然后kate的样式就正常了，但是当我尝试去konsole ，dolphin中找相同的配置时。</p><p>它们居然没有。</p><h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>在偶然间我发现kde程序的配置文件都是放在 .config目录下面的</p><p>比如 kate -&gt; <code>katerc</code></p><p>konsole -&gt; <code>konsolerc</code></p><p>所以我去找了一下kate是怎么强制把风格设置为kvantum的</p><p>在katerc中搜索 kvantum 看到:</p><pre><code class="toml">[General]...widgetStyle=kvantum-dark</code></pre><p>ok,在General标签下设置widgetStyle</p><p>在konsole,dolphin的配置文件的对应位置加上这个配置。</p><p>解决😄</p><p>dolphin:</p><pre><code class="toml">[General]ConfirmClosingMultipleTabs=falseConfirmClosingTerminalRunningProgram=falseEditableUrl=truewidgetStyle=kvantum-dark</code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>虽然只是一点点显示上的问题，但是对于一个强迫症来说还是非常难受的。特别是一个愿意折腾hyprland的强迫症。</p><p>另外kde家族也比较有意思，直接把kate配置栏copy下来不香吗，整地有的可以配，有的不能配。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;临床症状&quot;&gt;&lt;a href=&quot;#临床症状&quot; class=&quot;headerlink&quot; title=&quot;临床症状&quot;&gt;&lt;/a&gt;临床症状&lt;/h2&gt;&lt;p&gt;kde的部分应用不按照套路显示主题&lt;/p&gt;
+&lt;p&gt;我使用qt6ct来设置hyprland下qt程序的主题（主要是kde se</summary>
+      
+    
+    
+    
+    <category term="计算机" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+    <category term="linux" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/linux/"/>
+    
+    
+    <category term="hyprland" scheme="https://bighu630.github.io/tags/hyprland/"/>
+    
+    <category term="kde" scheme="https://bighu630.github.io/tags/kde/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux笔记持续更新</title>
+    <link href="https://bighu630.github.io/2024/09/29/linux%E7%AC%94%E8%AE%B0%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/"/>
+    <id>https://bighu630.github.io/2024/09/29/linux%E7%AC%94%E8%AE%B0%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/</id>
+    <published>2024-09-29T15:18:33.000Z</published>
+    <updated>2025-10-02T08:02:56.042Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="krdc"><a href="#krdc" class="headerlink" title="krdc"></a>krdc</h3><p>krdc 界面关闭组建后无法开启<br>krdc配置文件在 ~&#x2F;.local&#x2F;state&#x2F;krdcstaterc</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;krdc&quot;&gt;&lt;a href=&quot;#krdc&quot; class=&quot;headerlink&quot; title=&quot;krdc&quot;&gt;&lt;/a&gt;krdc&lt;/h3&gt;&lt;p&gt;krdc 界面关闭组建后无法开启&lt;br&gt;krdc配置文件在 ~&amp;#x2F;.local&amp;#x2F;state&amp;#x2F;kr</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>hyprland折腾记录</title>
+    <link href="https://bighu630.github.io/2024/09/29/hyprland%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/"/>
+    <id>https://bighu630.github.io/2024/09/29/hyprland%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/</id>
+    <published>2024-09-29T12:43:58.000Z</published>
+    <updated>2025-10-02T08:02:56.042Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>最近话了点时间折腾了一下wayland下面的平铺窗口管理器 – hyprland。<br>曾经的dwm选手折腾起hyprland来能一帆风顺吗？ 答案是显然不能。我也是没有解决所有的问题就开始写这篇文章<br>主要是不想继续折腾下去了</p></blockquote><h2 id="先大致看一下成果"><a href="#先大致看一下成果" class="headerlink" title="先大致看一下成果"></a>先大致看一下成果</h2><p><img src="https://s2.loli.net/2024/09/29/meKEIP7BFNsVwOi.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/29/meKEIP7BFNsVwOi.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240929205350930"></p><h2 id="借着配置文件大概讲一下"><a href="#借着配置文件大概讲一下" class="headerlink" title="借着配置文件大概讲一下"></a>借着配置文件大概讲一下</h2><pre><code># 没什么用的这里用注释解释一下 .├──  autostart.sh   # dwm的自启动脚本├──  config         # ~/.config 里面的配置文件│   ├──  alacritty│   ├──  dunst│   ├──  fcitx5│   ├──  hypr│   ├──  kitty│   ├──  mpd│   ├──  ncmpcpp│   ├──  picom│   ├──  qutebrowser│   ├──  ranger│   ├──  rofi│   ├──  swaync│   └──  waybar├──  conkyrc    # conky的配置，我没用conky了├──  dwm        # dwm的源码├──  install.sh # 一键安装脚本，里面之包含文件复制，没有安装必要软件的功能├──  nvim       # nvim 的配置├──  oh-my-zsh  # zsh├──  tmux       # tmux├──  updata.sh  # git push脚本├──  vimrc      # vim 配置├──  zshrc      # zshrc└──  zshrc-alias # zshrc依赖</code></pre><p>运行 <code>install.sh</code> 脚本将自动备份系统原有文件，并将此处的配置文件拷贝到对应的位置<br>如 nvim 目录，脚本会先将系统中的<del>&#x2F;.config&#x2F;nvim 备份为</del>&#x2F;.config&#x2F;nvimbak 并通过软连接的方式将这里的nvim链接到对应的地方。<br>注意install之后不能删除文件，因为实际上并没有把配置文件复制过去。</p><h2 id="目前还没有解决的文件"><a href="#目前还没有解决的文件" class="headerlink" title="目前还没有解决的文件"></a>目前还没有解决的文件</h2><ul><li>electron项目分辨率的问题<blockquote><p>这里主要是因为我有两块屏幕，一块 3200x2000的高分屏，一块普通的1080p屏幕,electron程序在两块屏幕上的缩放不一样<br>可以通过设置环境变量<code>ELECTRON_OZONE_PLATFORM_HINT=wayland</code>，但是这回导致无法输入中文（目前怀疑是wayland的问题）</p></blockquote></li><li>kde setting ,lxqt-config,qt6ct 等程序一起控制qt的显示样式，导致一个程序一个注意，很难受</li><li>typroa无法输入中文（刚刚写博客的时候发现的，不知道好不好解决）</li></ul><h2 id="给想从kde转到hyprland的朋友的建议"><a href="#给想从kde转到hyprland的朋友的建议" class="headerlink" title="给想从kde转到hyprland的朋友的建议"></a>给想从kde转到hyprland的朋友的建议</h2><p>目前hyprland生态比较成熟，但是有极少数应用在体验上对有落差:<br>比如钉钉，钉钉的窗口在hyprland中fctix5是独立管理的，如果你同时还喜欢用kitty作为终端模拟器，那么极有可能钉钉有时候会无法输入中文.<br>如果你恰好有一块高分屏，那你可能得想办法解决一下hyprland的缩放问题.<br>核心问题是hyprland的xwayland与wayland之间存在一点落差,但是大部分应用做的很好（xwayland生态&#x3D;&#x3D; 一锅粥）</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;最近话了点时间折腾了一下wayland下面的平铺窗口管理器 – hyprland。&lt;br&gt;曾经的dwm选手折腾起hyprland来能一帆风顺吗？ 答案是显然不能。我也是没有解决所有的问题就开始写这篇文章&lt;br&gt;主要是不想继续折腾下去了&lt;/p&gt;
+&lt;/</summary>
+      
+    
+    
+    
+    <category term="计算机" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+    <category term="linux" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/linux/"/>
+    
+    
+    <category term="hyprland" scheme="https://bighu630.github.io/tags/hyprland/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>最好的文件管理器-dolphin</title>
+    <link href="https://bighu630.github.io/2024/09/23/%E6%9C%80%E5%A5%BD%E7%9A%84%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8-dolphin/"/>
+    <id>https://bighu630.github.io/2024/09/23/%E6%9C%80%E5%A5%BD%E7%9A%84%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8-dolphin/</id>
+    <published>2024-09-23T11:04:30.000Z</published>
+    <updated>2025-10-02T08:02:56.044Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>WARN：windows没有,废话少说，直接开始</p></blockquote><h2 id="what’s-dolphin"><a href="#what’s-dolphin" class="headerlink" title="what’s dolphin"></a>what’s dolphin</h2><p><img src="https://s2.loli.net/2024/09/23/mQkP1vuL3RaBxcf.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/23/mQkP1vuL3RaBxcf.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240923190923075"></p><ul><li>长得好看</li></ul><p>dolphin使用kde的主题管理，可以通过kde的主题商店配合<code>kvantum manager</code> 配制出一个好看的主题，类似于我上面的(配置mac模式的是最简单的，相信苹果的设计师)</p><ul><li>分屏</li></ul><p>当然，还有很多其他的文件管理器可以分屏，但是dolphin可以（算是必不可少的）</p><p><img src="https://s2.loli.net/2024/09/23/pOaqeZPRFjJV9SH.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/23/pOaqeZPRFjJV9SH.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240923191319440"></p><ul><li>应用内终端</li></ul><p>可以看到上面图中最下面的部分。dolphin内置了konsole终端（kde的很多软件都内置konsole,比如kate）。有了内置终端，你会省很多事情。如果在搭配zorxide .可以在终端中用zoxide切换路径，上面的文件位置也会跟着切换，非常的方便（另外，开启和关闭终端的快捷键是F4）</p><ul><li>网络文件夹</li></ul><p>这是我最喜欢的功能。首先对于日常使用，我有时候会用到坚果云，阿里云，谷歌云的网盘，这三个网盘都可以接入dolphin</p><p><img src="https://s2.loli.net/2024/09/23/Tn1Ev4OtVXzL3ly.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/23/Tn1Ev4OtVXzL3ly.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240923191851837"></p><ul><li>坚果云：使用webdav模式接入</li><li>阿里云：稍作麻烦一点<ul><li>运行<a href="https://github.com/messense/aliyundrive-webdav">aliyun-webdav</a>,将阿里云转换为webdav</li><li>通过webdav方式接入</li></ul></li><li>谷歌云：通过kio插件接入<ul><li><a href="https://apps.kde.org/zh-cn/kio_gdrive/">安装软件</a></li><li>在kde的账户管理中登陆谷歌账户</li></ul></li></ul><p>在工作环境中，一般我们后端程序员都会有很多服务器，可能是测试的，可能是我们自己的，我们需要去系统里面拿一点日志看看。</p><p>dolphin可以通过ssh连接文件系统，例如我上面的华为云，work等文件夹都是ssh服务器</p><p>dolhpin支持的所有网络文件夹：</p><p><img src="https://s2.loli.net/2024/09/23/5qmdKcjQb2AynTs.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/23/5qmdKcjQb2AynTs.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240923192456555"></p><p>最关键的是，网络文件夹几乎和真实文件夹差不多，只要网好。</p><ul><li>搭配kde connect</li></ul><p>kde connect是kde的局域网共享软件</p><p>dolphin右键集成了kde connect分享功能，只要是喜欢用kde connect的都会感觉很好用</p><blockquote><p>非常推荐kde connect 可以局域网共享文件，共享剪贴板，非常的方便</p><p><img src="https://s2.loli.net/2024/09/23/Dw49NgoZa5IAH2T.png" class="lazyload" data-srcset="https://s2.loli.net/2024/09/23/Dw49NgoZa5IAH2T.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="image-20240923192752804"></p><p>如图中的bughu-p… 就是我手机的文件系统（需要在手机端给对应文件的访问权限），非常好用。</p></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;WARN：windows没有,废话少说，直接开始&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;what’s-dolphin&quot;&gt;&lt;a href=&quot;#what’s-dolphin&quot; class=&quot;headerlink&quot; title=&quot;what’</summary>
+      
+    
+    
+    
+    <category term="计算机" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+    <category term="linux" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/linux/"/>
+    
+    
+    <category term="文件管理器" scheme="https://bighu630.github.io/tags/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8/"/>
+    
+  </entry>
+  
+</feed>
