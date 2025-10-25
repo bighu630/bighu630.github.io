@@ -45,26 +45,26 @@ style-src 'self' https: 'unsafe-inline' *;
   <!-- front-matter head_begin end -->
     <link rel="shortcut icon" type='image/x-icon' href="/img/icon.svg">
   <link rel="preload" href="/css/style.css" as="style">
-  <link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/VarelaRound/VarelaRound-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
-<link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="https://fonts.gstatic.com/s/varelaround/v13/5Q97LzR5U84o2zX_mo2m5ZUi.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+<link rel="preload" href="https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxP.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
   <!-- feed -->
   <!-- 页面元数据 -->
   <title>solana杂谈（1） - thisHu's log</title>
-  <meta name="keywords" content="blockChain,L2,solidity,EVM,K8s,后端程序员,golang">
+  <meta name="keywords" content="solana,blockChain,L2,solidity,EVM,K8s,后端程序员,golang">
   <meta desc name="description" content="使卵石臻与完美的，非锤的打击，而是水的且歌且舞 - [object Object] - thisHu's log">
   
 <meta property="og:type" content="article">
 <meta property="og:title" content="solana杂谈（1）">
 <meta property="og:url" content="https://bighu630.github.io/2025/06/17/solana%E6%9D%82%E8%B0%88%EF%BC%881%EF%BC%89/index.html">
 <meta property="og:site_name" content="thisHu&#39;s log">
-<meta property="og:description" content="solana杂谈（1） 本文适用于‘只需要大致了解solana’的读者，部分说法可能不够准确&#x2F;不够深入，如许详细了解，建议阅读solana的 [官方文档]https:&#x2F;&#x2F;solana.com&#x2F;zh&#x2F;docs  solana账户模型solana 上所有数据都是储存在账户中，也就是说你可以通过账户信息拿到链上的任意状态（将区块链理解为一个大型状态机）solana 账户结构如下：  钱包用户的">
+<meta property="og:description" content="solana杂谈（1） 本文适用于“只需大致了解 Solana”的读者，部分说法可能不够准确或不够深入。如需详细了解，建议阅读 Solana 的官方文档：https:&#x2F;&#x2F;solana.com&#x2F;zh&#x2F;docs  solana账户模型solana 上所有数据都是储存在账户中，也就是说你可以通过账户信息拿到链上的任意状态（将区块链理解为一个大型状态机）.solana 账户结构如下：  钱包账户（Wall">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
 <meta property="article:published_time" content="2025-06-17T08:19:51.000Z">
-<meta property="article:modified_time" content="2025-06-17T09:35:29.085Z">
+<meta property="article:modified_time" content="2025-06-18T01:39:14.778Z">
 <meta property="article:author" content="[object Object]">
-<meta property="article:tag" content="blockChain,L2,solidity,EVM,K8s,后端程序员,golang">
+<meta property="article:tag" content="solana">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
   <style>
@@ -124,7 +124,7 @@ html {
   color: var(--color-text);
   width: 100%;
   height: 100%;
-  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  font-family: "Roboto", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, sans-serif, Menlo, Monaco, monospace, sans-serif;
   font-size: 16px;
 }
 html >::-webkit-scrollbar {
@@ -147,7 +147,7 @@ body {
   background-color: var(--color-site-body);
   text-rendering: optimizelegibility;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
-  line-height: 1.6;
+  line-height: 'normal';
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
 }
@@ -438,7 +438,7 @@ button {
   margin-top: 32px;
 }
 .cover-wrapper .cover-body .title {
-  font-family: "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Helvetica, monospace;
+  font-family: "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, sans-serif, Helvetica, monospace;
   font-size: 3.125rem;
   line-height: 1.2;
   text-shadow: 0 1px 2px rgba(0,0,0,0.1);
@@ -951,15 +951,15 @@ button {
   }
 }
 @font-face {
-  font-family: 'UbuntuMono';
-  src: url("https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf");
+  font-family: 'Roboto';
+  src: url("https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxP.ttf");
   font-weight: 'normal';
   font-style: 'normal';
   font-display: swap;
 }
 @font-face {
   font-family: 'Varela Round';
-  src: url("https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/VarelaRound/VarelaRound-Regular.ttf");
+  src: url("https://fonts.gstatic.com/s/varelaround/v13/5Q97LzR5U84o2zX_mo2m5ZUi.ttf");
   font-weight: 'normal';
   font-style: 'normal';
   font-display: swap;
@@ -1082,18 +1082,18 @@ button {
   line-height: 64px;
   padding: 0 24px;
   font-size: 1.25rem;
-  font-family: "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Helvetica, monospace;
+  font-family: "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, sans-serif, Helvetica, monospace;
 }
 .l_header #wrapper .nav-main .title img {
   height: 64px;
 }
 .l_header .nav-sub {
-  max-width: 1080px;
+  max-width: 1200px;
   margin: auto;
 }
 .l_header .nav-sub .title {
   font-weight: bold;
-  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  font-family: "Roboto", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, sans-serif, Menlo, Monaco, monospace, sans-serif;
   line-height: 1.2;
   max-height: 64px;
   white-space: normal;
@@ -1670,7 +1670,7 @@ ul.list-v >li>a:hover {
   right: calc(100% - 0.5 * 16px);
 }
 #wrapper {
-  max-width: 1080px;
+  max-width: 1200px;
   margin: auto;
 }
 @media screen and (min-width: 2048px) {
@@ -1720,11 +1720,11 @@ ul.list-v >li>a:hover {
 }
 @media screen and (max-width: 2048px) {
   .l_header {
-    max-width: 1112px;
-    left: calc((100% - 1112px) * 0.5);
+    max-width: 1232px;
+    left: calc((100% - 1232px) * 0.5);
   }
 }
-@media screen and (max-width: 1112px) {
+@media screen and (max-width: 1232px) {
   .l_header {
     left: 0;
     border-radius: 0;
@@ -1827,9 +1827,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 		'}'+
 	'</style>'+
     '<div class="kill-ie">'+
-        `<span class="kill-t"><b>抱歉，您的浏览器无法访问本站</b></span><br/>`+
-        `<span class="kill-c">微软已经于2016年终止了对 Internet Explorer (IE) 10 及更早版本的支持，<br/>继续使用存在极大的安全隐患，请使用当代主流的浏览器进行访问。</span><br/>`+
-        `<a target="_blank" rel="noopener" href="https://blogs.windows.com/windowsexperience/2021/05/19/the-future-of-internet-explorer-on-windows-10-is-in-microsoft-edge/"><strong>了解详情 ></strong></a>`+
+        `<span class="kill-t"><b>Sorry, your browser cannot access this site</b></span><br/>`+
+        `<span class="kill-c">Microsoft has terminated support for Internet Explorer (IE) 10 and earlier versions in 2016. <br/>There are great security risks to continue using it. Please use contemporary mainstream browsers to access.</span><br/>`+
+        `<a target="_blank" rel="noopener" href="https://blogs.windows.com/windowsexperience/2021/05/19/the-future-of-internet-explorer-on-windows-10-is-in-microsoft-edge/"><strong>Learn more ></strong></a>`+
     '</div>');
 </script>
 
@@ -1857,9 +1857,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 		}
 	</style>
     <div class="kill-noscript">
-        <span class="kill-t"><b>抱歉，您的浏览器无法访问本站</b></span><br/>
-        <span class="kill-c">本页面需要浏览器支持（启用）JavaScript</span><br/>
-        <a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=启用JavaScript"><strong>了解详情 ></strong></a>
+        <span class="kill-t"><b>Sorry, your browser cannot access this site</b></span><br/>
+        <span class="kill-c">This page requires browser support (enable) JavaScript</span><br/>
+        <a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=启用JavaScript"><strong>Learn more ></strong></a>
     </div>
 </noscript>
 
@@ -1874,7 +1874,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: false,
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1750152936140),
+    lastupdate: new Date(1761396518584),
     sidebar: {
       for_page: ["blogger","category","tagcloud","donate"],
       for_post: ["toc","post","blogger"],
@@ -2666,6 +2666,20 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           
             
+  <div class='new-meta-item category'>
+    <i class="fa-solid fa-folder-open fa-fw" aria-hidden="true"></i>
+    <a class="category-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链</a><span class="sep"></span><a class="category-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/solana/">solana</a>
+    
+      <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+        <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/" itemprop="url"><span itemprop="name">区块链</span></a>
+      </span>
+    
+      <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+        <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/solana/" itemprop="url"><span itemprop="name">solana</span></a>
+      </span>
+    
+  </div>
+
 
           
         
@@ -2691,13 +2705,13 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div class="new-meta-item wordcount">
     <a class='notlink'>
       <i class="fa-solid fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>字数：1.2k 字</p>
+      <p>1.6k words</p>
     </a>
   </div>
   <div class="new-meta-item readtime">
     <a class='notlink'>
       <i class="fa-solid fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>时长：4 分钟</p>
+      <p>5 min</p>
     </a>
   </div>
 
@@ -2715,25 +2729,32 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div id="layoutHelper-page-plugins"></div>
   <div id="post-body" itemprop="articleBody">
     <h2 id="solana杂谈（1）"><a href="#solana杂谈（1）" class="headerlink" title="solana杂谈（1）"></a>solana杂谈（1）</h2><blockquote>
-<p>本文适用于‘只需要大致了解solana’的读者，部分说法可能不够准确&#x2F;不够深入，如许详细了解，建议阅读solana的 [官方文档]<a target="_blank" rel="noopener" href="https://solana.com/zh/docs">https://solana.com/zh/docs</a></p>
+<p>本文适用于“只需大致了解 Solana”的读者，部分说法可能不够准确或不够深入。如需详细了解，建议阅读 Solana 的官方文档：<a target="_blank" rel="noopener" href="https://solana.com/zh/docs">https://solana.com/zh/docs</a></p>
 </blockquote>
-<h3 id="solana账户模型"><a href="#solana账户模型" class="headerlink" title="solana账户模型"></a>solana账户模型</h3><p>solana 上所有数据都是储存在账户中，也就是说你可以通过账户信息拿到链上的任意状态（将区块链理解为一个大型状态机）<br>solana 账户结构如下：<br><img src="https://solana.com/_next/image?url=/assets/docs/core/accounts/accounts.png&w=1200&q=75" class="lazyload" data-srcset="https://solana.com/_next/image?url=/assets/docs/core/accounts/accounts.png&w=1200&q=75" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="solana account"></p>
+<h3 id="solana账户模型"><a href="#solana账户模型" class="headerlink" title="solana账户模型"></a>solana账户模型</h3><p>solana 上所有数据都是储存在账户中，也就是说你可以通过账户信息拿到链上的任意状态（将区块链理解为一个大型状态机）.<br>solana 账户结构如下：<br><img src="https://solana.com/_next/image?url=/assets/docs/core/accounts/accounts.png&w=1200&q=75" class="lazyload" data-srcset="https://solana.com/_next/image?url=/assets/docs/core/accounts/accounts.png&w=1200&q=75" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="solana account"></p>
 <ul>
-<li>钱包用户的data是空（可以发送签名的账户是钱包账户）</li>
-<li>对于程序账户，data中包含solana上程序的指令集以及对应的wasm二进制代码</li>
-<li>对于数据用户，data中包含所有编码过后的数据</li>
+<li><strong>钱包账户（Wallet Account）</strong>：<code>data</code> 字段为空。这类账户由椭圆曲线生成的公私钥对管理，拥有私钥的用户可以通过签署并发送交易来修改链上状态。</li>
+<li><strong>程序账户（Program Account）</strong>：<code>data</code> 字段包含 Solana 程序的指令集及其 WASM 二进制代码。</li>
+<li><strong>数据账户（Data Account）</strong>：<code>data</code> 字段包含所有编码后的数据。</li>
 </ul>
-<p>solana中，钱包账户是通过椭圆曲线生成的公私钥对管理的，拥有私钥的的使用者可以通过签署&amp;发送交易的方式修改链上状态。合约账户和数据账户是通过特殊的方式生成的不再椭圆曲线上的公钥地址，无法直接的通过私钥生成签名。<br>他们的状态修改使用的是<code>PDA</code> 代理的签名方式在状态机内部进行的。</p>
-<h4 id="账户租金"><a href="#账户租金" class="headerlink" title="账户租金"></a>账户租金</h4><p>账户租金是solana避免数据臃余的处理方案（evm是通过释放空间，返回eth的方式），对于solana上所有的用户都需要支付租金（或者余额大于一定值免租）</p>
+<p>在 Solana 中，程序账户和数据账户的地址通常是通过特殊方式生成的，并非由椭圆曲线公私钥对直接控制，因此无法直接通过私钥生成签名。它们的状态修改通常通过<strong>程序派生地址（Program Derived Address, PDA）</strong>代理签名，在状态机内部进行。</p>
+<h4 id="账户租金"><a href="#账户租金" class="headerlink" title="账户租金"></a>账户租金</h4><p>账户租金是solana避免数据臃余的处理方案（evm是通过释放空间，返回eth的方式），对于solana上所有的用户都需要支付租金（或者余额大于一定值免租）.</p>
 <ul>
-<li>对于钱包用户，租金由自己支付</li>
-<li>对于程序用户，租金由程序的创建者支付，一次性付清</li>
-<li>对于数据用户，数据用户通常是程序创建用于保存数据的账户，由这个数据账户被创建的交易的发起者支付租金</li>
+<li><strong>钱包账户</strong>：租金由账户所有者自己支付。</li>
+<li><strong>程序账户</strong>：租金通常由程序的创建者一次性支付，以确保程序的可持续运行。</li>
+</ul>
+<p><strong>租金豁免</strong>：如果账户中存储的 SOL 数量足以支付该账户两年期的租金，则该账户可以获得租金豁免，无需再支付租金。这意味着账户将永久存在，除非被关闭。</p>
+<ul>
+<li><strong>数据账户（Data Account）</strong>：通常是程序用于保存数据的账户，其租金由创建该数据账户的交易发起者支付。</li>
 </ul>
 <blockquote>
-<p>对于数据账户，通常项目方核心的数据由程序部署时统一做初始化（避免核心账户被其他人初始化，而被链上意外删除），对于有用户管理的数据账户则由用户自己创建，如链上的token account（由用户自己创建，自己管理租金）<br>rent_epoch：这是一个遗留字段，源于 Solana 曾经有一个机制会定期从账户中扣除 lamports。虽然此字段仍然存在于账户类型中，但自从租金收取被弃用后，它已不再使用。😅 租金已经被弃用了</p>
+<p><strong>数据账户管理</strong>：对于核心项目数据，通常在程序部署时进行统一初始化，以防止意外删除。对于用户自行管理的数据账户（如链上的 Token 账户），则由用户自己创建并管理租金。</p>
 </blockquote>
-<h3 id="solana的token标准"><a href="#solana的token标准" class="headerlink" title="solana的token标准"></a>solana的token标准</h3><p>solana上的token不像evm有多种token执行标准（erc20&#x2F;erc721&#x2F;erc1155）,也不会每个token都上去部署一个合约。<br>solana上的token由token program统一管理（token progeam有两个版本，这里不做展开），接下来我们从token的生命周期来看一下solana的脱可能标准</p>
+<blockquote>
+<p>rent_epoch：这是一个遗留字段，源于 Solana 曾经有一个机制会定期从账户中扣除 lamports。虽然此字段仍然存在于账户类型中，但自从租金收取被弃用后，它已不再使用。😅 租金已经被弃用了</p>
+</blockquote>
+<h3 id="solana的token标准"><a href="#solana的token标准" class="headerlink" title="solana的token标准"></a>solana的token标准</h3><p>solana上的token不像evm有多种token执行标准（erc20&#x2F;erc721&#x2F;erc1155）,也不会每个token都上去部署一个合约。</p>
+<p>solana上的token由token program统一管理（token progeam有两个版本，这里不做展开），接下来我们从token的生命周期来看一下solana的脱可能标准</p>
 <ol>
 <li><p>项目方创建token<br>项目方创建token实际上是向token program发送一个mintinit指令，在token program中<code>登记</code>一个token 以及记录怎么发行token<br>不同于evm，不是一个合约，由合约管理token</p>
 </li>
@@ -2749,11 +2770,45 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </blockquote>
 <p>在solana上发行token不需要额外的部署代码</p>
 <p>对于nft类的token,solana并不严格区分token类型，nft和ft共享相同的指令集（指令里面也没有区分这两者）</p>
-<h4 id="solana上的nft"><a href="#solana上的nft" class="headerlink" title="solana上的nft"></a>solana上的nft</h4><p>solana nft转账之类的操作在token program上实现，生命周期通常由类似 Metaplex这类token标准管理（这些token是社区推动的标准，不同于token program预编译在solana主链上）<br>Metaplex这类标准通过控制token program mint不同的token来实现nft,也就是对于每一个nft的生成，实际上是在token program上执行 mintinit操作（！！！ 不是mint操作），每一个nft的mint相当于是发行一个token，Metaplex程序控制发行量，从而实现nft</p>
+<h4 id="solana上的nft"><a href="#solana上的nft" class="headerlink" title="solana上的nft"></a>solana上的nft</h4><p>solana nft转账之类的操作在token program上实现，生命周期通常由类似 Metaplex这类token标准管理（这些token是社区推动的标准，不同于token program预编译在solana主链上）</p>
+<p>Metaplex这类标准通过控制token program mint不同的token来实现nft,也就是对于每一个nft的生成，实际上是在token program上执行 mintinit操作（！！！ 不是mint操作），每一个nft的mint相当于是发行一个token，Metaplex程序控制发行量，从而实现nft</p>
 <h3 id="solana合约标准"><a href="#solana合约标准" class="headerlink" title="solana合约标准"></a>solana合约标准</h3><p>solana使用的BPF vm执行合约</p>
 <p>合约生命周期有BPF loader系列系统合约管理.通常情况下需要将合约编码成wasm的二进制码然后部署在solana链上</p>
-<p>对于合约开发，合约需要与solana链交互，所以并不是所有语言都可以开发solana合约，需要对应语言实现solana program sdk 并且可以编译成wasm的二进制码<br>目前来看只有（rust&#x2F;c&#x2F;c++）其他语言有一些设置实现的sdk,可能不太问题</p>
-<h3 id="solana的共识"><a href="#solana的共识" class="headerlink" title="solana的共识"></a>solana的共识</h3>
+<p>对于合约开发，合约需要与solana链交互，所以并不是所有语言都可以开发solana合约，需要对应语言实现solana program sdk 并且可以编译成wasm的二进制码<br>目前来看只有（rust&#x2F;c&#x2F;c++）其他语言有一些社区实现的sdk,可能存在问题</p>
+<h3 id="solana的共识"><a href="#solana的共识" class="headerlink" title="solana的共识"></a>solana的共识</h3><p>Solana 采用的是一种混合共识机制，结合了以下几个关键技术：</p>
+<ul>
+<li>Proof of History (PoH) — 历史证明</li>
+</ul>
+<p>这是 Solana 最核心的创新点。</p>
+<p>PoH 通过一个加密哈希函数（SHA-256）以连续的方式产生可验证的时间顺序证明，相当于给所有交易和事件打上了时间戳。</p>
+<p>这个机制让网络无需等待区块时间戳验证，极大地提高了交易处理速度和吞吐量。</p>
+<ul>
+<li>Tower BFT — 基于 PoH 的拜占庭容错共识</li>
+</ul>
+<p>Tower BFT 是 Solana 的一种优化的 Practical Byzantine Fault Tolerance (PBFT) 机制。</p>
+<p>利用 PoH 生成的全局时间顺序，节点可以在这个时间线上锁定状态，从而更高效地达成共识。</p>
+<p>节点通过投票和锁定投票权重防止双重花费和恶意行为。</p>
+<ul>
+<li>Turbine — 高效的数据传播协议</li>
+</ul>
+<p>用于快速分发数据包，减少网络拥堵，提高广播效率。</p>
+<ul>
+<li>Gulf Stream — 交易转发协议</li>
+</ul>
+<p>允许交易在网络中提前转发给验证者，减少确认时间。</p>
+<ul>
+<li>Sealevel — 并行智能合约运行时</li>
+</ul>
+<p>允许同时处理多个交易，提高吞吐量。</p>
+<h4 id="Solana-共识流程简要"><a href="#Solana-共识流程简要" class="headerlink" title="Solana 共识流程简要"></a>Solana 共识流程简要</h4><ol>
+<li><p>交易发起后，节点利用 PoH 来验证交易的时间顺序。</p>
+</li>
+<li><p>验证者节点基于 Tower BFT 达成共识，投票决定哪个区块被接受。</p>
+</li>
+<li><p>通过这种方式，Solana 可以实现每秒数千至数万笔交易的处理速度。</p>
+</li>
+</ol>
+
   </div>
   
   
@@ -2777,10 +2832,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateModified" datetime="2025-06-17T17:35:29+08:00">
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2025-06-18T09:39:14+08:00">
   <a class='notlink'>
     <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2025年6月17日</p>
+    <p>更新于：2025年6月18日</p>
   </a>
 </div>
 
@@ -2788,6 +2843,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         
           
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/solana/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>solana</p></a></div>
+  <span hidden itemprop="keywords">solana</span>
+
 
         
       
@@ -2855,6 +2914,11 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
     <div class="prev-next">
+      
+        <a class='prev' href='/2025/06/21/mongodb%E7%B4%A2%E5%BC%95/'>
+          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>mongodb索引</p>
+          <p class='content'>mongodb索引索引的作用索引支持在MongoDB中有效地执行查询。如果没有索引，MongoDB必须执行集合扫描，即扫描集合中的每个文档，以选择那些与查询语句匹配的文档。如果一个查询存在适当的...</p>
+        </a>
       
       
         <a class='next' href='/2025/04/15/%E7%A6%85%E4%B8%8E%E6%91%A9%E6%89%98%E8%BD%A6%E7%BB%B4%E4%BF%AE%E8%89%BA%E6%9C%AF%EF%BC%881%EF%BC%89/'>
@@ -2989,7 +3053,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#solana%E6%9D%82%E8%B0%88%EF%BC%881%EF%BC%89"><span class="toc-text">solana杂谈（1）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#solana%E8%B4%A6%E6%88%B7%E6%A8%A1%E5%9E%8B"><span class="toc-text">solana账户模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B4%A6%E6%88%B7%E7%A7%9F%E9%87%91"><span class="toc-text">账户租金</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#solana%E7%9A%84token%E6%A0%87%E5%87%86"><span class="toc-text">solana的token标准</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#solana%E4%B8%8A%E7%9A%84nft"><span class="toc-text">solana上的nft</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#solana%E5%90%88%E7%BA%A6%E6%A0%87%E5%87%86"><span class="toc-text">solana合约标准</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#solana%E7%9A%84%E5%85%B1%E8%AF%86"><span class="toc-text">solana的共识</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#solana%E6%9D%82%E8%B0%88%EF%BC%881%EF%BC%89"><span class="toc-text">solana杂谈（1）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#solana%E8%B4%A6%E6%88%B7%E6%A8%A1%E5%9E%8B"><span class="toc-text">solana账户模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B4%A6%E6%88%B7%E7%A7%9F%E9%87%91"><span class="toc-text">账户租金</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#solana%E7%9A%84token%E6%A0%87%E5%87%86"><span class="toc-text">solana的token标准</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#solana%E4%B8%8A%E7%9A%84nft"><span class="toc-text">solana上的nft</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#solana%E5%90%88%E7%BA%A6%E6%A0%87%E5%87%86"><span class="toc-text">solana合约标准</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#solana%E7%9A%84%E5%85%B1%E8%AF%86"><span class="toc-text">solana的共识</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Solana-%E5%85%B1%E8%AF%86%E6%B5%81%E7%A8%8B%E7%AE%80%E8%A6%81"><span class="toc-text">Solana 共识流程简要</span></a></li></ol></li></ol></li></ol>
     </div>
   </section>
 
@@ -3107,7 +3171,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
     
       
-        <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+        <div><p>Blog content follows the <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
 </div>
       
     
@@ -3120,9 +3184,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
     
       
-        本站使用
+        Use
         <a href="https://github.com/volantis-x/hexo-theme-volantis/#5.8.0" target="_blank" class="codename">Volantis</a>
-        作为主题
+        as theme
       
     
       
@@ -3968,7 +4032,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   <script>
-  let imgs = ["https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/052.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/016.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/054.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/042.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/001.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/051.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/006.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/003.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/005.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/056.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/039.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/019.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/034.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/035.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/002.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/012.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/033.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/038.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/046.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/025.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/004.webp"];
+  let imgs = ["https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/035.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/052.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/034.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/001.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/051.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/012.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/002.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/039.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/038.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/016.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/025.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/004.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/019.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/005.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/006.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/056.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/054.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/033.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/046.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/042.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/003.webp"];
   let index = 0;
   let IntervalParallax = null;
 

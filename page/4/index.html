@@ -45,8 +45,8 @@ style-src 'self' https: 'unsafe-inline' *;
   <!-- front-matter head_begin end -->
     <link rel="shortcut icon" type='image/x-icon' href="/img/icon.svg">
   <link rel="preload" href="/css/style.css" as="style">
-  <link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/VarelaRound/VarelaRound-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
-<link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="https://fonts.gstatic.com/s/varelaround/v13/5Q97LzR5U84o2zX_mo2m5ZUi.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+<link rel="preload" href="https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxP.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
   <!-- feed -->
   <!-- 页面元数据 -->
@@ -122,7 +122,7 @@ html {
   color: var(--color-text);
   width: 100%;
   height: 100%;
-  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  font-family: "Roboto", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, sans-serif, Menlo, Monaco, monospace, sans-serif;
   font-size: 16px;
 }
 html >::-webkit-scrollbar {
@@ -145,7 +145,7 @@ body {
   background-color: var(--color-site-body);
   text-rendering: optimizelegibility;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
-  line-height: 1.6;
+  line-height: 'normal';
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
 }
@@ -436,7 +436,7 @@ button {
   margin-top: 32px;
 }
 .cover-wrapper .cover-body .title {
-  font-family: "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Helvetica, monospace;
+  font-family: "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, sans-serif, Helvetica, monospace;
   font-size: 3.125rem;
   line-height: 1.2;
   text-shadow: 0 1px 2px rgba(0,0,0,0.1);
@@ -949,15 +949,15 @@ button {
   }
 }
 @font-face {
-  font-family: 'UbuntuMono';
-  src: url("https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf");
+  font-family: 'Roboto';
+  src: url("https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxP.ttf");
   font-weight: 'normal';
   font-style: 'normal';
   font-display: swap;
 }
 @font-face {
   font-family: 'Varela Round';
-  src: url("https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/VarelaRound/VarelaRound-Regular.ttf");
+  src: url("https://fonts.gstatic.com/s/varelaround/v13/5Q97LzR5U84o2zX_mo2m5ZUi.ttf");
   font-weight: 'normal';
   font-style: 'normal';
   font-display: swap;
@@ -1080,18 +1080,18 @@ button {
   line-height: 64px;
   padding: 0 24px;
   font-size: 1.25rem;
-  font-family: "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Helvetica, monospace;
+  font-family: "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, sans-serif, Helvetica, monospace;
 }
 .l_header #wrapper .nav-main .title img {
   height: 64px;
 }
 .l_header .nav-sub {
-  max-width: 1080px;
+  max-width: 1200px;
   margin: auto;
 }
 .l_header .nav-sub .title {
   font-weight: bold;
-  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  font-family: "Roboto", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, sans-serif, Menlo, Monaco, monospace, sans-serif;
   line-height: 1.2;
   max-height: 64px;
   white-space: normal;
@@ -1668,7 +1668,7 @@ ul.list-v >li>a:hover {
   right: calc(100% - 0.5 * 16px);
 }
 #wrapper {
-  max-width: 1080px;
+  max-width: 1200px;
   margin: auto;
 }
 @media screen and (min-width: 2048px) {
@@ -1718,11 +1718,11 @@ ul.list-v >li>a:hover {
 }
 @media screen and (max-width: 2048px) {
   .l_header {
-    max-width: 1112px;
-    left: calc((100% - 1112px) * 0.5);
+    max-width: 1232px;
+    left: calc((100% - 1232px) * 0.5);
   }
 }
-@media screen and (max-width: 1112px) {
+@media screen and (max-width: 1232px) {
   .l_header {
     left: 0;
     border-radius: 0;
@@ -1825,9 +1825,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 		'}'+
 	'</style>'+
     '<div class="kill-ie">'+
-        `<span class="kill-t"><b>抱歉，您的浏览器无法访问本站</b></span><br/>`+
-        `<span class="kill-c">微软已经于2016年终止了对 Internet Explorer (IE) 10 及更早版本的支持，<br/>继续使用存在极大的安全隐患，请使用当代主流的浏览器进行访问。</span><br/>`+
-        `<a target="_blank" rel="noopener" href="https://blogs.windows.com/windowsexperience/2021/05/19/the-future-of-internet-explorer-on-windows-10-is-in-microsoft-edge/"><strong>了解详情 ></strong></a>`+
+        `<span class="kill-t"><b>Sorry, your browser cannot access this site</b></span><br/>`+
+        `<span class="kill-c">Microsoft has terminated support for Internet Explorer (IE) 10 and earlier versions in 2016. <br/>There are great security risks to continue using it. Please use contemporary mainstream browsers to access.</span><br/>`+
+        `<a target="_blank" rel="noopener" href="https://blogs.windows.com/windowsexperience/2021/05/19/the-future-of-internet-explorer-on-windows-10-is-in-microsoft-edge/"><strong>Learn more ></strong></a>`+
     '</div>');
 </script>
 
@@ -1855,9 +1855,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 		}
 	</style>
     <div class="kill-noscript">
-        <span class="kill-t"><b>抱歉，您的浏览器无法访问本站</b></span><br/>
-        <span class="kill-c">本页面需要浏览器支持（启用）JavaScript</span><br/>
-        <a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=启用JavaScript"><strong>了解详情 ></strong></a>
+        <span class="kill-t"><b>Sorry, your browser cannot access this site</b></span><br/>
+        <span class="kill-c">This page requires browser support (enable) JavaScript</span><br/>
+        <a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=启用JavaScript"><strong>Learn more ></strong></a>
     </div>
 </noscript>
 
@@ -1872,7 +1872,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: false,
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1750152936140),
+    lastupdate: new Date(1761396518584),
     sidebar: {
       for_page: ["blogger","category","tagcloud","donate"],
       for_post: ["toc","post","blogger"],
@@ -2633,6 +2633,266 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           <div class='post-wrapper'>
             <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
+  <link itemprop="mainEntityOfPage" href="https://bighu630.github.io/2024/09/11/区块链应用与以太坊的交互/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="thisHu's log">
+  </span>
+  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
+    <meta itemprop="name" content="thisHu's log">
+    <meta itemprop="description" content="使卵石臻与完美的，非锤的打击，而是水的且歌且舞">
+  </span>
+  
+  
+  
+    <span hidden>
+      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+    </span>
+  
+  
+    
+    <h2 class="article-title"  itemprop="name headline">
+      <a href="/2024/09/11/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%BA%94%E7%94%A8%E4%B8%8E%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%9A%84%E4%BA%A4%E4%BA%92/"  itemprop="url">
+        区块链应用与以太坊的交互
+      </a>
+    </h2>
+  
+  <div class='md article-desc' itemprop="articleBody">
+    
+      <p>这篇文章深入探讨了以太坊的交互机制，强调通过以太坊支持的工具链实现链上合约与链下应用（如Chainlink和Arbitrum）的有效交互，特别是在合约调用、事件监控及交易构造等方面的具体实现和注意事项。</p>
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time itemprop="dateCreated datePublished" datetime="2024-09-11T15:52:13+08:00">2024-09-11</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链</a><span class="sep"></span><a class="category-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BB%A5%E5%A4%AA%E5%9D%8A/">以太坊</a>
+          
+            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+              <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/" itemprop="url"><span itemprop="name">区块链</span></a>
+            </span>
+          
+            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+              <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BB%A5%E5%A4%AA%E5%9D%8A/" itemprop="url"><span itemprop="name">以太坊</span></a>
+            </span>
+          
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2024/09/11/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%BA%94%E7%94%A8%E4%B8%8E%E4%BB%A5%E5%A4%AA%E5%9D%8A%E7%9A%84%E4%BA%A4%E4%BA%92/' itemprop="url">
+            Read More
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
+  <link itemprop="mainEntityOfPage" href="https://bighu630.github.io/2024/09/10/以太坊Rollup方案之-arbitrum（1）/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="thisHu's log">
+  </span>
+  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
+    <meta itemprop="name" content="thisHu's log">
+    <meta itemprop="description" content="使卵石臻与完美的，非锤的打击，而是水的且歌且舞">
+  </span>
+  
+  
+  
+    <span hidden>
+      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+    </span>
+  
+  
+    
+    <h2 class="article-title"  itemprop="name headline">
+      <a href="/2024/09/10/%E4%BB%A5%E5%A4%AA%E5%9D%8ARollup%E6%96%B9%E6%A1%88%E4%B9%8B-arbitrum%EF%BC%881%EF%BC%89/"  itemprop="url">
+        以太坊Rollup方案之 arbitrum（1）
+      </a>
+    </h2>
+  
+  <div class='md article-desc' itemprop="articleBody">
+    
+      <p>这篇文章深入探讨了Rollup的概念及其在以太坊扩容中的作用，特别是Arbitrum的实现方式。Rollup作为Layer 2扩容解决方案，通过将交易数据汇总到独立的Rollup链中，减轻了以太坊主链的负担。文章对两种主要的Rollup类型进行了对比：Optimistic Rollup（如Arbitrum）和ZK Rollup，分别介绍了它们在交易验证上的不同方法。</p>
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time itemprop="dateCreated datePublished" datetime="2024-09-10T20:56:05+08:00">2024-09-10</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链</a><span class="sep"></span><a class="category-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BA%8C%E5%B1%82/">二层</a>
+          
+            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+              <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/" itemprop="url"><span itemprop="name">区块链</span></a>
+            </span>
+          
+            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+              <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BA%8C%E5%B1%82/" itemprop="url"><span itemprop="name">二层</span></a>
+            </span>
+          
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2024/09/10/%E4%BB%A5%E5%A4%AA%E5%9D%8ARollup%E6%96%B9%E6%A1%88%E4%B9%8B-arbitrum%EF%BC%881%EF%BC%89/' itemprop="url">
+            Read More
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
+  <link itemprop="mainEntityOfPage" href="https://bighu630.github.io/2024/09/09/区块链应用的密钥管理/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="thisHu's log">
+  </span>
+  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
+    <meta itemprop="name" content="thisHu's log">
+    <meta itemprop="description" content="使卵石臻与完美的，非锤的打击，而是水的且歌且舞">
+  </span>
+  
+  
+  
+    <span hidden>
+      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+    </span>
+  
+  
+    
+    <h2 class="article-title"  itemprop="name headline">
+      <a href="/2024/09/09/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%BA%94%E7%94%A8%E7%9A%84%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/"  itemprop="url">
+        区块链应用的密钥管理
+      </a>
+    </h2>
+  
+  <div class='md article-desc' itemprop="articleBody">
+    
+      <p>这篇文章探讨了区块链应用中密钥管理的重要性，特别是在持续向区块链发送交易的场景下，如Arbitrum的Sequencer和Chainlink的数据馈送，强调了安全使用和管理私钥的方法，包括通过配置文件和文件密钥，同时分析了密钥的安全等级以及如何在程序中有效保护密钥，最后以Arbitrum的具体实现为例，详细阐述了密钥的生成、使用和存储过程。</p>
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time itemprop="dateCreated datePublished" datetime="2024-09-09T16:26:54+08:00">2024-09-09</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链</a><span class="sep"></span><a class="category-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BB%A5%E5%A4%AA%E5%9D%8A/">以太坊</a>
+          
+            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+              <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/" itemprop="url"><span itemprop="name">区块链</span></a>
+            </span>
+          
+            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+              <a href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BB%A5%E5%A4%AA%E5%9D%8A/" itemprop="url"><span itemprop="name">以太坊</span></a>
+            </span>
+          
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2024/09/09/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%BA%94%E7%94%A8%E7%9A%84%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/' itemprop="url">
+            Read More
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
+  <link itemprop="mainEntityOfPage" href="https://bighu630.github.io/2024/09/06/nginx-cf反向代理多个网页/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="thisHu's log">
+  </span>
+  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
+    <meta itemprop="name" content="thisHu's log">
+    <meta itemprop="description" content="使卵石臻与完美的，非锤的打击，而是水的且歌且舞">
+  </span>
+  
+  
+  
+    <span hidden>
+      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+    </span>
+  
+  
+    
+    <h2 class="article-title"  itemprop="name headline">
+      <a href="/2024/09/06/nginx-cf%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%A4%9A%E4%B8%AA%E7%BD%91%E9%A1%B5/"  itemprop="url">
+        nginx一个端口服务多个网页（带cdn)
+      </a>
+    </h2>
+  
+  <div class='md article-desc' itemprop="articleBody">
+    
+      <p>这篇博客介绍了如何使用Cloudflare和Nginx，在同一服务器的443端口上托管多个服务。通过为不同子域名配置Nginx反向代理，将请求路由到不同的本地服务，并使用Cloudflare的SSL证书和CDN加速访问。</p>
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time itemprop="dateCreated datePublished" datetime="2024-09-06T15:48:05+08:00">2024-09-06</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><span class="sep"></span><a class="category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BF%90%E7%BB%B4/">运维</a>
+          
+            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url"><span itemprop="name">计算机</span></a>
+            </span>
+          
+            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BF%90%E7%BB%B4/" itemprop="url"><span itemprop="name">运维</span></a>
+            </span>
+          
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2024/09/06/nginx-cf%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%A4%9A%E4%B8%AA%E7%BD%91%E9%A1%B5/' itemprop="url">
+            Read More
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
   <link itemprop="mainEntityOfPage" href="https://bighu630.github.io/2024/09/03/黑客帝国中的形而上学/">
   <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="thisHu's log">
@@ -2683,7 +2943,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div>
           <a class='readmore' href='/2024/09/03/%E9%BB%91%E5%AE%A2%E5%B8%9D%E5%9B%BD%E4%B8%AD%E7%9A%84%E5%BD%A2%E8%80%8C%E4%B8%8A%E5%AD%A6/' itemprop="url">
-            阅读全文
+            Read More
           </a>
         </div>
       
@@ -2748,7 +3008,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div>
           <a class='readmore' href='/2024/09/02/%E6%8B%89%E5%BA%B7%E7%B2%BE%E7%A5%9E%E5%88%86%E6%9E%90%E4%B8%8E%E4%BC%A6%E7%90%86/' itemprop="url">
-            阅读全文
+            Read More
           </a>
         </div>
       
@@ -2813,7 +3073,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div>
           <a class='readmore' href='/2024/09/02/%E5%AE%89%E5%8D%93Surfboard%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/' itemprop="url">
-            阅读全文
+            Read More
           </a>
         </div>
       
@@ -2878,7 +3138,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div>
           <a class='readmore' href='/2024/09/02/MPT%E7%B3%BB%E5%88%971/' itemprop="url">
-            阅读全文
+            Read More
           </a>
         </div>
       
@@ -2943,7 +3203,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div>
           <a class='readmore' href='/2024/09/02/how-to-use-nekobox-in-windows/' itemprop="url">
-            阅读全文
+            Read More
           </a>
         </div>
       
@@ -3008,263 +3268,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div>
           <a class='readmore' href='/2024/07/30/tho-dao-backdoor/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://bighu630.github.io/2024/07/03/Linux通用grub急救/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="thisHu's log">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="thisHu's log">
-    <meta itemprop="description" content="使卵石臻与完美的，非锤的打击，而是水的且歌且舞">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/07/03/Linux%E9%80%9A%E7%94%A8grub%E6%80%A5%E6%95%91/"  itemprop="url">
-        Linux通用grub急救
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>在这篇博客中，作者介绍了在折腾Linux的GRUB引导时常遇到的问题，并提出了解决方案，特别是当GRUB因分区表修改或Windows升级而出现问题时，如何修复GRUB引导。通过分享Windows与Linux共存环境下可能出现的分区表错位问题，作者提供了一个简单有效的解决思路：重新安装GRUB并使用grub-mkconfig生成新的GRUB配置。同时，文章还强调了使用Arch启动盘和手动挂载分区来解决问题的过程。</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-07-03T19:41:39+08:00">2024-07-03</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><span class="sep"></span><a class="category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/linux/">linux</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url"><span itemprop="name">计算机</span></a>
-            </span>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/linux/" itemprop="url"><span itemprop="name">linux</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/07/03/Linux%E9%80%9A%E7%94%A8grub%E6%80%A5%E6%95%91/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://bighu630.github.io/2024/01/26/A股-初见/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="thisHu's log">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="thisHu's log">
-    <meta itemprop="description" content="使卵石臻与完美的，非锤的打击，而是水的且歌且舞">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/01/26/A%E8%82%A1-%E5%88%9D%E8%A7%81/"  itemprop="url">
-        A股-初见
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>文章探讨了A股市场的困境，指出这是一个难以实现资本增值的市场。A股的问题在于上市公司普遍缺乏长期发展和增值的动力，更多地将上市视为套现的机会。作者批评了国内公司管理层的能力，认为他们无法稳定地推动公司增值。文章还提到A股的其他问题，如一股独大、畸形的市场竞争和不合理的上市制度，最终警示投资者不要轻易进入这个市场。</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-01-26T20:45:36+08:00">2024-01-26</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E7%BB%8F%E6%B5%8E/">经济</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E7%BB%8F%E6%B5%8E/" itemprop="url"><span itemprop="name">经济</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/01/26/A%E8%82%A1-%E5%88%9D%E8%A7%81/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://bighu630.github.io/2024/01/26/gin-jwt/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="thisHu's log">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="thisHu's log">
-    <meta itemprop="description" content="使卵石臻与完美的，非锤的打击，而是水的且歌且舞">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2024/01/26/gin-jwt/"  itemprop="url">
-        gin & jwt
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>本文介绍了在Go语言的Gin框架中使用JWT（JSON Web Token）进行身份验证的方法。作者讲解了JWT的作用，包括在客户端与服务器之间传递身份信息和防止重放攻击。博客详细展示了如何通过Gin的中间件来实现JWT校验，确保请求的合法性和安全性。文章还强调了JWT的基本使用注意事项，如不要在JWT中包含敏感信息，以及在验证时应注意Token的有效性和过期时间。</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2024-01-26T20:06:36+08:00">2024-01-26</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><span class="sep"></span><a class="category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/go/">go</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url"><span itemprop="name">计算机</span></a>
-            </span>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/go/" itemprop="url"><span itemprop="name">go</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2024/01/26/gin-jwt/' itemprop="url">
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="https://bighu630.github.io/2023/07/01/对马克思唯物主义的思考/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="thisHu's log">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="thisHu's log">
-    <meta itemprop="description" content="使卵石臻与完美的，非锤的打击，而是水的且歌且舞">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2023/07/01/%E5%AF%B9%E9%A9%AC%E5%85%8B%E6%80%9D%E5%94%AF%E7%89%A9%E4%B8%BB%E4%B9%89%E7%9A%84%E6%80%9D%E8%80%83/"  itemprop="url">
-        对马克思唯物主义的思考
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      <p>文章探讨了马克思的唯物主义和唯心主义之间的分歧。马克思的唯物主义强调物质决定意识，认为物质先于意识存在，并且人的意识是物质发展的结果。而唯心主义则认为意识决定物质，强调人的主观性。文章通过对比两者的观点，指出唯物主义能够使人扎根于现实世界，但也面临物质世界有限性的问题。作者偏向唯心主义观点，但承认马克思唯物主义在无产阶级哲学中的重要性和局限性。</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2023-07-01T12:00:00+08:00">2023-07-01</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E5%93%B2%E5%AD%A6/">哲学</a><span class="sep"></span><a class="category-link" href="/categories/%E5%93%B2%E5%AD%A6/%E5%94%AF%E5%BF%83%E4%B8%BB%E4%B9%89/">唯心主义</a>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E5%93%B2%E5%AD%A6/" itemprop="url"><span itemprop="name">哲学</span></a>
-            </span>
-          
-            <span hidden itemprop="about" itemscope itemtype="http://schema.org/Thing">
-              <a href="/categories/%E5%93%B2%E5%AD%A6/%E5%94%AF%E5%BF%83%E4%B8%BB%E4%B9%89/" itemprop="url"><span itemprop="name">唯心主义</span></a>
-            </span>
-          
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2023/07/01/%E5%AF%B9%E9%A9%AC%E5%85%8B%E6%80%9D%E5%94%AF%E7%89%A9%E4%B8%BB%E4%B9%89%E7%9A%84%E6%80%9D%E8%80%83/' itemprop="url">
-            阅读全文
+            Read More
           </a>
         </div>
       
@@ -3285,17 +3289,17 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           <a class="prev" rel="prev" href="/page/3/">
             <section class="post prev white-box shadow floatable blur" >
-              <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页&nbsp;
+              <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous&nbsp;
             </section>
           </a>
         
         <p class="current">
-          4 / 5
+          4 / 6
         </p>
         
           <a class="next" rel="next" href="/page/5/">
             <section class="post next white-box shadow floatable blur">
-              &nbsp;下一页&nbsp;<i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+              &nbsp;Next&nbsp;<i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
             </section>
           </a>
         
@@ -3398,7 +3402,12 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           <li><a class="flat-box"
             title="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"
             active-action="action-categoriesE58CBAE59D97E993BE"
-            ><div class='name'>区块链</div><div class='badge'>(14)</div></a></li>
+            ><div class='name'>区块链</div><div class='badge'>(16)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/solana/" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/solana/"
+            active-action="action-categoriesE58CBAE59D97E993BEsolana"
+            ><div class='name'>solana</div><div class='badge'>(1)</div></a></li>
         
           <li><a class="flat-box child"
             title="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BA%8C%E5%B1%82/" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/%E4%BA%8C%E5%B1%82/"
@@ -3429,6 +3438,11 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             title="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/%E8%B7%A8%E9%93%BE/" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/%E8%B7%A8%E9%93%BE/"
             active-action="action-categoriesE58CBAE59D97E993BEE8B7A8E993BE"
             ><div class='name'>跨链</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child"
+            title="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/%E9%9D%A2%E8%AF%95/" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/%E9%9D%A2%E8%AF%95/"
+            active-action="action-categoriesE58CBAE59D97E993BEE99DA2E8AF95"
+            ><div class='name'>面试</div><div class='badge'>(1)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%93%B2%E5%AD%A6/" href="/categories/%E5%93%B2%E5%AD%A6/"
@@ -3573,7 +3587,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
     <div class='content'>
-      <a href="/tags/A%E8%82%A1/" style="font-size: 14px; color: #999">A股</a> <a href="/tags/L2/" style="font-size: 16.5px; color: #888">L2</a> <a href="/tags/MPT/" style="font-size: 14px; color: #999">MPT</a> <a href="/tags/acme%E8%AF%81%E4%B9%A6/" style="font-size: 14px; color: #999">acme证书</a> <a href="/tags/arbitrum/" style="font-size: 24px; color: #555">arbitrum</a> <a href="/tags/cloudflare/" style="font-size: 16.5px; color: #888">cloudflare</a> <a href="/tags/fabric/" style="font-size: 14px; color: #999">fabric</a> <a href="/tags/gin/" style="font-size: 14px; color: #999">gin</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/go/" style="font-size: 16.5px; color: #888">go</a> <a href="/tags/gpg/" style="font-size: 14px; color: #999">gpg</a> <a href="/tags/grub/" style="font-size: 14px; color: #999">grub</a> <a href="/tags/hyprland/" style="font-size: 16.5px; color: #888">hyprland</a> <a href="/tags/jwt/" style="font-size: 14px; color: #999">jwt</a> <a href="/tags/kde/" style="font-size: 16.5px; color: #888">kde</a> <a href="/tags/konsole/" style="font-size: 14px; color: #999">konsole</a> <a href="/tags/linux/" style="font-size: 14px; color: #999">linux</a> <a href="/tags/manjaro/" style="font-size: 14px; color: #999">manjaro</a> <a href="/tags/nginx/" style="font-size: 14px; color: #999">nginx</a> <a href="/tags/solidity/" style="font-size: 21.5px; color: #666">solidity</a> <a href="/tags/ssh/" style="font-size: 14px; color: #999">ssh</a> <a href="/tags/vrf/" style="font-size: 14px; color: #999">vrf</a> <a href="/tags/%E4%B8%9A%E5%8A%9B/" style="font-size: 14px; color: #999">业力</a> <a href="/tags/%E4%B8%AD%E7%BB%A7%E9%93%BE/" style="font-size: 14px; color: #999">中继链</a> <a href="/tags/%E4%BA%8C%E5%85%83%E8%AE%BA/" style="font-size: 14px; color: #999">二元论</a> <a href="/tags/%E4%BB%A3%E7%90%86/" style="font-size: 14px; color: #999">代理</a> <a href="/tags/%E4%BB%A5%E5%A4%AA%E5%9D%8A/" style="font-size: 21.5px; color: #666">以太坊</a> <a href="/tags/%E4%BC%A6%E7%90%86/" style="font-size: 14px; color: #999">伦理</a> <a href="/tags/%E4%BD%9B%E6%95%99/" style="font-size: 14px; color: #999">佛教</a> <a href="/tags/%E5%85%8B%E5%B0%94%E6%81%BA%E9%83%AD%E5%B0%94/" style="font-size: 14px; color: #999">克尔恺郭尔</a> <a href="/tags/%E5%85%AB%E8%82%A1%E6%96%87/" style="font-size: 16.5px; color: #888">八股文</a> <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 19px; color: #777">区块链</a> <a href="/tags/%E5%8D%A0%E6%98%9F/" style="font-size: 14px; color: #999">占星</a> <a href="/tags/%E5%90%88%E7%BA%A6%E5%8D%87%E7%BA%A7/" style="font-size: 16.5px; color: #888">合约升级</a> <a href="/tags/%E5%90%88%E7%BA%A6%E5%AE%89%E5%85%A8/" style="font-size: 14px; color: #999">合约安全</a> <a href="/tags/%E5%94%AF%E5%BF%83%E4%B8%BB%E4%B9%89/" style="font-size: 14px; color: #999">唯心主义</a> <a href="/tags/%E5%AE%A1%E7%BE%8E/" style="font-size: 14px; color: #999">审美</a> <a href="/tags/%E5%AE%B9%E5%99%A8%E6%97%B6%E5%8C%BA/" style="font-size: 14px; color: #999">容器时区</a> <a href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" style="font-size: 14px; color: #999">密码学</a> <a href="/tags/%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/" style="font-size: 14px; color: #999">密钥管理</a> <a href="/tags/%E5%BD%A2%E8%80%8C%E4%B8%8A%E5%AD%A6/" style="font-size: 14px; color: #999">形而上学</a> <a href="/tags/%E6%8B%89%E5%BA%B7/" style="font-size: 14px; color: #999">拉康</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 19px; color: #777">教程</a> <a href="/tags/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8/" style="font-size: 14px; color: #999">文件管理器</a> <a href="/tags/%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8/" style="font-size: 14px; color: #999">显卡驱动</a> <a href="/tags/%E6%B2%89%E6%80%9D%E5%BD%95/" style="font-size: 24px; color: #555">沉思录</a> <a href="/tags/%E7%8E%AF%E7%AD%BE%E5%90%8D/" style="font-size: 14px; color: #999">环签名</a> <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" style="font-size: 21.5px; color: #666">科学上网</a> <a href="/tags/%E7%B2%BE%E7%A5%9E%E5%88%86%E6%9E%90/" style="font-size: 14px; color: #999">精神分析</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%A7%81%E4%BD%9B/" style="font-size: 14px; color: #999">见佛</a> <a href="/tags/%E8%AF%AD%E8%A8%80/" style="font-size: 14px; color: #999">语言</a> <a href="/tags/%E8%B5%84%E4%BA%A7%E6%A1%A5/" style="font-size: 14px; color: #999">资产桥</a> <a href="/tags/%E8%B7%A8%E9%93%BE/" style="font-size: 14px; color: #999">跨链</a> <a href="/tags/%E8%B7%A8%E9%93%BE%E8%B7%AF%E7%94%B1/" style="font-size: 14px; color: #999">跨链路由</a> <a href="/tags/%E9%A9%AC%E5%85%8B%E6%80%9D/" style="font-size: 14px; color: #999">马克思</a> <a href="/tags/%E9%BB%91%E5%AE%A2%E5%B8%9D%E5%9B%BD/" style="font-size: 14px; color: #999">黑客帝国</a>
+      <a href="/tags/A%E8%82%A1/" style="font-size: 14px; color: #999">A股</a> <a href="/tags/L2/" style="font-size: 16.5px; color: #888">L2</a> <a href="/tags/MPT/" style="font-size: 14px; color: #999">MPT</a> <a href="/tags/acme%E8%AF%81%E4%B9%A6/" style="font-size: 14px; color: #999">acme证书</a> <a href="/tags/arbitrum/" style="font-size: 24px; color: #555">arbitrum</a> <a href="/tags/cloudflare/" style="font-size: 16.5px; color: #888">cloudflare</a> <a href="/tags/fabric/" style="font-size: 14px; color: #999">fabric</a> <a href="/tags/gin/" style="font-size: 14px; color: #999">gin</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/go/" style="font-size: 16.5px; color: #888">go</a> <a href="/tags/gpg/" style="font-size: 14px; color: #999">gpg</a> <a href="/tags/grub/" style="font-size: 14px; color: #999">grub</a> <a href="/tags/hyprland/" style="font-size: 16.5px; color: #888">hyprland</a> <a href="/tags/jwt/" style="font-size: 14px; color: #999">jwt</a> <a href="/tags/kde/" style="font-size: 16.5px; color: #888">kde</a> <a href="/tags/konsole/" style="font-size: 14px; color: #999">konsole</a> <a href="/tags/linux/" style="font-size: 14px; color: #999">linux</a> <a href="/tags/manjaro/" style="font-size: 14px; color: #999">manjaro</a> <a href="/tags/nginx/" style="font-size: 14px; color: #999">nginx</a> <a href="/tags/solana/" style="font-size: 14px; color: #999">solana</a> <a href="/tags/solidity/" style="font-size: 21.5px; color: #666">solidity</a> <a href="/tags/ssh/" style="font-size: 14px; color: #999">ssh</a> <a href="/tags/vrf/" style="font-size: 14px; color: #999">vrf</a> <a href="/tags/%E4%B8%9A%E5%8A%9B/" style="font-size: 14px; color: #999">业力</a> <a href="/tags/%E4%B8%AD%E7%BB%A7%E9%93%BE/" style="font-size: 14px; color: #999">中继链</a> <a href="/tags/%E4%BA%8C%E5%85%83%E8%AE%BA/" style="font-size: 14px; color: #999">二元论</a> <a href="/tags/%E4%BA%A4%E6%98%93%E6%89%80/" style="font-size: 14px; color: #999">交易所</a> <a href="/tags/%E4%BB%A3%E7%90%86/" style="font-size: 14px; color: #999">代理</a> <a href="/tags/%E4%BB%A5%E5%A4%AA%E5%9D%8A/" style="font-size: 21.5px; color: #666">以太坊</a> <a href="/tags/%E4%BC%A6%E7%90%86/" style="font-size: 14px; color: #999">伦理</a> <a href="/tags/%E4%BD%9B%E6%95%99/" style="font-size: 14px; color: #999">佛教</a> <a href="/tags/%E5%85%8B%E5%B0%94%E6%81%BA%E9%83%AD%E5%B0%94/" style="font-size: 14px; color: #999">克尔恺郭尔</a> <a href="/tags/%E5%85%AB%E8%82%A1%E6%96%87/" style="font-size: 16.5px; color: #888">八股文</a> <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 19px; color: #777">区块链</a> <a href="/tags/%E5%8D%A0%E6%98%9F/" style="font-size: 14px; color: #999">占星</a> <a href="/tags/%E5%90%88%E7%BA%A6%E5%8D%87%E7%BA%A7/" style="font-size: 16.5px; color: #888">合约升级</a> <a href="/tags/%E5%90%88%E7%BA%A6%E5%AE%89%E5%85%A8/" style="font-size: 14px; color: #999">合约安全</a> <a href="/tags/%E5%94%AF%E5%BF%83%E4%B8%BB%E4%B9%89/" style="font-size: 14px; color: #999">唯心主义</a> <a href="/tags/%E5%AE%A1%E7%BE%8E/" style="font-size: 14px; color: #999">审美</a> <a href="/tags/%E5%AE%B9%E5%99%A8%E6%97%B6%E5%8C%BA/" style="font-size: 14px; color: #999">容器时区</a> <a href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/" style="font-size: 14px; color: #999">密码学</a> <a href="/tags/%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86/" style="font-size: 14px; color: #999">密钥管理</a> <a href="/tags/%E5%BD%A2%E8%80%8C%E4%B8%8A%E5%AD%A6/" style="font-size: 14px; color: #999">形而上学</a> <a href="/tags/%E6%8B%89%E5%BA%B7/" style="font-size: 14px; color: #999">拉康</a> <a href="/tags/%E6%95%99%E7%A8%8B/" style="font-size: 19px; color: #777">教程</a> <a href="/tags/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8/" style="font-size: 14px; color: #999">文件管理器</a> <a href="/tags/%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8/" style="font-size: 14px; color: #999">显卡驱动</a> <a href="/tags/%E6%B2%89%E6%80%9D%E5%BD%95/" style="font-size: 24px; color: #555">沉思录</a> <a href="/tags/%E7%8E%AF%E7%AD%BE%E5%90%8D/" style="font-size: 14px; color: #999">环签名</a> <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" style="font-size: 21.5px; color: #666">科学上网</a> <a href="/tags/%E7%B2%BE%E7%A5%9E%E5%88%86%E6%9E%90/" style="font-size: 14px; color: #999">精神分析</a> <a href="/tags/%E8%80%83%E7%A0%94/" style="font-size: 14px; color: #999">考研</a> <a href="/tags/%E8%A7%81%E4%BD%9B/" style="font-size: 14px; color: #999">见佛</a> <a href="/tags/%E8%AF%AD%E8%A8%80/" style="font-size: 14px; color: #999">语言</a> <a href="/tags/%E8%B5%84%E4%BA%A7%E6%A1%A5/" style="font-size: 14px; color: #999">资产桥</a> <a href="/tags/%E8%B7%A8%E9%93%BE/" style="font-size: 14px; color: #999">跨链</a> <a href="/tags/%E8%B7%A8%E9%93%BE%E8%B7%AF%E7%94%B1/" style="font-size: 14px; color: #999">跨链路由</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 14px; color: #999">面经</a> <a href="/tags/%E9%A9%AC%E5%85%8B%E6%80%9D/" style="font-size: 14px; color: #999">马克思</a> <a href="/tags/%E9%BB%91%E5%AE%A2%E5%B8%9D%E5%9B%BD/" style="font-size: 14px; color: #999">黑客帝国</a>
     </div>
   </section>
 
@@ -3690,7 +3704,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
     
       
-        <div><p>博客内容遵循 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+        <div><p>Blog content follows the <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
 </div>
       
     
@@ -3703,9 +3717,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
     
       
-        本站使用
+        Use
         <a href="https://github.com/volantis-x/hexo-theme-volantis/#5.8.0" target="_blank" class="codename">Volantis</a>
-        作为主题
+        as theme
       
     
       
@@ -4551,7 +4565,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   <script>
-  let imgs = ["https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/052.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/016.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/054.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/042.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/001.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/051.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/006.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/003.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/005.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/056.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/039.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/019.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/034.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/035.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/002.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/012.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/033.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/038.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/046.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/025.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/004.webp"];
+  let imgs = ["https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/035.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/052.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/034.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/001.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/051.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/012.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/002.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/039.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/038.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/016.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/025.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/004.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/019.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/005.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/006.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/056.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/054.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/033.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/046.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/042.webp","https://unpkg.com/volantis-static@0.0.1654736714924/media/wallpaper/minimalist/2020/003.webp"];
   let index = 0;
   let IntervalParallax = null;
 
