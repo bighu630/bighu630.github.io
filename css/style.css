@@ -14,7 +14,7 @@
   background: rgba(33,150,243,0.2);
 }
 h1 {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
 }
 h2 {
   font-size: 1.5rem;
@@ -253,6 +253,13 @@ td,
 th {
   padding: 0;
 }
+@font-face {
+  font-family: 'Fira Code';
+  src: url("https://fonts.gstatic.com/s/firacode/v13/uU9MCBsK6J-mK3mkbhPZ8Z2J.ttf");
+  font-weight: 'normal';
+  font-style: 'normal';
+  font-display: swap;
+}
 article#arc,
 article#cat,
 article#tag {
@@ -460,24 +467,24 @@ article#tag .all-tags ul li span:before {
   border-bottom: 1px solid rgba(68,68,68,0.1);
 }
 .article h1 {
-  text-align: left;
+  text-align: center;
   color: var(--color-h1);
-  margin-top: 48px;
+  margin-top: 24px;
 }
 .article h2 {
   text-align: left;
   color: var(--color-h2);
-  margin-top: 48px;
+  margin-top: 24px;
 }
 .article h3 {
   text-align: left;
   color: var(--color-h3);
-  margin-top: 24px;
+  margin-top: 12px;
 }
 .article h4 {
   text-align: left;
   color: var(--color-h4);
-  margin-top: 16px;
+  margin-top: 8px;
 }
 .article h5 {
   font-weight: bold;
@@ -518,7 +525,7 @@ article#tag .all-tags ul li span:before {
 .article p {
   margin-top: 1em;
   margin-bottom: 1em;
-  text-align: justify;
+  text-align: left;
   max-width: 100%;
   line-height: inherit;
 }
@@ -593,7 +600,7 @@ article#tag .all-tags ul li span:before {
   overflow: auto;
   background: var(--color-codeblock);
   font-size: 0.8125rem;
-  font-family: Menlo, UbuntuMono, Monaco, monospace, courier, sans-serif;
+  font-family: "hack", "Menlo", "Consolas", "Courier New", "Ubuntu Mono", monospace, monospace, courier, sans-serif;
   border: 1px solid #262a2c;
   padding: 16px;
   border-radius: 4px;
@@ -613,7 +620,7 @@ article#tag .all-tags ul li span:before {
   color: rgba(68,68,68,0.9);
 }
 .article code {
-  font-family: Menlo, UbuntuMono, Monaco, monospace, courier, sans-serif;
+  font-family: "hack", "Menlo", "Consolas", "Courier New", "Ubuntu Mono", monospace, monospace, courier, sans-serif;
 }
 .article code:not([class]) {
   word-break: break-all;
@@ -1481,7 +1488,7 @@ svg.loading {
 #l_main.no_sidebar {
   width: 100%;
   padding-right: 0;
-  max-width: 840px;
+  max-width: 1160px;
   margin: auto;
 }
 @media screen and (min-width: 2048px) {
@@ -1559,7 +1566,7 @@ svg.loading {
   -webkit-border-radius: 8px;
 }
 #l_main .post h1.title {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   margin: 0;
   border-bottom: none;
   padding-bottom: 4px;
@@ -1892,7 +1899,7 @@ svg.loading {
   display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
   display: flex;
   width: 100%;
-  max-width: 1080px;
+  max-width: 1400px;
   margin: 0 auto;
   flex-wrap: wrap;
   -webkit-flex-wrap: wrap;
@@ -2039,11 +2046,11 @@ img.lazyload:not(.placeholder).loaded {
 }
 .md h1:before,
 .md h2:before {
-  margin-top: -32px;
+  margin-top: -56px;
 }
 .md .article-meta+h1,
 .md .article-meta+h2 {
-  margin-top: -80px;
+  margin-top: -104px;
 }
 .md h3,
 .md h4,
@@ -2052,16 +2059,16 @@ img.lazyload:not(.placeholder).loaded {
   margin-bottom: 1em;
 }
 .md h3:before {
-  margin-top: -56px;
+  margin-top: -68px;
 }
 .md h4:before {
-  margin-top: -64px;
+  margin-top: -72px;
 }
 .md h5 {
   font-weight: bold;
 }
 .md h2+h3:before {
-  margin-top: -80px;
+  margin-top: -104px;
 }
 .md ul,
 .md ol {
@@ -3295,10 +3302,10 @@ img.lazyload:not(.placeholder).loaded {
   z-index: 2;
 }
 .snackbar-content {
-  max-width: 1080px;
+  max-width: 1400px;
   margin: 16px auto;
 }
-@media screen and (max-width: 1080px) {
+@media screen and (max-width: 1400px) {
   .snackbar-content {
     max-width: 100%;
   }
@@ -5433,11 +5440,11 @@ p.p.subtitle:first-child {
 }
 span.p.logo,
 p.p.logo {
-  font-family: "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Helvetica, monospace;
+  font-family: "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, sans-serif, Helvetica, monospace;
 }
 span.p.code,
 p.p.code {
-  font-family: Menlo, UbuntuMono, Monaco, monospace, courier, sans-serif;
+  font-family: "hack", "Menlo", "Consolas", "Courier New", "Ubuntu Mono", monospace, monospace, courier, sans-serif;
 }
 span.p.left,
 p.p.left {
@@ -5503,7 +5510,7 @@ p.p.h2 {
 }
 span.p.h1,
 p.p.h1 {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   color: var(--color-h1);
   padding-top: 2em;
 }
@@ -5922,7 +5929,7 @@ div.timenode:hover .meta:after {
   -ms-transform: scale(1);
 }
 .article mjx-container {
-  font-family: Menlo, UbuntuMono, Monaco, monospace, courier, sans-serif;
+  font-family: "hack", "Menlo", "Consolas", "Courier New", "Ubuntu Mono", monospace, monospace, courier, sans-serif;
   padding: 16px 8px;
   border-radius: 4px;
   -webkit-border-radius: 4px;
@@ -6381,7 +6388,7 @@ div.timenode:hover .meta:after {
   -moz-user-select: none;
   -ms-user-select: none;
   -webkit-appearance: none;
-  font-family: Menlo, Menlo, UbuntuMono, Monaco, monospace, courier, sans-serif;
+  font-family: Menlo, "hack", "Menlo", "Consolas", "Courier New", "Ubuntu Mono", monospace, monospace, courier, sans-serif;
   font-size: 11px;
   font-weight: bold;
   padding: 4px 8px;
@@ -6727,7 +6734,7 @@ pre {
   display: block;
   background: var(--color-block);
   font-size: 0.8125rem;
-  font-family: Menlo, UbuntuMono, Monaco, monospace, courier, sans-serif;
+  font-family: "hack", "Menlo", "Consolas", "Courier New", "Ubuntu Mono", monospace, monospace, courier, sans-serif;
   border-radius: 4px;
   -webkit-border-radius: 4px;
   line-height: 1.5;
@@ -6739,9 +6746,11 @@ pre {
   -moz-transition: all 0.28s ease;
   -o-transition: all 0.28s ease;
   -ms-transition: all 0.28s ease;
+  filter: grayscale(100%);
 }
 .highlight:hover {
   background: var(--color-codeblock);
+  filter: grayscale(0%);
 }
 .highlight:hover figcaption {
   transition: all 0.28s ease;
@@ -6898,7 +6907,7 @@ pre {
   border-radius: 4px;
   -webkit-border-radius: 4px;
   color: var(--color-text);
-  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  font-family: "Roboto", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, sans-serif, Menlo, Monaco, monospace, sans-serif;
 }
 .aplayer .aplayer-list {
   text-align: left;
