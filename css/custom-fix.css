@@ -1,0 +1,18 @@
+#u-search .modal .modal-header {
+  background: var(--color-card) !important;
+}
+.l_header.nav-sub .wrapper {
+  background: var(--color-card) !important;
+}
+#u-search .modal .modal-header {
+  background: rgba(255,255,255,0.95) !important;
+}
+.l_header.nav-sub .wrapper {
+  background: rgba(255,255,255,0.95) !important;
+}
+[data-theme="dark"] #u-search .modal .modal-header {
+  background: rgba(68,68,68,0.95) !important;
+}
+[data-theme="dark"] .l_header.nav-sub .wrapper {
+  background: rgba(68,68,68,0.95) !important;
+}
