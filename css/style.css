@@ -14,7 +14,7 @@
   background: rgba(33,150,243,0.2);
 }
 h1 {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
 }
 h2 {
   font-size: 1.5rem;
@@ -227,18 +227,18 @@ table:not([class]) {
   vertical-align: text-top;
 }
 table:not([class]) th {
-  background-color: #f1f1f1;
+  background-color: #131313;
 }
 table:not([class]) td,
 table:not([class]) th {
   padding: 8px 16px;
-  border: 2px solid #f1f1f1;
+  border: 2px solid #131313;
   line-height: 1.5;
   font-size: 90%;
 }
 table:not([class]) tr {
   word-break: keep-all;
-  background-color: #fefefe;
+  background-color: #202020;
   transition: all 0.28s ease;
   -webkit-transition: all 0.28s ease;
   -khtml-transition: all 0.28s ease;
@@ -247,11 +247,18 @@ table:not([class]) tr {
   -ms-transition: all 0.28s ease;
 }
 table:not([class]) tr:hover {
-  background-color: #f1f1f1;
+  background-color: #131313;
 }
 td,
 th {
   padding: 0;
+}
+@font-face {
+  font-family: 'Fira Code';
+  src: url("https://fonts.gstatic.com/s/firacode/v13/uU9MCBsK6J-mK3mkbhPZ8Z2J.ttf");
+  font-weight: 'normal';
+  font-style: 'normal';
+  font-display: swap;
 }
 article#arc,
 article#cat,
@@ -460,24 +467,24 @@ article#tag .all-tags ul li span:before {
   border-bottom: 1px solid rgba(68,68,68,0.1);
 }
 .article h1 {
-  text-align: left;
+  text-align: center;
   color: var(--color-h1);
-  margin-top: 48px;
+  margin-top: 24px;
 }
 .article h2 {
   text-align: left;
   color: var(--color-h2);
-  margin-top: 48px;
+  margin-top: 24px;
 }
 .article h3 {
   text-align: left;
   color: var(--color-h3);
-  margin-top: 24px;
+  margin-top: 12px;
 }
 .article h4 {
   text-align: left;
   color: var(--color-h4);
-  margin-top: 16px;
+  margin-top: 8px;
 }
 .article h5 {
   font-weight: bold;
@@ -518,7 +525,7 @@ article#tag .all-tags ul li span:before {
 .article p {
   margin-top: 1em;
   margin-bottom: 1em;
-  text-align: justify;
+  text-align: left;
   max-width: 100%;
   line-height: inherit;
 }
@@ -592,9 +599,9 @@ article#tag .all-tags ul li span:before {
   margin-bottom: 1em;
   overflow: auto;
   background: var(--color-codeblock);
-  font-size: 1rem;
-  font-family: Menlo, UbuntuMono, Monaco, monospace, courier, sans-serif;
-  border: 1px solid #ffebcb;
+  font-size: 0.8125rem;
+  font-family: "hack", "Menlo", "Consolas", "Courier New", "Ubuntu Mono", monospace, monospace, courier, sans-serif;
+  border: 1px solid #262a2c;
   padding: 16px;
   border-radius: 4px;
   -webkit-border-radius: 4px;
@@ -613,7 +620,7 @@ article#tag .all-tags ul li span:before {
   color: rgba(68,68,68,0.9);
 }
 .article code {
-  font-family: Menlo, UbuntuMono, Monaco, monospace, courier, sans-serif;
+  font-family: "hack", "Menlo", "Consolas", "Courier New", "Ubuntu Mono", monospace, monospace, courier, sans-serif;
 }
 .article code:not([class]) {
   word-break: break-all;
@@ -986,7 +993,7 @@ footer.footer {
 }
 footer.footer,
 footer.footer p {
-  font-size: 1rem;
+  font-size: 0.8125rem;
 }
 footer.footer .licenses {
   color: fade(, 50%);
@@ -1218,7 +1225,7 @@ footer.footer .copyright p {
   margin: 0;
 }
 .article.l_friends .friends-group .friend-content .friend-card .friend-right p.friend-name {
-  font-size: 1rem;
+  font-size: 0.8125rem;
   padding-top: 4px;
   font-weight: bold;
 }
@@ -1283,7 +1290,7 @@ footer.footer .copyright p {
   display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
   display: block;
   margin: 0.75rem auto;
-  font-size: 1rem;
+  font-size: 0.8125rem;
   color: var(--color-meta);
 }
 .md .img-wrap .image-caption:empty {
@@ -1481,7 +1488,7 @@ svg.loading {
 #l_main.no_sidebar {
   width: 100%;
   padding-right: 0;
-  max-width: 840px;
+  max-width: 1160px;
   margin: auto;
 }
 @media screen and (min-width: 2048px) {
@@ -1559,7 +1566,7 @@ svg.loading {
   -webkit-border-radius: 8px;
 }
 #l_main .post h1.title {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   margin: 0;
   border-bottom: none;
   padding-bottom: 4px;
@@ -1678,7 +1685,7 @@ svg.loading {
 #l_main .post .article-meta .new-meta-box,
 #l_main .post .article-meta .new-meta-box p,
 #l_main .post .article-meta .new-meta-box i {
-  font-size: 1rem;
+  font-size: 0.8125rem;
 }
 #l_main .post .article-meta .new-meta-box .new-meta-item {
   color: var(--color-meta);
@@ -1892,7 +1899,7 @@ svg.loading {
   display: flex /* NEW, Spec - Opera 12.1, Firefox 20+ */;
   display: flex;
   width: 100%;
-  max-width: 1080px;
+  max-width: 1400px;
   margin: 0 auto;
   flex-wrap: wrap;
   -webkit-flex-wrap: wrap;
@@ -2039,11 +2046,11 @@ img.lazyload:not(.placeholder).loaded {
 }
 .md h1:before,
 .md h2:before {
-  margin-top: -32px;
+  margin-top: -56px;
 }
 .md .article-meta+h1,
 .md .article-meta+h2 {
-  margin-top: -80px;
+  margin-top: -104px;
 }
 .md h3,
 .md h4,
@@ -2052,16 +2059,16 @@ img.lazyload:not(.placeholder).loaded {
   margin-bottom: 1em;
 }
 .md h3:before {
-  margin-top: -56px;
+  margin-top: -68px;
 }
 .md h4:before {
-  margin-top: -64px;
+  margin-top: -72px;
 }
 .md h5 {
   font-weight: bold;
 }
 .md h2+h3:before {
-  margin-top: -80px;
+  margin-top: -104px;
 }
 .md ul,
 .md ol {
@@ -2623,7 +2630,7 @@ img.lazyload:not(.placeholder).loaded {
   overflow: hidden;
   word-break: break-all;
   text-overflow: ellipsis;
-  font-size: 1rem;
+  font-size: 0.8125rem;
   color: var(--color-meta);
 }
 #u-search .modal .modal-body .modal-results .result .icon {
@@ -3295,10 +3302,10 @@ img.lazyload:not(.placeholder).loaded {
   z-index: 2;
 }
 .snackbar-content {
-  max-width: 1080px;
+  max-width: 1400px;
   margin: 16px auto;
 }
-@media screen and (max-width: 1080px) {
+@media screen and (max-width: 1400px) {
   .snackbar-content {
     max-width: 100%;
   }
@@ -3402,7 +3409,7 @@ img.lazyload:not(.placeholder).loaded {
     -webkit-border-radius: 4px;
     box-shadow: 0 4px 8px 0px rgba(0,0,0,0.1);
     -webkit-box-shadow: 0 4px 8px 0px rgba(0,0,0,0.1);
-    border: 1px solid #e7e7e7;
+    border: 1px solid #090909;
     visibility: hidden;
     transform: scale(0, 0);
     -webkit-transform: scale(0, 0);
@@ -3622,7 +3629,7 @@ img.lazyload:not(.placeholder).loaded {
 .md div.btns p,
 .article div.btns a,
 .md div.btns a {
-  font-size: 1rem;
+  font-size: 0.8125rem;
   color: var(--color-p);
 }
 .article div.btns b,
@@ -4453,7 +4460,7 @@ div.fancybox .gallery {
   overflow: hidden;
 }
 div.fancybox .image-caption {
-  font-size: 1rem;
+  font-size: 0.8125rem;
   padding-top: 0.5em;
   padding-bottom: 1em;
   color: var(--color-meta);
@@ -4963,7 +4970,7 @@ img.inline {
 .md .link-card p.url {
   flex-shrink: 0;
   color: var(--color-meta);
-  font-size: 1rem;
+  font-size: 0.8125rem;
 }
 .md .link-group {
   display: -webkit-box /* OLD - iOS 6-, Safari 3.1-6 */;
@@ -5433,11 +5440,11 @@ p.p.subtitle:first-child {
 }
 span.p.logo,
 p.p.logo {
-  font-family: "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Helvetica, monospace;
+  font-family: "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, sans-serif, Helvetica, monospace;
 }
 span.p.code,
 p.p.code {
-  font-family: Menlo, UbuntuMono, Monaco, monospace, courier, sans-serif;
+  font-family: "hack", "Menlo", "Consolas", "Courier New", "Ubuntu Mono", monospace, monospace, courier, sans-serif;
 }
 span.p.left,
 p.p.left {
@@ -5503,7 +5510,7 @@ p.p.h2 {
 }
 span.p.h1,
 p.p.h1 {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   color: var(--color-h1);
   padding-top: 2em;
 }
@@ -5801,9 +5808,9 @@ div.tabs .tab-content .tab-pane > .note:last-child {
 .article kbd {
   border-radius: 4px;
   -webkit-border-radius: 4px;
-  border: 1px solid #d2d2d2;
+  border: 1px solid #202020;
   border-bottom-width: 2px;
-  background: #fafafa;
+  background: #8b8b8b;
   padding-left: 4px;
   padding-right: 4px;
 }
@@ -5904,7 +5911,7 @@ div.timenode .body >*:last-child {
   margin-bottom: 0.25em;
 }
 div.timenode .body .highlight {
-  border: 1px solid #e4e4e4;
+  border: 1px solid #1c1c1c;
 }
 div.timenode:hover .meta {
   color: var(--color-text);
@@ -5922,7 +5929,7 @@ div.timenode:hover .meta:after {
   -ms-transform: scale(1);
 }
 .article mjx-container {
-  font-family: Menlo, UbuntuMono, Monaco, monospace, courier, sans-serif;
+  font-family: "hack", "Menlo", "Consolas", "Courier New", "Ubuntu Mono", monospace, monospace, courier, sans-serif;
   padding: 16px 8px;
   border-radius: 4px;
   -webkit-border-radius: 4px;
@@ -6381,7 +6388,7 @@ div.timenode:hover .meta:after {
   -moz-user-select: none;
   -ms-user-select: none;
   -webkit-appearance: none;
-  font-family: Menlo, Menlo, UbuntuMono, Monaco, monospace, courier, sans-serif;
+  font-family: Menlo, "hack", "Menlo", "Consolas", "Courier New", "Ubuntu Mono", monospace, monospace, courier, sans-serif;
   font-size: 11px;
   font-weight: bold;
   padding: 4px 8px;
@@ -6726,8 +6733,8 @@ pre {
   display: -moz-box /* OLD - Firefox 19- (buggy but mostly works) */;
   display: block;
   background: var(--color-block);
-  font-size: 1rem;
-  font-family: Menlo, UbuntuMono, Monaco, monospace, courier, sans-serif;
+  font-size: 0.8125rem;
+  font-family: "hack", "Menlo", "Consolas", "Courier New", "Ubuntu Mono", monospace, monospace, courier, sans-serif;
   border-radius: 4px;
   -webkit-border-radius: 4px;
   line-height: 1.5;
@@ -6752,17 +6759,17 @@ pre {
   -moz-transition: all 0.28s ease;
   -o-transition: all 0.28s ease;
   -ms-transition: all 0.28s ease;
-  background: #ffeed2;
+  background: #313739;
 }
 .highlight:hover .gutter {
-  background: #ffedd0;
+  background: #282d2e;
 }
 .highlight figcaption {
   font-size: 13px;
   position: sticky;
   left: 0;
   padding: 4px 8px 4px 8px;
-  background: #eaeaea;
+  background: #171717;
   border-top-left-radius: calc(4px - 1px);
   border-top-right-radius: calc(4px - 1px);
 }
@@ -6821,7 +6828,7 @@ pre {
   position: sticky;
   left: 0;
   z-index: 1;
-  background: #e9e9e9;
+  background: #0b0b0b;
 }
 .highlight >table .gutter pre {
   color: var(--color-meta);
@@ -6900,7 +6907,7 @@ pre {
   border-radius: 4px;
   -webkit-border-radius: 4px;
   color: var(--color-text);
-  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  font-family: "Roboto", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, sans-serif, Menlo, Monaco, monospace, sans-serif;
 }
 .aplayer .aplayer-list {
   text-align: left;
@@ -7161,7 +7168,7 @@ ul.list-v.rightmenu li.music .nav.volume .aplayer-volume-bar {
   position: relative;
   height: 8px;
   width: 100%;
-  background: #ededed;
+  background: #1a1a1a;
   border-radius: 32px;
   -webkit-border-radius: 32px;
   overflow: hidden;
