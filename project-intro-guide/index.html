@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>项目介绍 · 思考脚手架</title>
+<style>
+  :root{
+    --bg:#0f1115; --card:#171b22; --card2:#1e242e; --line:#2a323e;
+    --txt:#e8ecf1; --muted:#9aa4b2; --acc:#4da3ff; --acc2:#7c6cff;
+    --ok:#3ecf8e; --warn:#ffb020; --danger:#ff6b6b;
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(1200px 600px at 20% -10%,#1b2a45 0%,transparent 60%),radial-gradient(900px 500px at 90% 0%,#2a1f4d 0%,transparent 60%),var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;line-height:1.7}
+  header{max-width:1080px;margin:0 auto;padding:36px 20px 10px}
+  header h1{margin:0;font-size:28px;letter-spacing:.5px}
+  header p{color:var(--muted);margin:8px 0 0}
+  .pill{display:inline-block;font-size:12px;color:#cfe3ff;background:rgba(77,163,255,.12);border:1px solid rgba(77,163,255,.35);padding:3px 10px;border-radius:999px;margin-right:8px}
+  main{max-width:1080px;margin:0 auto;padding:16px 20px 80px;display:grid;grid-template-columns:250px 1fr;gap:18px}
+  @media(max-width:860px){main{grid-template-columns:1fr}}
+  nav{position:sticky;top:16px;align-self:start;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:12px}
+  nav button{display:flex;width:100%;text-align:left;gap:10px;align-items:center;background:transparent;border:0;color:var(--muted);padding:10px 10px;border-radius:10px;cursor:pointer;font-size:14px}
+  nav button.active{background:var(--card2);color:var(--txt);outline:1px solid var(--line)}
+  nav button .dot{width:8px;height:8px;border-radius:50%;background:#39424f;flex-shrink:0}
+  nav button.done .dot{background:var(--ok)}
+  nav button.active .dot{background:var(--acc)}
+  .progress{height:8px;background:#222a35;border-radius:99px;overflow:hidden;margin:8px 4px 4px}
+  .progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--acc2));transition:.3s}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin-bottom:16px}
+  .card h2{margin:0 0 4px;font-size:20px}
+  .card .sub{color:var(--muted);font-size:13px;margin-bottom:14px}
+  .q{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:14px 14px;margin:12px 0}
+  .q h3{margin:0 0 6px;font-size:15px}
+  .q h3 .tag{font-size:11px;color:#0f1115;background:var(--warn);border-radius:6px;padding:1px 7px;margin-left:8px;vertical-align:middle}
+  .q h3 .tag.core{background:var(--acc);color:#06121f}
+  .q h3 .tag.devil{background:var(--danger);color:#fff}
+  .why{font-size:13px;color:var(--muted);background:rgba(255,255,255,.03);border-left:3px solid var(--acc);padding:8px 10px;border-radius:0 8px 8px 0;margin:8px 0}
+  .ex{font-size:13px;color:#c9d4e2;margin:6px 0 8px}
+  .ex code{background:#0d1117;border:1px solid var(--line);padding:1px 6px;border-radius:6px;color:#ffd88a}
+  textarea{width:100%;min-height:74px;background:#0d1117;color:var(--txt);border:1px solid var(--line);border-radius:10px;padding:10px;font-size:14px;line-height:1.6;resize:vertical}
+  textarea:focus{outline:1px solid var(--acc);border-color:var(--acc)}
+  input[type=text]{width:100%;background:#0d1117;color:var(--txt);border:1px solid var(--line);border-radius:10px;padding:9px 10px;font-size:14px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:600px){.row{grid-template-columns:1fr}}
+  .flow{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding:12px 4px;margin-top:10px}
+  .node{background:#0d1117;border:1px solid var(--acc);border-radius:10px;padding:8px 12px;min-width:130px;text-align:center;font-size:13px;flex-shrink:0}
+  .node small{display:block;color:var(--muted);font-size:11px;margin-top:2px}
+  .arrow{align-self:center;padding:0 8px;color:var(--acc);font-weight:700;flex-shrink:0}
+  .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  button.btn{background:linear-gradient(90deg,var(--acc),var(--acc2));border:0;color:#08111f;font-weight:700;padding:10px 16px;border-radius:10px;cursor:pointer;font-size:14px}
+  button.ghost{background:transparent;border:1px solid var(--line);color:var(--txt);padding:10px 16px;border-radius:10px;cursor:pointer;font-size:14px}
+  button.ghost:hover{border-color:var(--acc)}
+  .out{white-space:pre-wrap;background:#0d1117;border:1px solid var(--line);border-radius:12px;padding:14px;font-size:14px;color:#dbe4ef}
+  .devil-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:700px){.devil-grid{grid-template-columns:1fr}}
+  .devil{background:linear-gradient(180deg,rgba(255,107,107,.10),rgba(255,107,107,.03));border:1px solid rgba(255,107,107,.35);border-radius:12px;padding:12px}
+  .devil h4{margin:0 0 6px;font-size:14px}
+  .devil p{margin:0 0 8px;font-size:13px;color:var(--muted)}
+  footer{max-width:1080px;margin:0 auto;padding:0 20px 60px;color:var(--muted);font-size:13px}
+  .tip{border:1px dashed var(--line);border-radius:12px;padding:12px;color:var(--muted);font-size:13px;margin-top:12px}
+  .k{color:var(--ok)}
+</style>
+</head>
+<body>
+<header>
+  <div><span class="pill">说不清 = 没想清</span><span class="pill">跟着数据走</span><span class="pill">日常 / 面试通用</span></div>
+  <h1>项目介绍 · 思考脚手架</h1>
+  <p>从左到右一步步填。核心线索只有一条：<b style="color:#fff">数据从哪来，经过什么，被补充了什么，最后到哪去。</b> 所有内容自动保存在本地，可导出。</p>
+</header>
+<main>
+  <nav id="nav">
+    <div style="font-size:12px;color:var(--muted);padding:4px 10px">进度 <span id="pct">0%</span></div>
+    <div class="progress"><i id="bar"></i></div>
+    <div id="navBtns"></div>
+    <div class="btns">
+      <button class="ghost" onclick="exportMD()">导出 Markdown</button>
+      <button class="ghost" onclick="clearAll()">清空</button>
+    </div>
+  </nav>
+  <section id="content"></section>
+</main>
+<footer>
+  用法：先填 0→3，再去挑战第 4 步“魔鬼追问”。能答出魔鬼追问的 3 个，你就比 80% 的人讲得清楚。最后在第 5 步一键生成 30秒 / 2分钟 / 5分钟三个版本讲稿。
+</footer>
+
+<script>
+const SECTIONS = [
+ {id:"s0", title:"0 · 定位：让听众有坐标", sub:"新人、兄弟团队、老板，进来先听这 30 秒。", qs:[
+  {k:"biz", q:"一句话：给谁用？解决什么痛？没有它会怎样？", why:"听众没有坐标，后面全是噪音。逼你用业务语言，不说技术。", ex:"例：给商家用的履约系统，解决超卖和发货超时，没有它大促必炸。"},
+  {k:"scale", q:"规模：QPS / 日单 / 数据量 / 团队几人？", why:"没量级就没有难度。100 QPS 和 10万 QPS 是两个故事。", ex:"例：峰值 8k QPS，日单 200万，订单表 10亿，团队 6 人。"},
+  {k:"map", q:"上下游：上游是谁 → 我们 → 下游是谁？", why:"定位 = 在链条里的位置。画出来，边界自然就清了。", ex:"例：上游是交易下单 → 我们做库存+履约 → 下游是仓储WMS/物流。"},
+ ]},
+ {id:"s1", title:"1 · 边界：负责什么，不负责什么", sub:"边界不清，功劳就说不清，故障也扯皮。", qs:[
+  {k:"own", q:"我们负责什么？明确不负责什么？", tag:"core", why:"面试官最爱问：这块到底是不是你做的？先自证。", ex:"负责：库存扣减、履约单创建。不负责：支付、实际发货。"},
+  {k:"die", q:"如果系统挂了，第一个死的是哪个业务？", tag:"core", why:"死得最快的，就是核心链路。其它都是细节，可以后讲。", ex:"挂了→超卖→资损。所以扣减是核心，运营后台搜索不是。"},
+ ]},
+ {id:"s2", title:"2 · 数据流转：跟着数据走（主体）", sub:"只留 3-5 步主链路 happy path，分支一句话带过。", qs:[
+  {k:"src", q:"数据从哪里来？原始形态是什么？", tag:"core", why:"来源决定信任度。用户请求相对可信，上游MQ/定时任务最爱出脏数据。", ex:"如下单请求 + 支付回调的 MQ，JSON，含 userId / sku / 数量。"},
+  {k:"steps", q:"经过什么？写出 3-5 步：A → B → C", tag:"core", why:"用 动词+名词 说：校验→扣减→落库→通知。不要一上来就讲代码分支。", ex:"例：参数校验 → Redis扣减 → 落库 → 发履约MQ"},
+  {k:"enrich", q:"每一步给数据补充了什么信息？", tag:"core", why:"这是最体现业务理解的一问。补充了什么 = 你的价值是什么。", ex:"例：风控补充风险分，路由补充仓库ID，支付回调补充支付单号。"},
+  {k:"store", q:"存了几份？MySQL / Redis / ES / MQ 各是什么角色？", why:"一份是源头，多份必有不一致。说清谁是源头，谁是派生/缓存。", ex:"MySQL是源头，Redis是加速+防超卖，ES只做运营搜索可延迟。"},
+  {k:"dst", q:"到哪里去？谁消费你的数据？契约是什么？", why:"下游拿你数据干什么，决定了你改字段的代价。", ex:"WMS 消费履约MQ做发货，字段新增必须兼容老版本。"},
+ ]},
+ {id:"s3", title:"3 · 数据结构：基于业务讲，不背表", sub:"不说有几张表，说为什么长这样。", qs:[
+  {k:"entity", q:"核心实体是什么？一句话业务含义 + 生命周期", why:"实体 = 业务概念的投射。说清它一生经过哪些状态。", ex:"例：订单 = 用户和钱的契约：一生 待支付→已支付→履约中→完成/关闭。"},
+  {k:"fields", q:"关键字段为什么存在？挑 3 个讲业务故事", why:"每个怪字段背后都是一次客诉或事故。讲故事，听众一下记住。", ex:"例：version防并发超卖；快照防改价扯皮；幂等键防重复扣款。"},
+  {k:"fsm", q:"状态机：什么动作触发流转？谁能改？非法跳变谁在拦？", why:"状态机是并发和 bug 的重灾区。能画出状态机，说明你真懂。", ex:"待支付→已支付 只能由支付回调触发，靠状态条件更新拦截非法跳变。"},
+ ]},
+ {id:"s4", title:"4 · 魔鬼追问：刺激思考的 12 问", sub:"答出任意 3 个，你的介绍就碾压大多数人。挑最痛的填。", qs:[]},
+ {id:"s5", title:"5 · 输出：一键生成讲稿", sub:"填完前面，这里自动生成 30秒 / 2分钟 / 讲稿全文。", qs:[]},
+];
+
+const DEVILS = [
+ {k:"d_del", q:"删除测试：如果删掉这张表 / 这个字段 / 这个中间件，第一秒发生什么？", why:"逼你分清核心和装饰。删了不痛的，都是可以后讲的细节。"},
+ {k:"d_evil", q:"魔鬼上游：如果上游给你发脏数据 / 重复 / 乱序 / 延迟，你怎么活？", why:"日常扯皮之源。你的校验、幂等、乱序处理都藏在这里。"},
+ {k:"d_twice", q:"重复来两次：同一条数据/请求来两次，会多扣钱吗？幂等键是什么？", why:"凡是涉及钱和库存，必问。不答幂等，等于埋雷。"},
+ {k:"d_time", q:"时间旅行：这条数据 1分钟 / 1天 / 1年后分别在哪？谁删它？冷热怎么分？", why:"逼你思考生命周期、归档、TTL。数据有生有死，不是永远在MySQL。"},
+ {k:"d_10x", q:"10倍暴击：量涨 10 倍，先挂的是哪一步？DB / 锁 / 带宽 / 下游？", why:"扩容和瓶颈一次问透。先说瓶颈，再说你预留了什么。"},
+ {k:"d_owner", q:"谁说了算：这个数据谁能写？谁只能读？有两个写者会打架吗？", why:"Single Writer 原则。一个数据两个写者，早晚出灵异事件。"},
+ {k:"d_window", q:"不一致窗口：你能接受几秒不一致？用户会感知到吗？客诉长什么样？", why:"缓存、ES、MQ 都是最终一致。说出窗口，才是成年人设计。"},
+ {k:"d_patch", q:"补丁考古：哪个字段 / 状态是后来打补丁加的？当时出了什么事故？", why:"最出故事的一问。补丁 = 血泪 = 你的成长。面试官最爱听。"},
+ {k:"d_jump", q:"非法跳变：待支付能直接变已完成吗？谁在拦？是代码、DB约束还是流程？", why:"状态机有没有守卫，决定系统是严谨还是裸奔。"},
+ {k:"d_money", q:"钱和责任在哪一步转移？这一步你怎么保证不丢不重？", why:"找到责任转移点，事务、 confirm、 对账都该围着它转。"},
+ {k:"d_newbie", q:"新人三问：新人最可能误解哪个字段？误调哪个接口会炸？", why:"能预判别人的误解，说明你是 Owner 视角，不是码农视角。"},
+ {k:"d_boss", q:"老板三问：如果砍掉一半机器/人力，你保哪条链路？先降级什么？", why:"逼你排序。什么可降级、什么可熔断、什么死也不能丢，一句话见功力。"},
+];
+
+const state = JSON.parse(localStorage.getItem("proj-intro-v1")||"{}");
+function save(){ localStorage.setItem("proj-intro-v1", JSON.stringify(state)); progress(); }
+function val(k){ return state[k]||""; }
+
+function renderNav(){
+  const nb = document.getElementById("navBtns"); nb.innerHTML="";
+  SECTIONS.forEach((s,i)=>{
+    const b=document.createElement("button");
+    const filled = s.qs.length? s.qs.filter(q=>val(q.k)?.trim()).length : (DEVILS.filter(d=>val(d.k)?.trim()).length?1:0);
+    b.className = (i===cur?"active ":"") + (filled>0?"done":"");
+    b.innerHTML = `<span class="dot"></span><span>${s.title}</span>`;
+    b.onclick=()=>{cur=i;render();};
+    nb.appendChild(b);
+  });
+}
+let cur = 0;
+function qBlock(q){
+  return `<div class="q"><h3>${q.q}${q.tag==="core"?'<span class="tag core">核心</span>':""}${q.tag==="devil"?'<span class="tag">追问</span>':""}</h3>
+  <div class="why">为什么问这个？${q.why}</div>
+  ${q.ex?`<div class="ex">${q.ex}</div>`:""}
+  <textarea data-k="${q.k}" placeholder="写下来，写不出来就说明这块没想清…">${(val(q.k)||"").replace(/</g,"&lt;")}</textarea></div>`;
+}
+function render(){
+  renderNav();
+  const c = document.getElementById("content"); const s = SECTIONS[cur];
+  let html = `<div class="card"><h2>${s.title}</h2><div class="sub">${s.sub}</div>`;
+  if(s.id==="s2"){
+    html += `<div class="row"><div><label style="font-size:13px;color:var(--muted)">来源（一句话）</label><input type="text" data-k="f_src" value="${(val("f_src")||"").replace(/"/g,"&quot;")}" placeholder="如下单请求 / 支付MQ"></div>
+    <div><label style="font-size:13px;color:var(--muted)">主步骤（用 → 分隔，3-5步）</label><input type="text" data-k="f_steps" value="${(val("f_steps")||"").replace(/"/g,"&quot;")}" placeholder="校验 → 扣减 → 落库 → 发MQ"></div></div>
+    <div class="row" style="margin-top:10px"><div><label style="font-size:13px;color:var(--muted)">存储</label><input type="text" data-k="f_store" value="${(val("f_store")||"").replace(/"/g,"&quot;")}" placeholder="MySQL / Redis / ES"></div>
+    <div><label style="font-size:13px;color:var(--muted)">下游</label><input type="text" data-k="f_dst" value="${(val("f_dst")||"").replace(/"/g,"&quot;")}" placeholder="WMS / 物流 / 对账"></div></div>
+    <div id="flow" class="flow"></div>`;
+  }
+  if(s.id==="s4"){
+    html += `<div class="tip">不用全答。选 <b class="k">3 个最痛的</b>填。每个都是面试官 / 故障复盘里的高频杀招。标 <span style="color:var(--danger)">●</span> 为推荐必答：重复来两次、10倍暴击、补丁考古。</div><div class="devil-grid">` +
+    DEVILS.map(d=>`<div class="devil"><h4>${d.q}</h4><p>${d.why}</p><textarea data-k="${d.k}" placeholder="…">${(val(d.k)||"").replace(/</g,"&lt;")}</textarea></div>`).join("") + `</div>`;
+  } else if(s.id==="s5"){
+    html += `<div class="btns"><button class="btn" onclick="gen(0)">生成 30秒电梯版</button><button class="btn" onclick="gen(1)">生成 2分钟标准版</button><button class="btn" onclick="gen(2)">生成全文讲稿</button><button class="ghost" onclick="copyOut()">复制</button></div><div style="height:12px"></div><div class="out" id="out">点上面按钮生成。会综合你前面填的所有内容 + 魔鬼追问里答出来的亮点。</div>
+    <div class="tip">结尾钩子建议（直接拿去用）：<br>① “最难的是 <b class="k">__</b>，如果感兴趣我可以展开” ② “当时在 A 和 B 间纠结，选了 A，因为 __” ③ “如果重来，我会把 __ 改成 __”</div>`;
+  } else {
+    html += s.qs.map(qBlock).join("");
+  }
+  html += `<div class="btns"><button class="ghost" onclick="prev()">← 上一步</button><button class="btn" onclick="next()">下一步 →</button></div></div>`;
+  c.innerHTML = html;
+  c.querySelectorAll("textarea,input").forEach(el=>{
+    el.addEventListener("input",e=>{ state[e.target.dataset.k]=e.target.value; save(); if(["f_src","f_steps","f_store","f_dst"].includes(e.target.dataset.k)) drawFlow(); });
+  });
+  drawFlow(); progress();
+}
+function drawFlow(){
+  const f = document.getElementById("flow"); if(!f) return;
+  const src = val("f_src")||val("src")||"来源";
+  const steps = (val("f_steps")||val("steps")||"校验 → 扣减 → 落库").split(/→|->|，|,/).map(s=>s.trim()).filter(Boolean).slice(0,5);
+  const store = val("f_store")||val("store")||"存储";
+  const dst = val("f_dst")||val("dst")||"下游";
+  let h = `<div class="node">🌱 来源<small>${esc(src).slice(0,24)}</small></div><div class="arrow">→</div>`;
+  h += steps.map(s=>`<div class="node">${esc(s).slice(0,20)}</div><div class="arrow">→</div>`).join("");
+  h += `<div class="node">💾 存储<small>${esc(store).slice(0,24)}</small></div><div class="arrow">→</div><div class="node">📦 下游<small>${esc(dst).slice(0,24)}</small></div>`;
+  f.innerHTML = h;
+}
+function esc(s){return (s||"").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function progress(){
+  const keys=[]; SECTIONS.forEach(s=>s.qs.forEach(q=>keys.push(q.k))); DEVILS.forEach(d=>keys.push(d.k));
+  ["f_src","f_steps","f_store","f_dst"].forEach(k=>keys.push(k));
+  const done = keys.filter(k=>(state[k]||"").trim()).length;
+  const pct = Math.round(done/keys.length*100);
+  document.getElementById("bar").style.width=pct+"%"; document.getElementById("pct").innerText=pct+"%";
+  renderNavOnly();
+}
+function renderNavOnly(){ const nb=document.getElementById("navBtns"); if(!nb||!nb.children.length) return;
+  SECTIONS.forEach((s,i)=>{ const b=nb.children[i]; if(!b) return;
+    const filled = s.qs.length? s.qs.filter(q=>(state[q.k]||"").trim()).length : (DEVILS.filter(d=>(state[d.k]||"").trim()).length?1:0);
+    b.className=(i===cur?"active ":"")+(filled>0?"done":""); });
+}
+function next(){ if(cur<SECTIONS.length-1){cur++;render();window.scrollTo({top:0,behavior:"smooth"})} }
+function prev(){ if(cur>0){cur--;render();window.scrollTo({top:0,behavior:"smooth"})} }
+function buildText(mode){
+  const g=k=>(state[k]||"").trim();
+  const devils = DEVILS.filter(d=>g(d.k)).map(d=>"· "+d.q+" "+g(d.k)).join("\n");
+  const elevator = `【30秒】${g("biz")} ${g("map")} 我负责${g("own")||"__"}，核心链路是${g("f_steps")||g("steps")||"__"}。`;
+  const standard = `【2分钟】背景：${g("biz")}（规模：${g("scale")}）\n链路：${g("map")}，主流程 ${g("f_steps")||g("steps")}。\n数据：从${g("src")}来，每步补充 ${g("enrich")}，${g("store")}，供给 ${g("dst")}。\n实体：${g("entity")} 关键设计：${g("fields")} 状态机：${g("fsm")}\n我负责：${g("own")}，最难的是${g("d_twice")||g("d_10x")||g("d_patch")||"__"}。`;
+  const full = `${standard}\n\n【边界】负责${g("own")}；挂了先死 ${g("die")}\n【魔鬼追问亮点】\n${devils||"（还没填第4步，建议至少填3个）"}\n\n钩子：这里面最难的是幂等/瓶颈/状态机，如果感兴趣我可以展开其中一个。`;
+  return mode===0?elevator:mode===1?standard:full;
+}
+function gen(m){ document.getElementById("out").innerText = buildText(m); }
+function copyOut(){ const t=document.getElementById("out").innerText; navigator.clipboard.writeText(t).then(()=>alert("已复制，去粘贴吧")); }
+function exportMD(){
+  let md = "# 项目介绍 · 思考底稿（"+new Date().toLocaleDateString()+")\n\n";
+  SECTIONS.forEach(s=>{ if(s.id==="s5")return;
+    md+=`## ${s.title}\n`; s.qs.forEach(q=>{ md+=`### ${q.q}\n${state[q.k]||"_（未填）_"}\n\n`; }); });
+  md+="## 魔鬼追问\n"; DEVILS.forEach(d=>{ if(state[d.k]) md+=`### ${d.q}\n${state[d.k]}\n\n`; });
+  md+="## 讲稿\n```\n"+buildText(2)+"\n```\n";
+  const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([md],{type:"text/markdown"})); a.download="项目介绍-底稿.md"; a.click();
+}
+function clearAll(){ if(confirm("清空所有已填内容？")){ localStorage.removeItem("proj-intro-v1"); location.reload(); } }
+render();
+</script>
+</body>
+</html>

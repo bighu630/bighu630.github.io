@@ -6,7 +6,7 @@
   <link href="https://bighu630.github.io/atom.xml" rel="self"/>
   
   <link href="https://bighu630.github.io/"/>
-  <updated>2026-09-05T09:40:59.511Z</updated>
+  <updated>2026-09-07T03:45:13.616Z</updated>
   <id>https://bighu630.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>如何理解一个项目小记</title>
+    <link href="https://bighu630.github.io/2026/09/07/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E4%B8%80%E4%B8%AA%E9%A1%B9%E7%9B%AE%E5%B0%8F%E8%AE%B0/"/>
+    <id>https://bighu630.github.io/2026/09/07/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E4%B8%80%E4%B8%AA%E9%A1%B9%E7%9B%AE%E5%B0%8F%E8%AE%B0/</id>
+    <published>2026-09-07T02:07:17.000Z</published>
+    <updated>2026-09-07T03:45:13.616Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>最近也是成功的面试失败了，我认真的反省了一下（所以才有了这篇博客）主要是因为这段时间vibe coding爽了，又是piplus,又是两个tui软件，一时vibe一时爽，一直vibe一爽。导致我之前在公司写的项目（和面试dj相关的项目）基本忘得差不多。<del>更重要的是最近以撒爽了.</del><br>所以现在来写一篇博客，主要来介绍怎么去理解一个项目（主要是自己写的项目）。</p><h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>首先，我们需要知道我们这个系统大概长什么样子，可以你不一定对这个系统了解，但是你需要知道整个系统服务是为了做什么（当然有些公司做的业务相同，或者和你沟通的人也大致了解这个项目，这种情况只需要说明你项目是抄那个主流服务的&#x2F;你就是做这个主流服务的），对于一般人而言，可以通过介绍整个系统服务的对象</p><blockquote><p>比如我们是做web3 meme市场的，类似gmgn的那种交互流程</p></blockquote><p>然后再介绍一下你这个项目大致是做什么的，上游是什么，我们这一层做了什么，下游是什么，中间用了什么中间件，qps大概是多大</p><blockquote><p>我们这个tx-parser项目主要是做链上数据解析的，我们整个系统的大致流程是用json-rpc&#x2F;ws获取链上最新的区块数据然后过滤交易里面的日志信息或者指令信息里面涉及到我们需要将解析的数据，主要是各个链上dex合约的token交易&#x2F;token创建事件。解析完成之后包装成统一的trade&#x2F;token-new&#x2F;pool-new 等结构推送到kafka里面，下面消费kafka里面的数据生成k线，行情，token表等数据，看监控我们处理的trade tps大概在500-600左右，token信息的tps很少，不超过10</p></blockquote><p>这么一介绍，大概对面就能知道你这个服务在系统中的作用。然后我们就到了下一步，给对面说你在这里面主要做了什么，可能有的项目是多个人一起写的，这个时候需要标注你工作的内容，大致说一下什么工作是其他人做的（你要详细介绍的项目，最好是你占大头），也可能这个项目是你一个人写的，这个时候你就需要挑重点的写了。</p><blockquote><p>我在这个项目里面主要是做整体框架的搭建，还有就是做了solana链上dex的流动性变化的解析以及evm链上rpc使用量优化，evm上大部分解析内容主要是我同事写的，solana链上dex的swap解析我们使用garser订阅的grpc在另外一个项目解析的。这个项目之前是一个类似脚本的项目，我来之后是把爬链解析的框架做了重构，把爬链和解析分成两个服务，中间用kafka传递区块，然后用kafka的多分区做负载均衡，下面起三个解析服务拉kafka的数据做解析，然后把爬链进度，rpc使用情况，解析情况打到grafana监控和lark告警里面。</p><p>后面接流动性变化的需求做了solana链上metaora系列&#x2F; pumpswap&#x2F; raydium系列&#x2F;orca 系列池子流动性变化的解析，主要是做加减池子的解析</p><p>在后面做了evm链rpc调用的优化，当时是因为我们要接新的base链，我们的rpc服务撑不住之前bsc那套代码的rpc调用，主要是uniswap v3&#x2F;v4 解析过程中多次调用rpc请求拉代币数据，后面我是根据解析的需求在链上写了一个工具合约，上游传需要查询token的地址，账户的地址，池子的地址，合约自动用stadecall去其他相关合约拉数据，一次性返回所有需要的数据。</p></blockquote><p>再此之后，如果是面试，面试官就会根据你上面的回答去问你一些细节的问题，比如关键的数据结构，某些地方为什么有这么设计，中间的性能问题等等，这些是你需要提前思考的，需要结合你上面的项目介绍重点思考的。面试官平白无辜问出来的问题一般是基本常识，要么是业务常识，要么是不一定需要你知道，但是知道的能加分的。</p><p>在反复拉扯之后（也可能是拉扯之前），他可能会问你那些地方是你觉得做的比较好的，这个时候就是你秀肌肉的时候了，可以是在工程上的优点，可以是技术有的秀肌肉。</p><p>最后，也是最大的陷阱，你觉得这个系统还能怎么优化，这是考验你对这个系统的熟悉程度，能快速评判你是这个项目里面的一个螺丝钉，把别人的东西说成自己的东西，还是你真的熟悉这个项目，没有什么项目是完美的，在不断迭代新需求的过程中，总会用一些古老的设计变成现在的坑，如果你说你觉得项目每什么问题，那说明你根本就不懂这个项目，你不知道这个项目的历史，也想象不到这个项目的未来，你只知道你在这个项目里面干活，你知道你那块地在那儿，你在上面耕作，然后没有其他的了。</p><blockquote><p>我觉得这个系统有些地方是有很大问题的，比如kafka的topic使用，我们trade这个topic里面有至少三种（另外一个服务会用）不同的消息，当时踩了一个大坑，我们下游的web3-token服务会处理trade和token-new，pool-new 这几种消息，然后当时写代码没注意这三个消息都在同一个topic里面，我们在一个服务里面起了多个消费者消费这个topic,最终导致每个消费者拿到的都不是完整的消息，最终导致页面上有数据，但是数据不全，当时是排查了好久才发现是kafkatopic的问题，一直以为是入库哪里有消息丢失，还是有三分接口失败导致token丢失。这个bug对项目影响深远， 当时为了赶上线加了好多兜底逻辑。</p><p>还有一个是dex更新的问题，链上的dex可能隔一段时间就会有更新，我们一直是看社区消息才知道有更新，这个其实可以监控链上的合约升级事件去做，但是对evm链的处理会比较麻烦。</p><p>还有一个整体资源使用的问题，我们solana&#x2F;base&#x2F;bsc的rpc节点加了一个中间代理，这三个链的中间代理都在一个服务器上，然后我们所有的服务需要用rpc都是去接这个代理，这导致有时候rpc会突然延迟很大，导致解析程序大量数据堆积在内存里面，最后oom, 后面我们是解决了oom的问题，让消息堆积在kafka里面，但是出现rpc问题的时候线上可能数据就会落后一点10-1h不等，不过出现的频率不高</p></blockquote><h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><p>以上这些是我最近对面试介绍项目的思考，我让ai写了一个类似填空的网站，可以帮助思考，当然核型是你必须得项目熟悉，还得对你做的业务熟悉，不然就是巧妇难为无米之炊。</p><p>网站我也托管在这个博客域名下面：</p><p><a href="/project-intro-guide/">📝 项目介绍 · 思考脚手架</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;起因&quot;&gt;&lt;a href=&quot;#起因&quot; class=&quot;headerlink&quot; title=&quot;起因&quot;&gt;&lt;/a&gt;起因&lt;/h2&gt;&lt;p&gt;最近也是成功的面试失败了，我认真的反省了一下（所以才有了这篇博客）主要是因为这段时间vibe coding爽了，又是piplus,又是两个t</summary>
+      
+    
+    
+    
+    <category term="计算机" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+    <category term="笔记" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="面试" scheme="https://bighu630.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+    <category term="项目理解" scheme="https://bighu630.github.io/tags/%E9%A1%B9%E7%9B%AE%E7%90%86%E8%A7%A3/"/>
+    
+  </entry>
   
   <entry>
     <title>记忆</title>
@@ -513,9 +541,9 @@
     <category term="笔记" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AC%94%E8%AE%B0/"/>
     
     
-    <category term="go" scheme="https://bighu630.github.io/tags/go/"/>
-    
     <category term="八股文" scheme="https://bighu630.github.io/tags/%E5%85%AB%E8%82%A1%E6%96%87/"/>
+    
+    <category term="go" scheme="https://bighu630.github.io/tags/go/"/>
     
   </entry>
   
@@ -544,34 +572,6 @@
     <category term="arbitrum" scheme="https://bighu630.github.io/tags/arbitrum/"/>
     
     <category term="资产桥" scheme="https://bighu630.github.io/tags/%E8%B5%84%E4%BA%A7%E6%A1%A5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>go 八股文复习-1</title>
-    <link href="https://bighu630.github.io/2024/12/14/go-%E5%85%AB%E8%82%A1%E6%96%87%E5%A4%8D%E4%B9%A0-1/"/>
-    <id>https://bighu630.github.io/2024/12/14/go-%E5%85%AB%E8%82%A1%E6%96%87%E5%A4%8D%E4%B9%A0-1/</id>
-    <published>2024-12-14T08:31:00.000Z</published>
-    <updated>2025-10-02T08:02:56.042Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="常见数据结构-实现原理-–-chan"><a href="#常见数据结构-实现原理-–-chan" class="headerlink" title="常见数据结构&amp;实现原理 – chan"></a>常见数据结构&amp;实现原理 – chan</h2><blockquote><p><code>chan</code>是用来提供go协程间通信通道的工具，也是go高并发优势的重要组成部分，通过chan我们可以非常简单的实现协程之间的通信（只需要用 <code>&lt;-</code> 写入 用<code>-&gt;</code> 读取）</p></blockquote><ul><li><code>chan</code> 的数据结构</li></ul><pre><code class="go">type hchan struct &#123;    qcount   uint           // 当前队列中剩余元素个数    dataqsiz uint           // 环形队列长度，即可以存放的元素个数, 初始化时指定    buf      unsafe.Pointer // 环形队列指针    elemsize uint16         // 每个元素的大小,元素根据大小线性排布，后面根据offset取值    // 关闭状态的chan是可读的，如果chan关闭 读取时没有内容，    // 那么会直接返回nil,false（代表读取失败，&lt;- 读到的是一个空指针），而不会阻塞，    // 如果没有关闭，没有数据可以读取时会阻塞    closed   uint32         // 标识关闭状态    elemtype *_type         // 元素类型    sendx    uint           // 队列下标，指示元素写入时存放到队列中的位置    recvx    uint           // 队列下标，指示元素从队列的该位置读出    // 如果一个协程在读chan,chan中没有数据，那么协程就会挂在这里, 等到有数据读时再唤醒    // FIFO队列，先进先出    recvq    waitq          // 等待读消息的goroutine队列    sendq    waitq          // 等待写消息的goroutine队列    lock mutex              // 互斥锁，chan不允许并发读写,所以chan是并发安全的&#125;</code></pre><p><code>chan</code> 中使用环形队列实现缓冲区(实际上就是在遍历最后一个后将索引指向第一个,实际上还是线性的)</p><ul><li><code>chan</code>的读写</li></ul><p><strong>向<code>chan</code>写入数据</strong></p><p><img src="https://s2.loli.net/2024/12/14/NfwVLRTOK9Bkcan.png" class="lazyload" data-srcset="https://s2.loli.net/2024/12/14/NfwVLRTOK9Bkcan.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="write to chan"></p><ol><li>如果<code>recvq</code>中有<code>goroutine(G)</code>等待，则将数据写入G并且唤醒G</li><li>如果<code>recvq</code>中没有等待的G,则尝试写入缓冲区，如果缓冲区也没有，则阻塞并挂在<code>sendq</code>上</li></ol><p><strong>在<code>chan</code>中读取数据</strong></p><p><img src="https://s2.loli.net/2024/12/14/BmZKLizylQjbD7r.png" class="lazyload" data-srcset="https://s2.loli.net/2024/12/14/BmZKLizylQjbD7r.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="read date from chan"></p><p>查看<code>sendq</code>不为空（说明有G阻塞在写入）</p><ol><li>此时如果有缓冲区，那么应该先读缓冲区的，并且在<code>sendq</code>中取出一个G来写入数据（因为我们拿走了一个，所以现在缓冲区未满</li><li>此时如果没有缓冲区，那么我们直接在<code>sendq</code>中取一个G,并读取他的数据</li></ol><p>如果<code>sendq</code>为空</p><ol><li>尝试去缓冲区读数据</li><li>阻塞，并挂在<code>recvq</code>上</li></ol><ul><li><code>单向chan</code></li></ul><p>实际上不存在单向<code>chan</code>,是在函数内做的约束,可以直接把一个<code>chan</code>当作只读&#x2F;只写的<code>chan</code>传递</p><ul><li>关闭<code>chan</code></li></ul><p>关闭<code>chan</code>时</p><ol><li>唤醒所有的<code>recvq</code>,向所有的<code>recvq</code>中写入nil</li><li>唤醒所有的<code>sendq</code>,使他们panic</li></ol><blockquote><p><code>recvq</code>和<code>sendq</code>一般不会同时有G</p></blockquote><p>除此之外，panic出现的常见场景还有：</p><p>关闭值为nil的channel<br>关闭已经被关闭的channel<br>向已经关闭的channel写数据</p><h3 id="select"><a href="#select" class="headerlink" title="select"></a>select</h3><p>select 可以同时监控多个<code>chan</code>,并不会阻塞，select支持向<code>chan</code>中写或者读取<code>chan</code>中的数据，如果碰巧写不进去(缓冲区满了)，读不到(没有数据),select不会阻塞，而是直接跳过<br>（后续select章节将会详细描述如何选择）</p><p>select 对case条目的处理是随即的，所以并不是在前面的case就会先触发。</p><h3 id="range"><a href="#range" class="headerlink" title="range"></a>range</h3><p>使用range可以持续的读取<code>chan</code>中的数据，如果<code>chan</code>中没有数据，则阻塞</p><p>注意：如果向此channel写数据的G退出时，系统检测到这种情况后会panic，否则range将会永久阻塞。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;常见数据结构-实现原理-–-chan&quot;&gt;&lt;a href=&quot;#常见数据结构-实现原理-–-chan&quot; class=&quot;headerlink&quot; title=&quot;常见数据结构&amp;amp;实现原理 – chan&quot;&gt;&lt;/a&gt;常见数据结构&amp;amp;实现原理 – chan&lt;/h2&gt;&lt;</summary>
-      
-    
-    
-    
-    <category term="计算机" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
-    
-    <category term="笔记" scheme="https://bighu630.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AC%94%E8%AE%B0/"/>
-    
-    
-    <category term="go" scheme="https://bighu630.github.io/tags/go/"/>
-    
-    <category term="八股文" scheme="https://bighu630.github.io/tags/%E5%85%AB%E8%82%A1%E6%96%87/"/>
     
   </entry>
   
